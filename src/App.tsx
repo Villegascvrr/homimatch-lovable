@@ -1,22 +1,16 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Index from '@/pages/Index';
 import RegisterPage from '@/pages/RegisterPage';
 import SignInPage from '@/pages/SignInPage';
-import MatchingPage from '@/pages/MatchingPage';
-import PricingPage from '@/pages/PricingPage';
-import SubscriptionPage from '@/pages/SubscriptionPage';
-import SuccessPage from '@/pages/SuccessPage';
-import ProfilePage from '@/components/profiles/ProfilePage';
-import ProfileEditPage from '@/components/profiles/ProfileEditPage';
+import MaintenancePage from '@/pages/MaintenancePage';
+import MatchingLandingPage from '@/pages/MatchingLandingPage';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 import { AuthProvider } from '@/context/AuthContext';
 import { Toaster } from '@/components/ui/toaster';
-import ChatPage from './pages/ChatPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
-import ComingSoonPage from './pages/CoomingSoon';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import CookiesPage from './pages/CookiesPage';
@@ -31,22 +25,33 @@ function App() {
           <div className="min-h-screen bg-background pt-16 md:pt-20">
             <ScrollToTop />
             <Routes>
+              {/* Rutas principales */}
               <Route path="/" element={<Index />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/signin" element={<SignInPage />} />
-              <Route path="/matching" element={<MatchingPage />} />
-              <Route path="/precios" element={<PricingPage />} />
-              <Route path="/suscripcion" element={<SubscriptionPage />} />
-              <Route path="/success" element={<SuccessPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/profile/edit" element={<ProfileEditPage />} />
-              <Route path="/chat" element={<ChatPage />} />
+              <Route path="/maintenance" element={<MaintenancePage />} />
+              <Route path="/matching" element={<MatchingLandingPage />} />
+              
+              {/* Autenticación */}
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
               <Route path="/reset-password" element={<ResetPasswordPage />} />
-              <Route path="/coming-soon" element={<ComingSoonPage />} />
+              
+              {/* Legales */}
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/terms" element={<TermsPage />} />
               <Route path="/cookies" element={<CookiesPage />} />
+              
+              {/* Redirigir rutas antiguas a registro o mantenimiento */}
+              <Route path="/precios" element={<Navigate to="/register" replace />} />
+              <Route path="/suscripcion" element={<Navigate to="/register" replace />} />
+              <Route path="/success" element={<Navigate to="/maintenance" replace />} />
+              <Route path="/profile" element={<Navigate to="/maintenance" replace />} />
+              <Route path="/profile/edit" element={<Navigate to="/maintenance" replace />} />
+              <Route path="/chat" element={<Navigate to="/maintenance" replace />} />
+              <Route path="/coming-soon" element={<Navigate to="/maintenance" replace />} />
+              
+              {/* 404 - Redirigir al inicio */}
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
             <Toaster />
           </div>

@@ -85,11 +85,11 @@ const SignInPage = () => {
     setLoginError('');
   }, [location.search, toast]);
   
-  // Redirect if user is already logged in
+  // Redirect if user is already logged in - to maintenance page
   useEffect(() => {
     if (user && !authLoading) {
-      console.log('User is logged in, redirecting to home');
-      navigate('/', { replace: true });
+      console.log('User is logged in, redirecting to maintenance');
+      navigate('/maintenance', { replace: true });
     }
   }, [user, authLoading, navigate]);
 
@@ -102,7 +102,8 @@ const SignInPage = () => {
     try {
       console.log('Attempting sign in with:', values.email);
       await signIn(values.email, values.password);
-      // Don't manually redirect here - let the useEffect handle it
+      // Redirigir a página de mantenimiento después del login
+      navigate('/maintenance');
     } catch (error: any) {
       console.error("Error during sign in:", error);
       setLoginError(error.message || 'Error al iniciar sesión. Verifica tus credenciales.');
@@ -119,6 +120,8 @@ const SignInPage = () => {
       setLoginError('');
       console.log('Attempting Google sign in');
       await signInWithGoogleOAuth();
+      // Después del login, redirigir a mantenimiento
+      navigate('/maintenance');
     } catch (error: any) {
       console.error("Error durante la autenticación con Google:", error);
       setLoginError(error.message || 'Error al iniciar sesión con Google.');
