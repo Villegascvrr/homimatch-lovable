@@ -14,10 +14,7 @@ export interface UserSignUpData {
 }
 
 export interface ExtendedUser extends User {
-  profile_image?: string | null;
-  completed?: boolean;
-  profile_image_id?: string | null;
-  is_suscriptor?: boolean;
+  // Campos simplificados - solo datos básicos de registro
 }
 
 /**
@@ -111,31 +108,8 @@ export const useAuthLogic = () => {
       if (error) throw error;
       
       if (refreshedUser) {
-        const { data: profileData, error: profileError } = await supabase
-          .from('profiles')
-          .select('profile_image_id, completed')
-          .eq('id', refreshedUser.id)
-          .maybeSingle();
-
-        const { data: subscriptionData, error: subscriptionError } = await supabase
-          .from('subscribers')
-          .select('*')
-          .eq('user_id', refreshedUser.id)
-          .maybeSingle();
-
-        if (!profileError && profileData) {
-          const profileImage = await useProfileImage(refreshedUser.id, profileData.profile_image_id);
-          setUser({
-            ...refreshedUser,
-            profile_image: profileImage,
-            profile_image_id: profileData.profile_image_id,
-            completed: profileData.completed,
-            is_suscriptor: subscriptionData?.subscribed ? true : false
-          });
-        } else {
-          
-          setUser(refreshedUser);
-        }
+        // Solo establecer el usuario con datos básicos
+        setUser(refreshedUser);
       }
       setIsInternalAction(false);
       return;
@@ -270,52 +244,13 @@ export const useAuthLogic = () => {
         throw authError;
       }
       
-      
-      
+      // Establecer usuario con datos básicos
       if (authData.user) {
-        const profileData = {
-          id: authData.user.id,
-          first_name: userData.firstName,
-          last_name: userData.lastName,
-          username: userData.username,
-          email: userData.email,
-          profile_image_id: null,
-          profile_image: null,
-          completed: false
-        };
-
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .upsert(profileData, { onConflict: 'id' });
-
-        if (profileError) {
-          console.error("Error creating profile:", profileError.message);
-          throw profileError;
-        }
-        
-        console.log("Profile created successfully");
-        
-        const { data: subscriptionData } = await supabase
-          .from('subscribers')
-          .select('*')
-          .eq('user_id', authData.user.id)
-          .maybeSingle();
-
-        setUser({
-          ...authData.user,
-          profile_image: null,
-          profile_image_id: null,
-          completed: false,
-          is_suscriptor: subscriptionData?.subscribed ? true : false
-        });
+        setUser(authData.user);
         
         if (authData.session) {
-          
           setSession(authData.session);
-          
           saveSessionToLocalStorage(authData.session);
-        } else {
-          console.warn("No session in signup response!");
         }
       }
       
@@ -389,22 +324,9 @@ export const useAuthLogic = () => {
       }
       
       if (data.session) {
-        
         setSession(data.session);
         setUser(data.user);
-        
         saveSessionToLocalStorage(data.session);
-        
-        const { data: subscriptionData } = await supabase
-          .from('subscribers')
-          .select('*')
-          .eq('user_id', data.user.id)
-          .maybeSingle();
-
-        setUser({
-          ...data.user,
-          is_suscriptor: subscriptionData?.subscribed ? true : false
-        });
         
         toast({
           title: "Inicio de sesión exitoso",
