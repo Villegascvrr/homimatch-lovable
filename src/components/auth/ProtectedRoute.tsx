@@ -3,7 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import DemoBanner from "../layout/DemoBanner";
 import { useEffect, useState } from "react";
-import { hasStoredSession } from "@/integrations/supabase/client";
+import { hasStoredSession } from "@/lib/auth-helpers";
 import { Loader2 } from "lucide-react";
 
 interface ProtectedRouteProps {

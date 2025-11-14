@@ -21,7 +21,7 @@ import {
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useAuth } from '@/context/AuthContext';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { signInWithGoogleOAuth } from '@/integrations/supabase/client';
+import { signInWithGoogleOAuth } from '@/lib/auth-helpers';
 
 const formSchema = z.object({
   email: z.string().email({

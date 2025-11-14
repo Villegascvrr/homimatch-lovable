@@ -7,7 +7,7 @@ import WelcomeMessage from './WelcomeMessage';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import { signInWithGoogleOAuth } from '@/integrations/supabase/client';
+import { signInWithGoogleOAuth } from '@/lib/auth-helpers';
 const Hero = () => {
   const [email, setEmail] = useState('');
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
