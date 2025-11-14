@@ -14,7 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      waiting_list: {
+        Row: {
+          auth_user_id: string | null
+          ciudad: string | null
+          created_at: string
+          email: string
+          first_name: string | null
+          id: string
+          last_name: string | null
+          universidad: string | null
+        }
+        Insert: {
+          auth_user_id?: string | null
+          ciudad?: string | null
+          created_at?: string
+          email: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          universidad?: string | null
+        }
+        Update: {
+          auth_user_id?: string | null
+          ciudad?: string | null
+          created_at?: string
+          email?: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          universidad?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

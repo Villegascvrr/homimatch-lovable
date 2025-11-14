@@ -11,7 +11,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from '@/components/ui/button';
 import { Heart, Mail } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-import { signInWithGoogleOAuth } from '@/integrations/supabase/client';
+import { signInWithGoogleOAuth } from '@/lib/auth-helpers';
 
 
 interface ChatPageProps {

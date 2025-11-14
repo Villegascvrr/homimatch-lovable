@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Session, User } from '@supabase/supabase-js';
-import { supabase, checkEmailExists } from '@/integrations/supabase/client';
+import { supabase } from '@/integrations/supabase/client';
+import { checkEmailExists } from '@/lib/auth-helpers';
 import { useToast } from '@/hooks/use-toast';
 import useProfileImage from './use-profile-image';
 

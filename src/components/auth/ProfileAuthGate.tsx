@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Mail, LogIn } from 'lucide-react';
-import { signInWithGoogleOAuth } from '@/integrations/supabase/client';
+import { signInWithGoogleOAuth } from '@/lib/auth-helpers';
 
 /**
  * Component displayed on the profile page when user is not authenticated
