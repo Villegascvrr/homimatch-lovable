@@ -1,5 +1,4 @@
 import { supabase } from '@/integrations/supabase/client';
-import { addToWaitingList } from '@/lib/waiting-list';
 
 /**
  * Agrega un usuario a la lista de espera después del registro
