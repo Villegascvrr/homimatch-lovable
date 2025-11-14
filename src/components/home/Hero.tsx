@@ -95,11 +95,11 @@ const Hero = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <div className="inline-block px-4 py-1.5 mb-1 md:mb-2 rounded-full bg-homi-ultraLightPurple text-homi-purple text-xs md:text-sm font-medium animate-pulse-soft">
-            ¡Ya disponible en todas las ciudades universitarias!
+            ¡Próximamente la app disponible!
           </div>
           
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 animate-slide-up leading-tight px-2 my-0">
-              Encuentra compañeros de piso compatibles <span className="homi-gradient-text">compañeros de piso</span> compatibles
+                                                                            Encuentra compañeros de piso compatibles <span className="homi-gradient-text">compañeros de piso</span> compatibles
           </h1>
           
           <p className="text-base md:text-xl text-muted-foreground mb-6 max-w-2xl mx-auto px-2">
