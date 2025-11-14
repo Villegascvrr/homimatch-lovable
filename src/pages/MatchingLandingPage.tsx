@@ -57,7 +57,7 @@ const MatchingLandingPage = () => {
 
         {/* Grid de perfiles */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {mockProfiles.map((profile) => (
+          {mockProfiles.slice(0, 3).map((profile) => (
             <div 
               key={profile.id}
               onClick={handleProfileClick}
