@@ -10,7 +10,7 @@ export interface UserSignUpData {
   password: string;
   firstName: string;
   lastName: string;
-  username: string;
+  username?: string; // Opcional
 }
 
 export interface ExtendedUser extends User {
