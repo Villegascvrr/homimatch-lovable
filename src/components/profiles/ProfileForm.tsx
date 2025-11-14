@@ -8,53 +8,14 @@ import { supabase } from "@/integrations/supabase/client";
 
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { FormImageUpload } from "@/components/ui/form-image-upload";
-import ProfileStatusToggle from "@/components/profiles/ProfileStatusToggle";
-import { Separator } from "@/components/ui/separator";
 import ProfileBasicInfo from "./ProfileBasicInfo";
-import ProfileInterests from "./ProfileInterests";
-import ProfileApartmentPreferences from "./ProfileApartmentPreferences";
-import ProfileLifestyle from "./ProfileLifestyle";
-import { useIsMobile } from '@/hooks/use-mobile';
-import useProfileImage from '@/hooks/use-profile-image';
+import { Card } from "@/components/ui/card";
 
-// Define the form schema with all necessary fields
+// Schema simplificado solo con datos básicos
 const formSchema = z.object({
-  firstName: z.string().min(1, "El nombre es obligatorio"),
-  lastName: z.string().optional(),
-  username: z.string().min(2, "El nombre de usuario debe tener al menos 2 caracteres"),
-  email: z.string().email("Por favor introduce un email válido"),
-  bio: z.string().optional(),
-  age: z.string()
-    .refine(val => {
-      const num = parseInt(val);
-      return !isNaN(num) && num >= 16;
-    }, { message: "Debes tener al menos 16 años" })
-    .optional(),
-  occupation: z.string().optional(),
-  occupationType: z.enum(['student', 'professional', 'entrepreneur', 'other']).optional(),
-  university: z.string().optional(),
-  fieldOfStudy: z.string().optional(),
-  profileImage: z.string().optional(),
-  interests: z.array(z.string()).default([]),
-  isProfileActive: z.boolean().default(true),
-  apartmentStatus: z.enum(['looking', 'have']).default('looking'),
-  ciudad: z.string().optional(),
-  ciudad_otra: z.string().optional(),
-  city_zonas: z.array(z.string()).default([]),
-  companeros_count: z.string().optional(),
-  budget: z.string().optional(),
-  room_count: z.string().optional(),
-  room_price: z.string().optional(),
-  apartment_description: z.string().optional(),
-  completed: z.boolean().default(false),
-  lifestyle: z.object({
-    schedule: z.enum(['morning_person', 'night_owl', 'flexible']).optional(),
-    cleanliness: z.enum(['very_clean', 'clean', 'moderate', 'relaxed']).optional(),
-    smoking: z.enum(['non_smoker', 'outdoor_only', 'smoker']).optional(),
-    pets: z.enum(['no_pets', 'has_pets', 'pets_welcome', 'no_pets_allowed']).optional(),
-    guests: z.enum(['rarely', 'occasionally', 'frequently', 'no_problem']).optional(),
-  }).optional(),
+  firstName: z.string().min(1, 'El nombre es requerido'),
+  lastName: z.string().min(1, 'El apellido es requerido'),
+  email: z.string().email('Email inválido'),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -65,39 +26,17 @@ interface ProfileFormProps {
 }
 
 const ProfileForm = ({ onSaved, cancelEdit }: ProfileFormProps) => {
+  const { user } = useAuth();
   const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
-  const [initialFormData, setInitialFormData] = useState<FormValues | null>(null);
-  const { user, refreshUser } = useAuth();
-  const [apartmentStatus, setApartmentStatus] = useState<'looking' | 'have'>('looking');
-  const [showUniversityField, setShowUniversityField] = useState(false);
-  const [showFixedButtons, setShowFixedButtons] = useState(true);
-  const formRef = useRef<HTMLFormElement>(null);
-  const formEndRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      username: "",
-      email: "",
-      bio: "",
-      age: "",
-      occupation: "",
-      occupationType: undefined,
-      university: "",
-      fieldOfStudy: "",
-      profileImage: "",
-      interests: [],
-      isProfileActive: true,
-      apartmentStatus: 'looking',
-      ciudad: "",
-      ciudad_otra: "",
-      city_zonas: [],
+      firstName: '',
+      lastName: '',
+      email: '',
       companeros_count: "",
       budget: "",
       room_count: "",
