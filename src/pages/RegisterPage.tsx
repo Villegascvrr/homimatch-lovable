@@ -117,70 +117,56 @@ const RegisterPage = () => {
     setIsSigningWithGoogle(true);
     try {
       await signInWithGoogle();
-      // We'll be redirected to Google login page
-    } catch (error) {
-      console.error("Error during Google sign in:", error);
+      // El usuario será redirigido por Google OAuth
+      // Después del registro exitoso, redirigir a página de mantenimiento
+      navigate('/maintenance');
+    } catch (error: any) {
+      console.error("Error during Google sign-in:", error);
+      toast({
+        title: "Error",
+        description: error.message || "Ha ocurrido un error con la autenticación de Google",
+        variant: "destructive"
+      });
+    } finally {
       setIsSigningWithGoogle(false);
     }
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (isSubmitting) return;
     
     setIsSubmitting(true);
-    
     try {
-      // Final check if email exists right before submission
-      const emailExists = await checkEmailExists(values.email);
-      if (emailExists) {
-        form.setError("email", {
-          type: "manual", 
-          message: "Este correo electrónico ya está registrado. Por favor, usa otro o inicia sesión." 
-        });
-        setIsSubmitting(false);
-        return;
-      }
-      
-      // Si el correo no existe, procedemos con el registro
       const result = await signUp({
         email: values.email,
         password: values.password,
         firstName: values.firstName,
         lastName: values.lastName,
-        username: values.username
+        username: values.username,
       });
-      
+
       if (result.success) {
         toast({
-          title: "Registro exitoso",
-          description: "¡Tu perfil ha sido creado! Ahora puedes encontrar tu compañero de piso ideal.",
-          variant: "default",
+          title: "¡Registro exitoso!",
+          description: "Tu cuenta ha sido creada correctamente.",
         });
         
-        
-        
-        // La redirección ya la hace el método signUp
-      } else if (result.error?.message?.includes('email') || result.error?.message?.includes('already')) {
-        form.setError("email", {
-          type: "manual",
-          message: "Este correo electrónico ya está registrado. Por favor, usa otro o inicia sesión."
-        });
-      }
-    } catch (error: any) {
-      console.error("Error during registration:", error);
-      
-      // Verificar si el error es por correo electrónico duplicado
-      if (error.message?.includes('email')) {
-        form.setError("email", { 
-          type: "manual", 
-          message: "Este correo electrónico ya está registrado. Intenta iniciar sesión." 
-        });
+        // Redirigir a página de mantenimiento
+        navigate('/maintenance');
       } else {
         toast({
-          title: "Error",
-          description: error.message || "Ocurrió un error al procesar tu registro. Inténtalo de nuevo.",
+          title: "Error en el registro",
+          description: result.error?.message || "Ha ocurrido un error al crear tu cuenta",
           variant: "destructive",
         });
       }
+    } catch (error: any) {
+      console.error("Error during sign up:", error);
+      toast({
+        title: "Error",
+        description: error.message || "Ha ocurrido un error al crear tu cuenta",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }

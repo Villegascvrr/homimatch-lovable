@@ -1,11 +1,12 @@
 
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
+import { SUPABASE_CONFIG } from '@/lib/supabase-config';
 
-const supabaseUrl = "https://salayaazmrghyqjddagm.supabase.co";
-const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhbGF5YWF6bXJnaHlxamRkYWdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM3MTIwNTUsImV4cCI6MjA1OTI4ODA1NX0.9gj_r8FTvbq_DuE4Bw7O-gP2GV8dbemQeUwd4Mwh9to";
-
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient<Database>(
+  SUPABASE_CONFIG.url,
+  SUPABASE_CONFIG.anonKey
+);
 
 export const signInWithGoogleOAuth = async () => {
   const { data, error } = await supabase.auth.signInWithOAuth({
