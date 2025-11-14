@@ -34,10 +34,6 @@ import { useAuth } from '@/context/AuthContext';
 const formSchema = z.object({
   firstName: z.string().min(2, { message: 'El nombre debe tener al menos 2 caracteres' }),
   lastName: z.string().min(2, { message: 'Los apellidos deben tener al menos 2 caracteres' }),
-  username: z.string()
-    .min(3, { message: 'El nombre de usuario debe tener al menos 3 caracteres' })
-    .max(20, { message: 'El nombre de usuario no puede tener más de 20 caracteres' })
-    .regex(/^[a-z0-9_]+$/, { message: 'El nombre de usuario solo puede contener letras minúsculas, números y guiones bajos' }),
   email: z.string().email({ message: 'Email inválido' }),
   password: z.string().min(6, { message: 'La contraseña debe tener al menos 6 caracteres' }),
   confirmPassword: z.string(),
@@ -70,13 +66,12 @@ const RegisterPage = () => {
     defaultValues: {
       firstName: '',
       lastName: '',
-      username: '',
       email: '',
       password: '',
       confirmPassword: '',
       terms: false,
     },
-    mode: "onBlur" // Changed from onChange to onBlur to validate when user moves away from field
+    mode: "onBlur"
   });
   
   // Add debounce to avoid too many API calls
@@ -142,7 +137,6 @@ const RegisterPage = () => {
         password: values.password,
         firstName: values.firstName,
         lastName: values.lastName,
-        username: values.username,
       });
 
       if (result.success) {
@@ -268,30 +262,6 @@ const RegisterPage = () => {
                         )}
                       />
                     </div>
-                    
-                    <FormField
-                      control={form.control}
-                      name="username"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Nombre de usuario</FormLabel>
-                          <FormControl>
-                            <div className="relative">
-                              <Input 
-                                placeholder="tu_usuario" 
-                                className="pl-10 rounded-full" 
-                                {...field} 
-                              />
-                              <AtSign className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                            </div>
-                          </FormControl>
-                          <FormDescription>
-                            Tu identificador único en la plataforma. Solo puede contener letras minúsculas, números y guiones bajos.
-                          </FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
                     
                     <FormField
                       control={form.control}
