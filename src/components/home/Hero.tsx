@@ -99,7 +99,7 @@ const Hero = () => {
           </div>
           
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 animate-slide-up leading-tight px-2 my-0">
-                                                                            Encuentra compañeros de piso compatibles <span className="homi-gradient-text">compañeros de piso</span> compatibles
+            Encuentra <span className="homi-gradient-text">compañeros de piso</span> compatibles
           </h1>
           
           <p className="text-base md:text-xl text-muted-foreground mb-6 max-w-2xl mx-auto px-2">
