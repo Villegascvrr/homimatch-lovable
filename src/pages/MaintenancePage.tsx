@@ -37,7 +37,11 @@ const MaintenancePage = () => {
           {/* Mensaje principal */}
           <div className="bg-white dark:bg-card border border-border rounded-2xl p-8 shadow-lg">
             <h1 className="text-3xl md:text-4xl font-bold text-center mb-4">
-              ¡Gracias por registrarte{user?.user_metadata?.firstName ? `, ${user.user_metadata.firstName}` : ''}!
+              {user ? (
+                <>¡Gracias por registrarte{user?.user_metadata?.firstName ? `, ${user.user_metadata.firstName}` : ''}!</>
+              ) : (
+                <>¡Bienvenido a HomiMatch!</>
+              )}
             </h1>
             
             <div className="bg-homi-ultraLightPurple/50 border border-homi-purple/20 rounded-xl p-6 mb-6">
@@ -51,24 +55,49 @@ const MaintenancePage = () => {
             </div>
 
             <div className="space-y-4 mb-8">
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-homi-purple mt-2"></div>
-                <p className="text-muted-foreground">
-                  <span className="font-semibold text-foreground">Te notificaremos por email</span> cuando la aplicación esté lista para usar
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-homi-purple mt-2"></div>
-                <p className="text-muted-foreground">
-                  Tu cuenta está <span className="font-semibold text-foreground">completamente configurada</span> y lista
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-homi-purple mt-2"></div>
-                <p className="text-muted-foreground">
-                  Serás de los <span className="font-semibold text-foreground">primeros en acceder</span> cuando lancemos
-                </p>
-              </div>
+              {user ? (
+                <>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-homi-purple mt-2"></div>
+                    <p className="text-muted-foreground">
+                      <span className="font-semibold text-foreground">Te notificaremos por email</span> cuando la aplicación esté lista para usar
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-homi-purple mt-2"></div>
+                    <p className="text-muted-foreground">
+                      Tu cuenta está <span className="font-semibold text-foreground">completamente configurada</span> y lista
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-homi-purple mt-2"></div>
+                    <p className="text-muted-foreground">
+                      Serás de los <span className="font-semibold text-foreground">primeros en acceder</span> cuando lancemos
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-homi-purple mt-2"></div>
+                    <p className="text-muted-foreground">
+                      <span className="font-semibold text-foreground">Regístrate</span> para ser notificado cuando esté lista
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-homi-purple mt-2"></div>
+                    <p className="text-muted-foreground">
+                      Tendrás acceso prioritario a todas las funcionalidades
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-homi-purple mt-2"></div>
+                    <p className="text-muted-foreground">
+                      Sé de los <span className="font-semibold text-foreground">primeros en encontrar</span> tu compañero de piso ideal
+                    </p>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Botones de acción */}
