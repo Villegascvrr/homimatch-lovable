@@ -36,22 +36,7 @@ export type Database = {
           profile_id_1?: string | null
           profile_id_2?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "matches_profile_id_1_fkey"
-            columns: ["profile_id_1"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "matches_profile_id_2_fkey"
-            columns: ["profile_id_2"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       messages: {
         Row: {
@@ -86,13 +71,6 @@ export type Database = {
             referencedRelation: "matches"
             referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "messages_sender_id_fkey"
-            columns: ["sender_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
         ]
       }
       profile_discards: {
@@ -114,22 +92,7 @@ export type Database = {
           id?: string
           profile_id?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "profile_discards_discarded_profile_id_fkey"
-            columns: ["discarded_profile_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "profile_discards_profile_id_fkey"
-            columns: ["profile_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       profile_matches: {
         Row: {
@@ -150,101 +113,35 @@ export type Database = {
           matched_profile_id?: string | null
           profile_id?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "profile_matches_matched_profile_id_fkey"
-            columns: ["matched_profile_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "profile_matches_profile_id_fkey"
-            columns: ["profile_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       profiles: {
         Row: {
-          auth_user_id: string | null
-          bio: string | null
-          budget_max: number | null
-          budget_min: number | null
-          city_zone: string | null
-          companeros_count: number | null
-          completed: boolean | null
-          created_at: string | null
-          edad: number | null
-          email: string | null
+          auth_user_id: string
+          created_at: string
+          email: string
           first_name: string | null
-          has_apartment: boolean | null
           id: string
-          interests: string[] | null
-          is_profile_active: boolean | null
           last_name: string | null
-          lifestyle: Json | null
-          ocupacion: string | null
-          profile_image: string | null
-          profile_image_id: string | null
-          skips: number | null
-          universidad: string | null
-          updated_at: string | null
-          username: string | null
+          updated_at: string
         }
         Insert: {
-          auth_user_id?: string | null
-          bio?: string | null
-          budget_max?: number | null
-          budget_min?: number | null
-          city_zone?: string | null
-          companeros_count?: number | null
-          completed?: boolean | null
-          created_at?: string | null
-          edad?: number | null
-          email?: string | null
+          auth_user_id: string
+          created_at?: string
+          email: string
           first_name?: string | null
-          has_apartment?: boolean | null
           id?: string
-          interests?: string[] | null
-          is_profile_active?: boolean | null
           last_name?: string | null
-          lifestyle?: Json | null
-          ocupacion?: string | null
-          profile_image?: string | null
-          profile_image_id?: string | null
-          skips?: number | null
-          universidad?: string | null
-          updated_at?: string | null
-          username?: string | null
+          updated_at?: string
         }
         Update: {
-          auth_user_id?: string | null
-          bio?: string | null
-          budget_max?: number | null
-          budget_min?: number | null
-          city_zone?: string | null
-          companeros_count?: number | null
-          completed?: boolean | null
-          created_at?: string | null
-          edad?: number | null
-          email?: string | null
+          auth_user_id?: string
+          created_at?: string
+          email?: string
           first_name?: string | null
-          has_apartment?: boolean | null
           id?: string
-          interests?: string[] | null
-          is_profile_active?: boolean | null
           last_name?: string | null
-          lifestyle?: Json | null
-          ocupacion?: string | null
-          profile_image?: string | null
-          profile_image_id?: string | null
-          skips?: number | null
-          universidad?: string | null
-          updated_at?: string | null
-          username?: string | null
+          updated_at?: string
         }
         Relationships: []
       }
