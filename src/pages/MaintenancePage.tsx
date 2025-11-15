@@ -66,10 +66,10 @@ const MaintenancePage = () => {
                 </p>
               </div>
 
-              <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-8"></div>
+              <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-4"></div>
 
               {/* Instagram CTA */}
-              <div className="text-center space-y-4 pt-6 pb-4">
+              <div className="text-center space-y-4 pt-2 pb-4">
                 <div className="space-y-2">
                   <div className="flex items-center justify-center gap-2">
                     
