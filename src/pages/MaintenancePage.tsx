@@ -43,9 +43,7 @@ const MaintenancePage = () => {
                 <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
                   La app oficial de HomiMatch llegará muy pronto
                 </h2>
-                <p className="text-sm md:text-base text-white/90 mb-4">
-                  Es la forma más rápida y sencilla de encontrar compañero de piso.
-                </p>
+                
                 <p className="text-sm text-white/85 flex items-center justify-center gap-2">
                   <Mail className="w-4 h-4" />
                   Te avisaremos por email cuando esté lista.
@@ -71,9 +69,9 @@ const MaintenancePage = () => {
               <div className="text-center space-y-4">
                 <div className="space-y-2">
                   <div className="flex items-center justify-center gap-2">
-                    <Instagram className="w-5 h-5 text-homi-purple" strokeWidth={2} />
+                    
                     <h3 className="text-lg font-bold text-foreground">
-                      Mantente al día
+                      Mantente al día para no è           
                     </h3>
                   </div>
                   <p className="text-sm text-muted-foreground">
@@ -81,18 +79,10 @@ const MaintenancePage = () => {
                   </p>
                 </div>
 
-                <Button 
-                  asChild 
-                  className="w-full bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-purple/90 hover:to-homi-lightPurple/90 text-white font-semibold shadow-lg rounded-lg h-11 transition-all hover:scale-[1.02]" 
-                >
-                  <a 
-                    href="https://www.instagram.com/homimatch_es/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="flex items-center justify-center gap-2"
-                  >
+                <Button asChild className="w-full bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-purple/90 hover:to-homi-lightPurple/90 text-white font-semibold shadow-lg rounded-lg h-11 transition-all hover:scale-[1.02]">
+                  <a href="https://www.instagram.com/homimatch_es/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                     <Instagram className="w-5 h-5" />
-                    <span>Seguir en Instagram (@homimatch_es)</span>
+                    <span>Seguir en Instagram (@homimatch)</span>
                   </a>
                 </Button>
               </div>
