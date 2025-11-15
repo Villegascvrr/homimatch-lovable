@@ -17,17 +17,12 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section - Visual con gradiente */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-homi-ultraLightPurple/30 via-background to-background py-16 md:py-24">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-homi-lightPurple/20 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-homi-purple/10 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+      {/* Hero Section - Limpio y moderno */}
+      <section className="relative overflow-hidden bg-background py-16 md:py-20">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="grid lg:grid-cols-[1fr,auto] gap-16 items-start">
             {/* Texto Hero */}
-            <div className="space-y-6">
+            <div className="space-y-6 max-w-xl">
               <div className="inline-block">
                 <span className="px-4 py-1.5 rounded-full bg-homi-purple/10 text-homi-purple text-sm font-medium flex items-center gap-1.5 w-fit">
                   <MapPin className="w-3.5 h-3.5" />
@@ -35,51 +30,49 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                 </span>
               </div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
                 Encontrar compañero de piso en <span className="homi-gradient-text">{city.name}</span>
               </h1>
               
-              <p className="text-lg md:text-xl text-muted-foreground">
+              <p className="text-lg text-muted-foreground leading-relaxed">
                 Encontrar compañeros de piso en {city.name} es más fácil que nunca. Crea tu perfil, conecta con personas compatibles y comparte piso en cualquier zona de la ciudad.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row gap-4 pt-2">
                 <Link to="/register" className="inline-block">
-                  <Button size="lg" className="w-full sm:w-auto rounded-full bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-lightPurple hover:to-homi-purple text-white font-bold shadow-lg shadow-purple-500/30 transform hover:scale-105 transition-all duration-300">
+                  <Button size="lg" className="w-full sm:w-auto rounded-full bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-lightPurple hover:to-homi-purple text-white font-bold shadow-lg shadow-purple-500/30 transform hover:scale-105 transition-all duration-300 px-8">
                     Unirme a HomiMatch
                   </Button>
                 </Link>
                 <Link to="/matching" className="inline-block">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full border-2 bg-background hover:bg-homi-purple/5">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full border-2 bg-background hover:bg-homi-purple/5 px-8">
                     Explorar perfiles
                   </Button>
                 </Link>
               </div>
 
-              <div className="flex items-center gap-6 pt-4">
-                <div className="flex items-center gap-2">
-                  <div className="flex -space-x-2">
-                    <div className="w-8 h-8 rounded-full border-2 border-background bg-gradient-to-br from-homi-purple to-homi-lightPurple"></div>
-                    <div className="w-8 h-8 rounded-full border-2 border-background bg-gradient-to-br from-homi-lightPurple to-homi-purple"></div>
-                    <div className="w-8 h-8 rounded-full border-2 border-background bg-gradient-to-br from-homi-purple to-homi-ultraLightPurple"></div>
-                  </div>
-                  <span className="text-sm text-muted-foreground">+500 usuarios activos</span>
+              <div className="flex items-center gap-2 pt-2">
+                <div className="flex -space-x-2">
+                  <div className="w-8 h-8 rounded-full border-2 border-background bg-gradient-to-br from-homi-purple to-homi-lightPurple"></div>
+                  <div className="w-8 h-8 rounded-full border-2 border-background bg-gradient-to-br from-homi-lightPurple to-homi-purple"></div>
+                  <div className="w-8 h-8 rounded-full border-2 border-background bg-gradient-to-br from-homi-purple to-homi-ultraLightPurple"></div>
                 </div>
+                <span className="text-sm text-muted-foreground font-medium">+500 usuarios activos</span>
               </div>
             </div>
 
-            {/* Collage de perfiles reales - 2 tarjetas verticales */}
+            {/* Tarjetas de perfiles - Más grandes y prominentes */}
             <div className="relative hidden lg:block">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="flex gap-6">
                 {/* Tarjeta 1 - Elena */}
-                <Card className="overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-300 rounded-3xl bg-white dark:bg-card">
-                  <div className="relative h-72">
+                <Card className="overflow-hidden border-0 shadow-2xl rounded-3xl bg-card w-[280px]">
+                  <div className="relative h-80">
                     <img 
                       src={heroProfiles[0].imgUrl} 
                       alt={heroProfiles[0].name}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute top-3 left-3 flex gap-2">
+                    <div className="absolute top-4 left-4 flex gap-2">
                       <span className="px-3 py-1.5 bg-green-500 text-white text-xs font-semibold rounded-full shadow-lg">
                         Activo ahora
                       </span>
@@ -89,7 +82,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                       </span>
                     </div>
                   </div>
-                  <CardContent className="p-4">
+                  <CardContent className="p-5">
                     <div className="mb-2">
                       <h3 className="font-bold text-xl text-foreground">{heroProfiles[0].name}, {heroProfiles[0].age}</h3>
                       <p className="text-sm text-muted-foreground flex items-center gap-1">
@@ -111,14 +104,14 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                 </Card>
 
                 {/* Tarjeta 2 - Carlos */}
-                <Card className="overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-300 rounded-3xl bg-white dark:bg-card">
-                  <div className="relative h-72">
+                <Card className="overflow-hidden border-0 shadow-2xl rounded-3xl bg-card w-[280px]">
+                  <div className="relative h-80">
                     <img 
                       src={heroProfiles[1].imgUrl} 
                       alt={heroProfiles[1].name}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute top-3 left-3 flex gap-2">
+                    <div className="absolute top-4 left-4 flex gap-2">
                       <span className="px-3 py-1.5 bg-green-500 text-white text-xs font-semibold rounded-full shadow-lg">
                         Activo ahora
                       </span>
@@ -128,7 +121,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                       </span>
                     </div>
                   </div>
-                  <CardContent className="p-4">
+                  <CardContent className="p-5">
                     <div className="mb-2">
                       <h3 className="font-bold text-xl text-foreground">{heroProfiles[1].name}, {heroProfiles[1].age}</h3>
                       <p className="text-sm text-muted-foreground flex items-center gap-1">
