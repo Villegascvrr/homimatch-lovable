@@ -16,7 +16,7 @@ export const CityLandingTemplate = ({
   const heroProfiles = mockProfiles.slice(0, 3);
   return <div className="min-h-screen bg-background">
       {/* Hero Section - Limpio y moderno */}
-      <section className="relative overflow-hidden bg-background py-16 md:py-20">
+      <section className="relative overflow-hidden bg-background py-10 md:py-20">
         <div className="container mx-auto px-4 max-w-7xl py-[16px]">
           <div className="grid lg:grid-cols-[1fr,auto] gap-16 items-start">
             {/* Texto Hero */}
