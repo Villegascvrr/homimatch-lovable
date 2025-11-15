@@ -17,6 +17,8 @@ import CookiesPage from './pages/CookiesPage';
 import ChatPage from './pages/ChatPage';
 import ProfilePage from './pages/ProfilePage';
 import MatchesPage from './pages/MatchesPage';
+import SeoCityLandingPage from './pages/SeoCityLandingPage';
+import SeoCitiesIndexPage from './pages/SeoCitiesIndexPage';
 
 const queryClient = new QueryClient();
 
@@ -34,6 +36,10 @@ function App() {
               <Route path="/signin" element={<SignInPage />} />
               <Route path="/maintenance" element={<MaintenancePage />} />
               <Route path="/matching" element={<MatchingLandingPage />} />
+              
+              {/* SEO Landing Pages */}
+              <Route path="/companero-de-piso" element={<SeoCitiesIndexPage />} />
+              <Route path="/companero-de-piso/:city" element={<SeoCityLandingPage />} />
               
               {/* Autenticación */}
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
