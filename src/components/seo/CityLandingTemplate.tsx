@@ -155,18 +155,23 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
 
       <main className="container mx-auto px-4 py-12 max-w-6xl">
         {/* Ventajas */}
-        <section className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <section className="mb-24">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="px-4 py-2 rounded-full bg-homi-purple/10 text-homi-purple text-sm font-medium">
+                ✨ Ventajas exclusivas
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 homi-gradient-text">
               ¿Por qué usar HomiMatch en {city.name}?
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               La forma más moderna y segura de encontrar compañero de piso
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="text-center p-6 hover:shadow-xl transition-shadow duration-300 border-2">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <Card className="text-center p-8 hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-background to-homi-ultraLightPurple/10 rounded-3xl">
               <div className="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-homi-purple to-homi-lightPurple flex items-center justify-center mb-4">
                 <Users className="w-8 h-8 text-white" />
               </div>
@@ -176,8 +181,8 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
               </p>
             </Card>
 
-            <Card className="text-center p-6 hover:shadow-xl transition-shadow duration-300 border-2">
-              <div className="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-homi-lightPurple to-homi-purple flex items-center justify-center mb-4">
+            <Card className="text-center p-8 hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-background to-homi-ultraLightPurple/10 rounded-3xl">
+              <div className="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-homi-lightPurple to-homi-purple flex items-center justify-center mb-4 shadow-lg">
                 <Home className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2 text-foreground">Comparte gastos</h3>
@@ -186,8 +191,8 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
               </p>
             </Card>
 
-            <Card className="text-center p-6 hover:shadow-xl transition-shadow duration-300 border-2">
-              <div className="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-homi-purple to-homi-ultraLightPurple flex items-center justify-center mb-4">
+            <Card className="text-center p-8 hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-background to-homi-ultraLightPurple/10 rounded-3xl">
+              <div className="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-homi-purple to-homi-ultraLightPurple flex items-center justify-center mb-4 shadow-lg">
                 <Shield className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2 text-foreground">Perfiles verificados</h3>
@@ -196,8 +201,8 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
               </p>
             </Card>
 
-            <Card className="text-center p-6 hover:shadow-xl transition-shadow duration-300 border-2">
-              <div className="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-homi-lightPurple to-homi-ultraLightPurple flex items-center justify-center mb-4">
+            <Card className="text-center p-8 hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-background to-homi-ultraLightPurple/10 rounded-3xl">
+              <div className="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-homi-lightPurple to-homi-ultraLightPurple flex items-center justify-center mb-4 shadow-lg">
                 <MapPin className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2 text-foreground">Busca por zona</h3>
@@ -209,7 +214,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
         </section>
 
         {/* Options Section - SEO Content */}
-        <section className="mb-20 bg-gradient-to-br from-homi-ultraLightPurple/20 to-transparent rounded-3xl p-8 md:p-12">
+        <section className="mb-24 bg-gradient-to-br from-homi-ultraLightPurple/30 via-homi-lightPurple/5 to-transparent rounded-3xl p-10 md:p-16 shadow-lg">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
             Opciones para encontrar compañero de piso en {city.name}
           </h2>
@@ -281,10 +286,10 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            <Card className="hover:shadow-xl transition-shadow duration-300 border-2">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-homi-purple to-homi-lightPurple flex items-center justify-center mb-4">
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-background to-homi-ultraLightPurple/10 rounded-3xl">
+              <CardContent className="p-8">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-homi-purple to-homi-lightPurple flex items-center justify-center mb-6 shadow-lg">
                   <CheckCircle className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-foreground">Qué preguntar en la primera visita</h3>
@@ -309,9 +314,9 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-xl transition-shadow duration-300 border-2">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-homi-lightPurple to-homi-purple flex items-center justify-center mb-4">
+            <Card className="hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-background to-homi-ultraLightPurple/10 rounded-3xl">
+              <CardContent className="p-8">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-homi-lightPurple to-homi-purple flex items-center justify-center mb-6 shadow-lg">
                   <CheckCircle className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-foreground">Cómo firmar un acuerdo de convivencia</h3>
@@ -335,9 +340,9 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-xl transition-shadow duration-300 border-2">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-homi-purple to-homi-ultraLightPurple flex items-center justify-center mb-4">
+            <Card className="hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-background to-homi-ultraLightPurple/10 rounded-3xl">
+              <CardContent className="p-8">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-homi-purple to-homi-ultraLightPurple flex items-center justify-center mb-6 shadow-lg">
                   <CheckCircle className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-foreground">Cómo evitar problemas comunes</h3>
@@ -365,15 +370,20 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
         </section>
 
         {/* FAQ Section */}
-        <section className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+        <section className="mb-24">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="px-4 py-2 rounded-full bg-homi-purple/10 text-homi-purple text-sm font-medium">
+                ❓ FAQ
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 homi-gradient-text">
               Preguntas frecuentes sobre compartir piso en {city.name}
             </h2>
           </div>
 
-          <div className="max-w-3xl mx-auto space-y-4">
-            <Card className="hover:shadow-lg transition-shadow duration-300 border-l-4 border-l-homi-purple">
+          <div className="max-w-4xl mx-auto space-y-6">
+            <Card className="hover:shadow-xl transition-all duration-300 border-0 border-l-4 border-l-homi-purple bg-gradient-to-r from-homi-purple/5 to-background rounded-2xl">
               <CardContent className="p-6">
                 <h3 className="text-lg font-bold mb-3 text-foreground flex items-start gap-2">
                   <span className="text-homi-purple">Q:</span>
@@ -385,7 +395,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-lg transition-shadow duration-300 border-l-4 border-l-homi-lightPurple">
+            <Card className="hover:shadow-xl transition-all duration-300 border-0 border-l-4 border-l-homi-lightPurple bg-gradient-to-r from-homi-lightPurple/5 to-background rounded-2xl">
               <CardContent className="p-6">
                 <h3 className="text-lg font-bold mb-3 text-foreground flex items-start gap-2">
                   <span className="text-homi-lightPurple">Q:</span>
@@ -397,7 +407,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-lg transition-shadow duration-300 border-l-4 border-l-homi-purple">
+            <Card className="hover:shadow-xl transition-all duration-300 border-0 border-l-4 border-l-homi-purple bg-gradient-to-r from-homi-purple/5 to-background rounded-2xl">
               <CardContent className="p-6">
                 <h3 className="text-lg font-bold mb-3 text-foreground flex items-start gap-2">
                   <span className="text-homi-purple">Q:</span>
@@ -409,7 +419,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-lg transition-shadow duration-300 border-l-4 border-l-homi-lightPurple">
+            <Card className="hover:shadow-xl transition-all duration-300 border-0 border-l-4 border-l-homi-lightPurple bg-gradient-to-r from-homi-lightPurple/5 to-background rounded-2xl">
               <CardContent className="p-6">
                 <h3 className="text-lg font-bold mb-3 text-foreground flex items-start gap-2">
                   <span className="text-homi-lightPurple">Q:</span>
@@ -424,33 +434,38 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
         </section>
 
         {/* CTA Section */}
-        <section className="mb-20 relative overflow-hidden rounded-3xl">
+        <section className="mb-24 relative overflow-hidden rounded-3xl shadow-2xl">
           <div className="absolute inset-0 bg-gradient-to-br from-homi-purple via-homi-lightPurple to-homi-ultraLightPurple"></div>
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxIDEuNzktNCA0LTRzNCAxLjc5IDQgNC0xLjc5IDQtNCA0LTQtMS43OS00LTR6bTAgMTBjMC0yLjIxIDEuNzktNCA0LTRzNCAxLjc5IDQgNC0xLjc5IDQtNCA0LTQtMS43OS00LTR6TTI2IDM0YzAtMi4yMSAxLjc5LTQgNC00czQgMS43OSA0IDQtMS43OSA0LTQgNC00LTEuNzktNC00em0wIDEwYzAtMi4yMSAxLjc5LTQgNC00czQgMS43OSA0IDQtMS43OSA0LTQgNC00LTEuNzktNC00eiIvPjwvZz48L2c+PC9zdmc+')] opacity-10"></div>
           
-          <div className="relative px-8 py-16 md:py-20 text-center">
-            <div className="max-w-3xl mx-auto space-y-6">
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+          <div className="relative px-8 py-20 md:py-28 text-center">
+            <div className="max-w-4xl mx-auto space-y-8">
+              <div className="inline-block mb-4">
+                <span className="px-6 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium border border-white/30">
+                  🚀 Únete hoy
+                </span>
+              </div>
+              <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
                 Empieza a buscar tu compañero de piso en {city.name}
               </h2>
-              <p className="text-lg md:text-xl text-white/90 mb-8">
+              <p className="text-xl md:text-2xl text-white/90 mb-10 max-w-3xl mx-auto">
                 Únete a HomiMatch y encuentra a tu compañero de piso ideal hoy mismo. Gratis, fácil y rápido.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <Link to="/register">
-                  <Button size="lg" className="w-full sm:w-auto rounded-full bg-white text-homi-purple hover:bg-white/90 font-bold shadow-xl transform hover:scale-105 transition-all duration-300">
+                  <Button size="lg" className="w-full sm:w-auto rounded-full bg-white text-homi-purple hover:bg-white/95 font-bold shadow-2xl transform hover:scale-105 transition-all duration-300 px-8 py-6 text-lg">
                     Crear mi perfil gratis
                   </Button>
                 </Link>
                 <Link to="/matching">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full border-2 border-white text-white bg-white/10 hover:bg-white/20">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full border-2 border-white text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm px-8 py-6 text-lg font-semibold">
                     Ver perfiles en {city.name}
                   </Button>
                 </Link>
               </div>
 
-              <div className="pt-6 flex items-center justify-center gap-8 text-white/90">
+              <div className="pt-10 flex items-center justify-center gap-12 text-white/90">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-5 h-5" />
                   <span className="text-sm">100% Gratis</span>
