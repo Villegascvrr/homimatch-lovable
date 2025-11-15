@@ -326,6 +326,21 @@ const Index = () => {
         
         <section className="py-16 md:py-20 overflow-x-hidden w-full">
           <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold mb-4">
+                Conoce a algunos de nuestros <span className="homi-gradient-text">usuarios</span>
+              </h3>
+              <p className="text-muted-foreground">
+                Perfiles reales de personas que ya están usando HomiMatch para encontrar su hogar ideal
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mb-16 mr-5 ml-5">
+              {featuredProfiles.map(profile => <div key={profile.id} className="animate-on-scroll">
+                  <MatchCard {...profile} compact={true} onLike={id => console.log('Liked:', id)} onPass={id => console.log('Passed:', id)} onView={id => navigate('/profile')} />
+                </div>)}
+            </div>
+
             <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16 animate-on-scroll">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Para <span className="homi-gradient-text">todo tipo de personas</span>
@@ -357,21 +372,6 @@ const Index = () => {
                   </p>
                 </div>
               </div>
-            </div>
-            
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold mb-4">
-                Conoce a algunos de nuestros <span className="homi-gradient-text">usuarios</span>
-              </h3>
-              <p className="text-muted-foreground">
-                Perfiles reales de personas que ya están usando HomiMatch para encontrar su hogar ideal
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mb-16 mr-5 ml-5">
-              {featuredProfiles.map(profile => <div key={profile.id} className="animate-on-scroll">
-                  <MatchCard {...profile} compact={true} onLike={id => console.log('Liked:', id)} onPass={id => console.log('Passed:', id)} onView={id => navigate('/profile')} />
-                </div>)}
             </div>
 
             {/* Enhanced Success Stories Section */}
