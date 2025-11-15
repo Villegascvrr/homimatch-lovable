@@ -32,20 +32,42 @@ const SeoCitiesIndexPage = () => {
           <div className="grid lg:grid-cols-[1fr,auto] gap-16 items-start">
             {/* Left Content */}
             <div className="space-y-6 max-w-xl">
-              <Badge className="mb-2 px-4 py-2 bg-homi-purple/10 text-homi-purple border-0 text-sm font-semibold">
-                35+ ciudades disponibles
-              </Badge>
+              <div className="inline-block">
+                <span className="px-4 py-1.5 rounded-full bg-homi-purple/10 text-homi-purple text-sm font-medium flex items-center gap-1.5 w-fit">
+                  <MapPin className="w-3.5 h-3.5" />
+                  Disponible en España
+                </span>
+              </div>
+              
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
-                Encuentra <span className="homi-gradient-text">compañeros de piso</span> en toda España
+                Encontrar compañero de piso en <span className="homi-gradient-text">España</span>
               </h1>
+              
               <p className="text-lg text-muted-foreground leading-relaxed">
-                HomiMatch te ayuda a conectar con personas afines para compartir piso en más de 35 ciudades españolas
+                Encontrar compañeros de piso en España es más fácil que nunca. Crea tu perfil, conecta con personas compatibles y comparte piso en cualquier zona de la ciudad.
               </p>
-              <Link to="/register">
-                <Button size="lg" className="rounded-full bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-lightPurple hover:to-homi-purple text-white font-bold shadow-lg shadow-purple-500/30 transform hover:scale-105 transition-all duration-300 px-8 py-6 text-lg">
-                  Unirme a HomiMatch
-                </Button>
-              </Link>
+
+              <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                <Link to="/register" className="inline-block">
+                  <Button size="lg" className="w-full sm:w-auto rounded-full bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-lightPurple hover:to-homi-purple text-white font-bold shadow-lg shadow-purple-500/30 transform hover:scale-105 transition-all duration-300">
+                    Unirme a HomiMatch
+                  </Button>
+                </Link>
+                <Link to="/matching" className="inline-block">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full border-2 bg-background hover:bg-homi-purple/5">
+                    Explorar perfiles
+                  </Button>
+                </Link>
+              </div>
+
+              <div className="flex items-center gap-2 pt-2">
+                <div className="flex -space-x-2">
+                  <div className="w-8 h-8 rounded-full border-2 border-background bg-gradient-to-br from-homi-purple to-homi-lightPurple"></div>
+                  <div className="w-8 h-8 rounded-full border-2 border-background bg-gradient-to-br from-homi-lightPurple to-homi-purple"></div>
+                  <div className="w-8 h-8 rounded-full border-2 border-background bg-gradient-to-br from-homi-purple to-homi-ultraLightPurple"></div>
+                </div>
+                <span className="text-sm text-muted-foreground font-medium">+500 usuarios activos</span>
+              </div>
             </div>
             
             {/* Right Content - Profile Cards */}
@@ -134,7 +156,7 @@ const SeoCitiesIndexPage = () => {
         {/* Cities Grid */}
         <section className="mb-20">
           <div className="text-center mb-10">
-            <Badge className="mb-4 px-4 py-2 bg-gradient-to-r from-homi-purple/20 to-homi-lightPurple/20 text-homi-purple border-0 text-sm font-semibold">
+            <Badge className="mb-4 px-4 py-2 bg-homi-purple/10 text-homi-purple border-0 text-sm font-semibold">
               Elige tu ubicación
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold homi-gradient-text">
@@ -144,7 +166,7 @@ const SeoCitiesIndexPage = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {seoCities.map((city) => (
               <Link key={city.slug} to={`/companero-de-piso/${city.slug}`}>
-                <Card className="hover:shadow-lg transition-all duration-300 cursor-pointer h-full border-0 bg-gradient-to-br from-background to-homi-ultraLightPurple/10 rounded-2xl transform hover:scale-105">
+                <Card className="hover:shadow-xl transition-all duration-300 cursor-pointer h-full border-0 bg-card rounded-3xl shadow-lg transform hover:scale-105">
                   <CardContent className="p-5">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-homi-purple to-homi-lightPurple flex items-center justify-center flex-shrink-0 shadow-md">
@@ -169,7 +191,7 @@ const SeoCitiesIndexPage = () => {
         {/* Why HomiMatch Section */}
         <section className="mb-20">
           <div className="text-center mb-10">
-            <Badge className="mb-4 px-4 py-2 bg-gradient-to-r from-homi-purple/20 to-homi-lightPurple/20 text-homi-purple border-0 text-sm font-semibold">
+            <Badge className="mb-4 px-4 py-2 bg-homi-purple/10 text-homi-purple border-0 text-sm font-semibold">
               Ventajas
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold homi-gradient-text">
@@ -177,21 +199,21 @@ const SeoCitiesIndexPage = () => {
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card className="border-0 bg-gradient-to-br from-background to-homi-ultraLightPurple/10 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 text-center">
+            <Card className="border-0 bg-card rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-homi-purple to-homi-lightPurple mb-6 shadow-lg">
                 <MapPin className="w-8 h-8 text-white" />
               </div>
               <div className="text-4xl font-bold homi-gradient-text mb-2">35+</div>
               <p className="text-base text-foreground font-semibold">Ciudades en España</p>
             </Card>
-            <Card className="border-0 bg-gradient-to-br from-background to-homi-ultraLightPurple/10 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 text-center">
+            <Card className="border-0 bg-card rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-homi-lightPurple to-homi-purple mb-6 shadow-lg">
                 <Shield className="w-8 h-8 text-white" />
               </div>
               <div className="text-4xl font-bold homi-gradient-text mb-2">100%</div>
               <p className="text-base text-foreground font-semibold">Perfiles verificados</p>
             </Card>
-            <Card className="border-0 bg-gradient-to-br from-background to-homi-ultraLightPurple/10 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 text-center">
+            <Card className="border-0 bg-card rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-homi-purple to-homi-ultraLightPurple mb-6 shadow-lg">
                 <UserCheck className="w-8 h-8 text-white" />
               </div>
@@ -206,7 +228,7 @@ const SeoCitiesIndexPage = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-homi-purple/10 via-homi-lightPurple/5 to-transparent"></div>
           <div className="relative p-12 md:p-16">
             <div className="text-center mb-12">
-              <Badge className="mb-4 px-4 py-2 bg-gradient-to-r from-homi-purple/20 to-homi-lightPurple/20 text-homi-purple border-0 text-sm font-semibold">
+              <Badge className="mb-4 px-4 py-2 bg-homi-purple/10 text-homi-purple border-0 text-sm font-semibold">
                 Proceso
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold homi-gradient-text">
