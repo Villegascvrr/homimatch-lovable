@@ -59,10 +59,9 @@ const MaintenancePage = () => {
             </Card>
           </div>
 
-          {/* Grid Layout for Secondary Info */}
-          <div className="grid md:grid-cols-2 gap-6 mb-10">
-            {/* Maintenance Notice */}
-            <Card className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl">
+          {/* Maintenance Notice */}
+          <div className="mb-10">
+            <Card className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl max-w-md mx-auto">
               <CardContent className="p-8 text-center space-y-3">
                 <div className="w-12 h-12 rounded-xl bg-muted/50 flex items-center justify-center mx-auto mb-3">
                   <div className="w-6 h-6 rounded-full border-2 border-muted-foreground border-t-transparent animate-spin"></div>
@@ -75,21 +74,46 @@ const MaintenancePage = () => {
                 </p>
               </CardContent>
             </Card>
+          </div>
 
-            {/* Social Follow */}
-            <Card className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl">
-              <CardContent className="p-8 flex flex-col items-center justify-center space-y-4 h-full">
-                <h3 className="text-lg font-semibold text-foreground">
-                  Mantente al día
-                </h3>
-                <Button asChild className="w-full bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-purple/90 hover:to-homi-lightPurple/90 text-white font-semibold shadow-lg rounded-xl" size="lg">
-                  <a href="https://www.instagram.com/homimatch_es/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                    <Instagram className="w-5 h-5" />
-                    @homimatch_es
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
+          {/* Instagram CTA Section - Destacado */}
+          <div className="mb-10">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-homi-purple/20 to-homi-lightPurple/20 rounded-3xl blur-xl"></div>
+              <Card className="relative bg-gradient-to-br from-card to-card/80 backdrop-blur-sm border-2 border-homi-purple/30 rounded-3xl shadow-xl overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-homi-purple/10 to-transparent rounded-full blur-3xl"></div>
+                <CardContent className="relative p-10 md:p-12 text-center space-y-6">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-homi-purple/20 to-homi-lightPurple/20 border border-homi-purple/30 mb-2">
+                    <Instagram className="w-8 h-8 text-homi-purple" strokeWidth={2} />
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <h3 className="text-2xl md:text-3xl font-bold text-foreground">
+                      Mantente al día
+                    </h3>
+                    <p className="text-lg text-muted-foreground max-w-lg mx-auto leading-relaxed">
+                      Síguenos para enterarte antes que nadie del lanzamiento de la app
+                    </p>
+                  </div>
+
+                  <Button 
+                    asChild 
+                    className="w-full max-w-md bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-purple/90 hover:to-homi-lightPurple/90 text-white font-bold shadow-2xl rounded-xl border-0 h-14 text-lg transition-all hover:scale-105" 
+                    size="lg"
+                  >
+                    <a 
+                      href="https://www.instagram.com/homimatch_es/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="flex items-center justify-center gap-3"
+                    >
+                      <Instagram className="w-6 h-6" />
+                      <span>Seguir en Instagram (@homimatch_es)</span>
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           </div>
 
           {/* Back Button */}
