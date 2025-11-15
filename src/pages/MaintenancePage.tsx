@@ -15,81 +15,103 @@ const MaintenancePage = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-background via-background to-muted/10">
       <Navbar />
       
-      <main className="flex-grow flex items-center justify-center px-4 py-12 bg-gradient-to-b from-background to-muted/20">
-        <div className="max-w-3xl w-full space-y-8">
-          {/* Sección de éxito */}
-          <div className="text-center space-y-3">
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-homi-purple to-homi-lightPurple rounded-full flex items-center justify-center shadow-lg">
-                <CheckCircle className="w-10 h-10 text-white" />
-              </div>
+      <main className="flex-grow flex items-center justify-center px-6 py-16">
+        <div className="max-w-4xl w-full">
+          {/* Success Header */}
+          <div className="text-center mb-12 space-y-6">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-homi-purple/10 to-homi-lightPurple/10 border-2 border-homi-purple/20">
+              <CheckCircle className="w-11 h-11 text-homi-purple" strokeWidth={2.5} />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground">
-              Tu cuenta se ha creado con éxito
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              Gracias por registrarte en HomiMatch.
-            </p>
+            
+            <div className="space-y-3">
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
+                Tu cuenta se ha creado con éxito
+              </h1>
+              <p className="text-xl text-muted-foreground font-light">
+                Gracias por registrarte en HomiMatch.
+              </p>
+            </div>
           </div>
 
-          {/* Mensaje de mantenimiento */}
-          <Card className="bg-muted/50 border-border/50">
-            <CardContent className="pt-6 text-center space-y-2">
-              <h2 className="text-xl font-semibold text-foreground">
-                Web en mantenimiento temporal
-              </h2>
-              <p className="text-muted-foreground">
-                Estamos realizando ajustes para mejorar tu experiencia.
-              </p>
-            </CardContent>
-          </Card>
+          {/* Main App Card - DESTACADO */}
+          <div className="relative mb-12">
+            <div className="absolute inset-0 bg-gradient-to-br from-homi-purple to-homi-lightPurple rounded-3xl blur-2xl opacity-20"></div>
+            <Card className="relative bg-gradient-to-br from-homi-purple via-homi-purple to-homi-lightPurple border-0 shadow-2xl rounded-3xl overflow-hidden">
+              <CardContent className="p-10 md:p-14 text-center space-y-6">
+                <div className="space-y-4">
+                  <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+                    La app oficial de HomiMatch<br />llegará muy pronto
+                  </h2>
+                  
+                  <div className="h-1 w-24 bg-white/30 rounded-full mx-auto"></div>
+                  
+                  <div className="space-y-4 pt-2">
+                    <p className="text-xl md:text-2xl text-white/95 font-medium">
+                      Es la forma más rápida y sencilla de encontrar compañero de piso.
+                    </p>
+                    <p className="text-lg text-white/85 font-light max-w-2xl mx-auto">
+                      Te avisaremos por email en cuanto esté lista.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
-          {/* Sección destacada de la app */}
-          <Card className="bg-gradient-to-br from-homi-purple to-homi-lightPurple border-0 shadow-2xl">
-            <CardContent className="pt-8 pb-8 text-center space-y-4">
-              <h2 className="text-2xl md:text-3xl font-bold text-white">
-                La app oficial de HomiMatch llegará muy pronto
-              </h2>
-              <div className="space-y-3 text-white/95">
-                <p className="text-lg font-medium">
-                  Es la forma más rápida y sencilla de encontrar compañero de piso.
+          {/* Grid Layout for Secondary Info */}
+          <div className="grid md:grid-cols-2 gap-6 mb-10">
+            {/* Maintenance Notice */}
+            <Card className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl">
+              <CardContent className="p-8 text-center space-y-3">
+                <div className="w-12 h-12 rounded-xl bg-muted/50 flex items-center justify-center mx-auto mb-3">
+                  <div className="w-6 h-6 rounded-full border-2 border-muted-foreground border-t-transparent animate-spin"></div>
+                </div>
+                <h3 className="text-lg font-semibold text-foreground">
+                  Web en mantenimiento temporal
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Estamos realizando ajustes para mejorar tu experiencia.
                 </p>
-                <p className="text-base">
-                  Te avisaremos por email en cuanto esté lista para descargarla.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
 
-          {/* Mantente al día */}
-          <div className="text-center space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">
-              Mantente al día
-            </h3>
+            {/* Social Follow */}
+            <Card className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl">
+              <CardContent className="p-8 flex flex-col items-center justify-center space-y-4 h-full">
+                <h3 className="text-lg font-semibold text-foreground">
+                  Mantente al día
+                </h3>
+                <Button 
+                  asChild 
+                  className="w-full bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-purple/90 hover:to-homi-lightPurple/90 text-white font-semibold shadow-lg rounded-xl" 
+                  size="lg"
+                >
+                  <a 
+                    href="https://www.instagram.com/homimatch_es/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex items-center gap-2"
+                  >
+                    <Instagram className="w-5 h-5" />
+                    @homimatch_es
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Back Button */}
+          <div className="text-center">
             <Button 
               asChild 
-              className="w-full sm:w-auto bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-purple/90 hover:to-homi-lightPurple/90 text-white font-semibold shadow-lg" 
+              variant="outline" 
+              className="rounded-xl border-border/50 hover:bg-muted/50" 
               size="lg"
             >
-              <a 
-                href="https://www.instagram.com/homimatch_es/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="flex items-center gap-2"
-              >
-                <Instagram className="w-5 h-5" />
-                Síguenos en Instagram: @homimatch_es
-              </a>
-            </Button>
-          </div>
-
-          {/* Botón volver al inicio */}
-          <div className="pt-4">
-            <Button asChild variant="outline" className="w-full" size="lg">
-              <Link to="/" className="flex items-center justify-center gap-2">
+              <Link to="/" className="flex items-center gap-2">
                 <Home className="w-4 h-4" />
                 Volver al inicio
               </Link>
