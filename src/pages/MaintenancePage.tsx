@@ -14,8 +14,7 @@ const MaintenancePage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-background via-background to-muted/10">
+  return <div className="min-h-screen flex flex-col bg-gradient-to-br from-background via-background to-muted/10">
       <Navbar />
       
       <main className="flex-grow flex items-center justify-center px-6 py-16">
@@ -49,9 +48,7 @@ const MaintenancePage = () => {
                   <div className="h-1 w-24 bg-white/30 rounded-full mx-auto"></div>
                   
                   <div className="space-y-4 pt-2">
-                    <p className="text-xl md:text-2xl text-white/95 font-medium">
-                      Es la forma más rápida y sencilla de encontrar compañero de piso.
-                    </p>
+                    
                     <p className="text-lg text-white/85 font-light max-w-2xl mx-auto">
                       Te avisaremos por email en cuanto esté lista.
                     </p>
@@ -84,17 +81,8 @@ const MaintenancePage = () => {
                 <h3 className="text-lg font-semibold text-foreground">
                   Mantente al día
                 </h3>
-                <Button 
-                  asChild 
-                  className="w-full bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-purple/90 hover:to-homi-lightPurple/90 text-white font-semibold shadow-lg rounded-xl" 
-                  size="lg"
-                >
-                  <a 
-                    href="https://www.instagram.com/homimatch_es/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="flex items-center gap-2"
-                  >
+                <Button asChild className="w-full bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-purple/90 hover:to-homi-lightPurple/90 text-white font-semibold shadow-lg rounded-xl" size="lg">
+                  <a href="https://www.instagram.com/homimatch_es/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                     <Instagram className="w-5 h-5" />
                     @homimatch_es
                   </a>
@@ -105,12 +93,7 @@ const MaintenancePage = () => {
 
           {/* Back Button */}
           <div className="text-center">
-            <Button 
-              asChild 
-              variant="outline" 
-              className="rounded-xl border-border/50 hover:bg-muted/50" 
-              size="lg"
-            >
+            <Button asChild variant="outline" className="rounded-xl border-border/50 hover:bg-muted/50" size="lg">
               <Link to="/" className="flex items-center gap-2">
                 <Home className="w-4 h-4" />
                 Volver al inicio
@@ -121,7 +104,6 @@ const MaintenancePage = () => {
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
 export default MaintenancePage;
