@@ -1,45 +1,43 @@
 import { Link } from "react-router-dom";
 import { Instagram, Mail } from "lucide-react";
-
 const Footer = () => {
-  const popularCities = [
-    { name: "Madrid", slug: "madrid" },
-    { name: "Barcelona", slug: "barcelona" },
-    { name: "Sevilla", slug: "sevilla" },
-    { name: "Valencia", slug: "valencia" },
-    { name: "Málaga", slug: "malaga" },
-    { name: "Bilbao", slug: "bilbao" }
-  ];
-
-  return (
-    <footer className="bg-gradient-to-br from-homi-ultraLightPurple/10 to-background border-t border-border/50 py-12 px-4">
+  const popularCities = [{
+    name: "Madrid",
+    slug: "madrid"
+  }, {
+    name: "Barcelona",
+    slug: "barcelona"
+  }, {
+    name: "Sevilla",
+    slug: "sevilla"
+  }, {
+    name: "Valencia",
+    slug: "valencia"
+  }, {
+    name: "Málaga",
+    slug: "malaga"
+  }, {
+    name: "Bilbao",
+    slug: "bilbao"
+  }];
+  return <footer className="bg-gradient-to-br from-homi-ultraLightPurple/10 to-background border-t border-border/50 py-12 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
           {/* Company Info */}
           <div className="md:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-homi-purple to-homi-lightPurple flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-lg">H</span>
-              </div>
+              
               <span className="font-bold text-2xl homi-gradient-text">HomiMatch</span>
             </Link>
             <p className="text-sm text-muted-foreground mb-4 max-w-xs">
               Encuentra tu compañero de piso ideal en toda España. Conecta con personas afines y comparte experiencias.
             </p>
             <div className="flex flex-col gap-2">
-              <a 
-                href="mailto:hola@homimatch.com" 
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-homi-purple transition-colors"
-              >
+              <a href="mailto:hola@homimatch.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-homi-purple transition-colors">
                 <Mail className="w-4 h-4" />
                 hola@homimatch.com
               </a>
-              <a 
-                href="https://instagram.com/homimatch" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-homi-purple transition-colors"
-              >
+              <a href="https://instagram.com/homimatch" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-homi-purple transition-colors">
                 <Instagram className="w-4 h-4" />
                 @homimatch
               </a>
@@ -72,16 +70,11 @@ const Footer = () => {
           <div>
             <h3 className="font-bold text-foreground mb-4">Ciudades populares</h3>
             <ul className="space-y-2">
-              {popularCities.map((city) => (
-                <li key={city.slug}>
-                  <Link 
-                    to={`/companero-de-piso/${city.slug}`} 
-                    className="text-sm text-muted-foreground hover:text-homi-purple transition-colors"
-                  >
+              {popularCities.map(city => <li key={city.slug}>
+                  <Link to={`/companero-de-piso/${city.slug}`} className="text-sm text-muted-foreground hover:text-homi-purple transition-colors">
                     {city.name}
                   </Link>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </div>
 
@@ -113,19 +106,12 @@ const Footer = () => {
             © 2024 HomiMatch. Todos los derechos reservados.
           </p>
           <div className="flex gap-4">
-            <a 
-              href="https://instagram.com/homimatch" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-homi-purple transition-colors"
-            >
+            <a href="https://instagram.com/homimatch" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-homi-purple transition-colors">
               <Instagram className="w-5 h-5" />
             </a>
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
