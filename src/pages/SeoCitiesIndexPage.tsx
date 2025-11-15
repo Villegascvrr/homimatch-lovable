@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { seoCities } from "@/data/seoCities";
 import { mockProfiles } from "@/data/mockProfiles";
-import { MapPin, UserCheck, Search, MessageCircle, CheckCircle, Users, Shield } from "lucide-react";
+import { MapPin, Star, Shield, UserCheck, Search, MessageCircle, Users } from "lucide-react";
 
 const SeoCitiesIndexPage = () => {
   return (
@@ -26,19 +26,19 @@ const SeoCitiesIndexPage = () => {
       
       <Navbar />
       
-      <main className="container mx-auto px-4 py-12 max-w-7xl">
+      <main className="container mx-auto px-4 py-16 max-w-7xl">
         {/* Hero Section */}
-        <section className="mb-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <section className="mb-20">
+          <div className="grid lg:grid-cols-[1fr,auto] gap-16 items-start">
             {/* Left Content */}
-            <div className="text-center lg:text-left">
-              <Badge className="mb-6 px-4 py-2 bg-gradient-to-r from-homi-purple/20 to-homi-lightPurple/20 text-homi-purple border-0 text-sm font-semibold">
+            <div className="space-y-6 max-w-xl">
+              <Badge className="mb-2 px-4 py-2 bg-homi-purple/10 text-homi-purple border-0 text-sm font-semibold">
                 35+ ciudades disponibles
               </Badge>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
                 Encuentra <span className="homi-gradient-text">compañeros de piso</span> en toda España
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0">
+              <p className="text-lg text-muted-foreground leading-relaxed">
                 HomiMatch te ayuda a conectar con personas afines para compartir piso en más de 35 ciudades españolas
               </p>
               <Link to="/register">
@@ -49,52 +49,80 @@ const SeoCitiesIndexPage = () => {
             </div>
             
             {/* Right Content - Profile Cards */}
-            <div className="hidden lg:flex gap-6 justify-center">
+            <div className="hidden lg:flex gap-6">
               {/* Elena Card */}
-              <Card className="w-64 overflow-hidden border-0 bg-gradient-to-br from-background to-homi-ultraLightPurple/10 rounded-3xl shadow-xl transform hover:scale-105 transition-all duration-300">
-                <img 
-                  src={mockProfiles[0].imgUrl} 
-                  alt={mockProfiles[0].name}
-                  className="w-full h-72 object-cover"
-                />
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-xl font-bold text-foreground">{mockProfiles[0].name}, {mockProfiles[0].age}</h3>
-                    <Badge className="bg-gradient-to-r from-homi-purple to-homi-lightPurple text-white border-0">
+              <Card className="overflow-hidden border-0 shadow-2xl rounded-3xl bg-card w-[280px]">
+                <div className="relative h-80">
+                  <img 
+                    src={mockProfiles[0].imgUrl} 
+                    alt={mockProfiles[0].name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute top-4 left-4 flex gap-2">
+                    <span className="px-3 py-1.5 bg-green-500 text-white text-xs font-semibold rounded-full shadow-lg">
+                      Activo ahora
+                    </span>
+                    <span className="px-3 py-1.5 bg-homi-purple text-white text-xs font-semibold rounded-full flex items-center gap-1 shadow-lg">
+                      <Star className="w-3.5 h-3.5" fill="white" />
                       {mockProfiles[0].compatibility}%
-                    </Badge>
+                    </span>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-3">{mockProfiles[0].location}</p>
+                </div>
+                <CardContent className="p-5">
+                  <div className="mb-2">
+                    <h3 className="font-bold text-xl text-foreground">{mockProfiles[0].name}, {mockProfiles[0].age}</h3>
+                    <p className="text-sm text-muted-foreground flex items-center gap-1">
+                      <MapPin className="w-3.5 h-3.5" />
+                      {mockProfiles[0].location}
+                    </p>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                    {mockProfiles[0].bio}
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {mockProfiles[0].tags.slice(0, 3).map((tag) => (
-                      <Badge key={tag.id} variant="secondary" className="text-xs bg-homi-purple/10 text-homi-purple border-0">
+                      <span key={tag.id} className="px-3 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full font-medium">
                         {tag.name}
-                      </Badge>
+                      </span>
                     ))}
                   </div>
                 </CardContent>
               </Card>
               
               {/* Carlos Card */}
-              <Card className="w-64 overflow-hidden border-0 bg-gradient-to-br from-background to-homi-ultraLightPurple/10 rounded-3xl shadow-xl transform hover:scale-105 transition-all duration-300 mt-12">
-                <img 
-                  src={mockProfiles[1].imgUrl} 
-                  alt={mockProfiles[1].name}
-                  className="w-full h-72 object-cover"
-                />
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-xl font-bold text-foreground">{mockProfiles[1].name}, {mockProfiles[1].age}</h3>
-                    <Badge className="bg-gradient-to-r from-homi-purple to-homi-lightPurple text-white border-0">
+              <Card className="overflow-hidden border-0 shadow-2xl rounded-3xl bg-card w-[280px]">
+                <div className="relative h-80">
+                  <img 
+                    src={mockProfiles[1].imgUrl} 
+                    alt={mockProfiles[1].name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute top-4 left-4 flex gap-2">
+                    <span className="px-3 py-1.5 bg-green-500 text-white text-xs font-semibold rounded-full shadow-lg">
+                      Activo ahora
+                    </span>
+                    <span className="px-3 py-1.5 bg-homi-purple text-white text-xs font-semibold rounded-full flex items-center gap-1 shadow-lg">
+                      <Star className="w-3.5 h-3.5" fill="white" />
                       {mockProfiles[1].compatibility}%
-                    </Badge>
+                    </span>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-3">{mockProfiles[1].location}</p>
+                </div>
+                <CardContent className="p-5">
+                  <div className="mb-2">
+                    <h3 className="font-bold text-xl text-foreground">{mockProfiles[1].name}, {mockProfiles[1].age}</h3>
+                    <p className="text-sm text-muted-foreground flex items-center gap-1">
+                      <MapPin className="w-3.5 h-3.5" />
+                      {mockProfiles[1].location}
+                    </p>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                    {mockProfiles[1].bio}
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {mockProfiles[1].tags.slice(0, 3).map((tag) => (
-                      <Badge key={tag.id} variant="secondary" className="text-xs bg-homi-purple/10 text-homi-purple border-0">
+                      <span key={tag.id} className="px-3 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full font-medium">
                         {tag.name}
-                      </Badge>
+                      </span>
                     ))}
                   </div>
                 </CardContent>
