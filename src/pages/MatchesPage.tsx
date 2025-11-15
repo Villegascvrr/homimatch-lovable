@@ -6,7 +6,7 @@ const MatchesPage = () => {
   const { session } = useAuth();
 
   if (!session) {
-    return <AuthRequiredNotice />;
+    return <AuthRequiredNotice message="Para ver tus matches, necesitas iniciar sesión o registrarte" />;
   }
 
   return <AppInDevelopmentNotice />;
