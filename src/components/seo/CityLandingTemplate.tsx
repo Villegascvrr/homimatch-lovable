@@ -226,20 +226,6 @@ export const CityLandingTemplate = ({
           </div>
         </section>
 
-        {/* Options Section - SEO Content */}
-        <section className="mb-24 bg-gradient-to-br from-homi-ultraLightPurple/30 via-homi-lightPurple/5 to-transparent rounded-3xl p-10 md:p-16 shadow-lg">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-            Opciones para encontrar compañero de piso en {city.name}
-          </h2>
-          <div className="space-y-4 text-lg text-muted-foreground">
-            <p>
-              Da igual si <strong className="text-foreground">busco compañero de piso {city.name}</strong>, <strong className="text-foreground">se busca compañero de piso {city.name}</strong> o necesitas encontrar <strong className="text-foreground">compañeros de piso {city.name}</strong>. HomiMatch te ayuda a conectar con personas que buscan <strong className="text-foreground">compañera de piso {city.name}</strong> o <strong className="text-foreground">buscamos compañera de piso en {city.name}</strong>.
-            </p>
-            <p>
-              Da igual si buscas alquilar una habitación o compartir para reducir gastos: aquí puedes conectar con personas que buscan piso en {city.name}.
-            </p>
-          </div>
-        </section>
 
         {/* How It Works Section */}
         <section className="mb-20">
@@ -526,6 +512,21 @@ export const CityLandingTemplate = ({
                 Ver todas las ciudades disponibles →
               </Button>
             </Link>
+          </div>
+        </section>
+
+        {/* Options Section - SEO Content */}
+        <section className="mb-12 bg-gradient-to-br from-homi-ultraLightPurple/30 via-homi-lightPurple/5 to-transparent rounded-3xl p-10 md:p-16 shadow-lg">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
+            Opciones para encontrar compañero de piso en {city.name}
+          </h2>
+          <div className="space-y-4 text-lg text-muted-foreground">
+            <p>
+              Da igual si <strong className="text-foreground">busco compañero de piso {city.name}</strong>, <strong className="text-foreground">se busca compañero de piso {city.name}</strong> o necesitas encontrar <strong className="text-foreground">compañeros de piso {city.name}</strong>. HomiMatch te ayuda a conectar con personas que buscan <strong className="text-foreground">compañera de piso {city.name}</strong> o <strong className="text-foreground">buscamos compañera de piso en {city.name}</strong>.
+            </p>
+            <p>
+              Da igual si buscas alquilar una habitación o compartir para reducir gastos: aquí puedes conectar con personas que buscan piso en {city.name}.
+            </p>
           </div>
         </section>
       </main>
