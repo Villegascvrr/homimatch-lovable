@@ -7,7 +7,7 @@ import * as z from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { CheckCircle2, ArrowRight, User, Mail, Lock } from 'lucide-react';
+import { CheckCircle2, ArrowRight, User, Mail } from 'lucide-react';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
@@ -21,9 +21,6 @@ const formSchema = z.object({
   }),
   email: z.string().email({
     message: 'Email inválido'
-  }),
-  password: z.string().min(6, {
-    message: 'La contraseña debe tener al menos 6 caracteres'
   })
 });
 
@@ -45,7 +42,6 @@ const EmailSignup = () => {
       firstName: '',
       lastName: '',
       email: '',
-      password: '',
     },
     mode: "onBlur"
   });
@@ -138,7 +134,6 @@ const EmailSignup = () => {
       
       const result = await signUp({
         email: values.email,
-        password: values.password,
         firstName: values.firstName,
         lastName: values.lastName,
       });
@@ -158,7 +153,7 @@ const EmailSignup = () => {
         
         toast({
           title: "Cuenta creada con éxito",
-          description: "Ya puedes comenzar a usar tu cuenta.",
+          description: "Revisa tu correo para confirmar tu cuenta.",
           variant: "default",
         });
         
@@ -166,9 +161,9 @@ const EmailSignup = () => {
         if (!isNavigatingAway) {
           setIsNavigatingAway(true);
           
-          // Redirección consistente con el flujo de OAuth
+          // Redirigir a página de mantenimiento
           setTimeout(() => {
-            navigate('/?registered=true');
+            navigate('/maintenance');
           }, 1000);
         }
       } else {
@@ -314,26 +309,6 @@ const EmailSignup = () => {
                           <div className="h-4 w-4 animate-spin rounded-full border-2 border-b-transparent"></div>
                         </div>
                       )}
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>} />
-            
-            <FormField control={form.control} name="password" render={({
-              field
-            }) => <FormItem>
-                  <FormLabel>Contraseña *</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input 
-                        id="password" 
-                        type="password" 
-                        placeholder="••••••••" 
-                        className="pl-10 rounded-full" 
-                        disabled={isLoading || isSigningWithGoogle}
-                        {...field} 
-                      />
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                     </div>
                   </FormControl>
                   <FormMessage />

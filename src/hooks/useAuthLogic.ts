@@ -6,7 +6,7 @@ import { useToast } from '@/hooks/use-toast';
 
 export interface UserSignUpData {
   email: string;
-  password: string;
+  password?: string; // Opcional - se genera automáticamente si no se proporciona
   firstName: string;
   lastName: string;
   username?: string; // Opcional
@@ -195,12 +195,11 @@ export const useAuthLogic = () => {
     try {
       
       
-      // Validate required fields
-      if (!userData.email || !userData.password || !userData.firstName || 
-          !userData.lastName) {
+      // Validate required fields (solo nombre, apellidos y email)
+      if (!userData.email || !userData.firstName || !userData.lastName) {
         toast({
           title: "Datos incompletos",
-          description: "Por favor completa nombre, apellidos, email y contraseña.",
+          description: "Por favor completa nombre, apellidos y correo electrónico.",
           variant: "destructive",
           duration: 1500
         });
@@ -227,9 +226,12 @@ export const useAuthLogic = () => {
       // Generate username from email if not provided
       const username = userData.username || extractUsernameFromEmail(userData.email);
       
+      // Generate a random password if not provided (required by Supabase)
+      const password = userData.password || Math.random().toString(36).slice(-12) + Math.random().toString(36).slice(-12);
+      
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: userData.email,
-        password: userData.password,
+        password: password,
         options: {
           data: {
             first_name: userData.firstName,
