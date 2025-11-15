@@ -6,7 +6,7 @@ const ChatPage = () => {
   const { session } = useAuth();
 
   if (!session) {
-    return <AuthRequiredNotice />;
+    return <AuthRequiredNotice message="Para ver tus chats, necesitas iniciar sesión o registrarte" />;
   }
 
   return <AppInDevelopmentNotice />;

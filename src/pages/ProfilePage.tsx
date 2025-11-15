@@ -6,7 +6,7 @@ const ProfilePage = () => {
   const { session } = useAuth();
 
   if (!session) {
-    return <AuthRequiredNotice />;
+    return <AuthRequiredNotice message="Para ver tu perfil, necesitas iniciar sesión o registrarte" />;
   }
 
   return <AppInDevelopmentNotice />;
