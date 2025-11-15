@@ -4,22 +4,20 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Users, Home, Shield, MapPin, Heart, CheckCircle, X, Plus, Star, Search } from "lucide-react";
 import { SeoCityData, seoCities } from "@/data/seoCities";
 import { mockProfiles } from "@/data/mockProfiles";
-
 interface CityLandingTemplateProps {
   city: SeoCityData;
 }
-
-export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
+export const CityLandingTemplate = ({
+  city
+}: CityLandingTemplateProps) => {
   const otherCities = seoCities.filter(c => c.slug !== city.slug);
-  
+
   // Usar los primeros 3 perfiles para el hero (Elena, Carlos, Laura)
   const heroProfiles = mockProfiles.slice(0, 3);
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       {/* Hero Section - Limpio y moderno */}
       <section className="relative overflow-hidden bg-background py-16 md:py-20">
-        <div className="container mx-auto px-4 max-w-7xl">
+        <div className="container mx-auto px-4 max-w-7xl py-[16px]">
           <div className="grid lg:grid-cols-[1fr,auto] gap-16 items-start">
             {/* Texto Hero */}
             <div className="space-y-6 max-w-xl">
@@ -63,11 +61,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
               {/* Tarjeta Elena - Solo móvil */}
               <Card className="overflow-hidden border-0 shadow-2xl rounded-3xl bg-card lg:hidden mt-6">
                 <div className="relative h-64">
-                  <img 
-                    src={heroProfiles[0].imgUrl} 
-                    alt={heroProfiles[0].name}
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={heroProfiles[0].imgUrl} alt={heroProfiles[0].name} className="w-full h-full object-cover" />
                   <div className="absolute top-4 left-4 flex gap-2">
                     <span className="px-3 py-1.5 bg-green-500 text-white text-xs font-semibold rounded-full shadow-lg">
                       Activo ahora
@@ -90,11 +84,9 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                     {heroProfiles[0].bio}
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {heroProfiles[0].tags.slice(0, 3).map((tag) => (
-                      <span key={tag.id} className="px-3 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full font-medium">
+                    {heroProfiles[0].tags.slice(0, 3).map(tag => <span key={tag.id} className="px-3 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full font-medium">
                         {tag.name}
-                      </span>
-                    ))}
+                      </span>)}
                   </div>
                 </CardContent>
               </Card>
@@ -106,11 +98,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                 {/* Tarjeta 1 - Elena */}
                 <Card className="overflow-hidden border-0 shadow-2xl rounded-3xl bg-card w-[280px]">
                   <div className="relative h-[260px]">
-                    <img 
-                      src={heroProfiles[0].imgUrl} 
-                      alt={heroProfiles[0].name}
-                      className="w-full h-full object-cover"
-                    />
+                    <img src={heroProfiles[0].imgUrl} alt={heroProfiles[0].name} className="w-full h-full object-cover" />
                     <div className="absolute top-4 left-4 flex gap-2">
                       <span className="px-3 py-1.5 bg-green-500 text-white text-xs font-semibold rounded-full shadow-lg">
                         Activo ahora
@@ -133,11 +121,9 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                       {heroProfiles[0].bio}
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      {heroProfiles[0].tags.slice(0, 3).map((tag) => (
-                        <span key={tag.id} className="px-3 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full font-medium">
+                      {heroProfiles[0].tags.slice(0, 3).map(tag => <span key={tag.id} className="px-3 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full font-medium">
                           {tag.name}
-                        </span>
-                      ))}
+                        </span>)}
                     </div>
                   </CardContent>
                 </Card>
@@ -145,11 +131,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                 {/* Tarjeta 2 - Carlos */}
                 <Card className="overflow-hidden border-0 shadow-2xl rounded-3xl bg-card w-[280px]">
                   <div className="relative h-[260px]">
-                    <img 
-                      src={heroProfiles[1].imgUrl} 
-                      alt={heroProfiles[1].name}
-                      className="w-full h-full object-cover"
-                    />
+                    <img src={heroProfiles[1].imgUrl} alt={heroProfiles[1].name} className="w-full h-full object-cover" />
                     <div className="absolute top-4 left-4 flex gap-2">
                       <span className="px-3 py-1.5 bg-green-500 text-white text-xs font-semibold rounded-full shadow-lg">
                         Activo ahora
@@ -172,11 +154,9 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                       {heroProfiles[1].bio}
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      {heroProfiles[1].tags.slice(0, 3).map((tag) => (
-                        <span key={tag.id} className="px-3 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full font-medium">
+                      {heroProfiles[1].tags.slice(0, 3).map(tag => <span key={tag.id} className="px-3 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full font-medium">
                           {tag.name}
-                        </span>
-                      ))}
+                        </span>)}
                     </div>
                   </CardContent>
                 </Card>
@@ -528,12 +508,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-            {otherCities.slice(0, 20).map((otherCity) => (
-              <Link
-                key={otherCity.slug}
-                to={`/companero-de-piso/${otherCity.slug}`}
-                className="group"
-              >
+            {otherCities.slice(0, 20).map(otherCity => <Link key={otherCity.slug} to={`/companero-de-piso/${otherCity.slug}`} className="group">
                 <Card className="h-full hover:shadow-lg hover:border-homi-purple transition-all duration-300 cursor-pointer">
                   <CardContent className="p-4 text-center">
                     <MapPin className="w-6 h-6 mx-auto mb-2 text-homi-purple group-hover:scale-110 transition-transform duration-300" />
@@ -542,8 +517,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                     </p>
                   </CardContent>
                 </Card>
-              </Link>
-            ))}
+              </Link>)}
           </div>
 
           <div className="text-center mt-8">
@@ -555,6 +529,5 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
           </div>
         </section>
       </main>
-    </div>
-  );
+    </div>;
 };
