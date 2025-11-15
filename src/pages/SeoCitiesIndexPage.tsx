@@ -33,7 +33,7 @@ const SeoCitiesIndexPage = () => {
       
       <Navbar />
       
-      <main className="container mx-auto px-4 py-16 max-w-7xl">
+      <main className="container mx-auto px-4 py-10 md:py-16 max-w-7xl">
         {/* Hero Section */}
         <section className="mb-20">
           <div className="grid lg:grid-cols-[1fr,auto] gap-16 items-start">
