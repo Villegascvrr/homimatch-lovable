@@ -54,87 +54,6 @@ const SeoCitiesIndexPage = () => {
                 Encontrar compañeros de piso en España es más fácil que nunca. Crea tu perfil, conecta con personas compatibles y comparte piso en cualquier zona de la ciudad.
               </p>
 
-              {/* Tarjetas de perfiles - Solo móvil */}
-              <div className="flex flex-col gap-4 lg:hidden my-6">
-                {/* Tarjeta Elena - Móvil */}
-                <Card className="overflow-hidden border-0 shadow-2xl rounded-3xl bg-card">
-                  <div className="relative h-64">
-                    <img 
-                      src={mockProfiles[0].imgUrl} 
-                      alt={mockProfiles[0].name}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute top-4 left-4 flex gap-2">
-                      <span className="px-3 py-1.5 bg-green-500 text-white text-xs font-semibold rounded-full shadow-lg">
-                        Activo ahora
-                      </span>
-                      <span className="px-3 py-1.5 bg-homi-purple text-white text-xs font-semibold rounded-full flex items-center gap-1 shadow-lg">
-                        <Star className="w-3.5 h-3.5" fill="white" />
-                        {mockProfiles[0].compatibility}%
-                      </span>
-                    </div>
-                  </div>
-                  <CardContent className="p-5">
-                    <div className="mb-2">
-                      <h3 className="font-bold text-xl text-foreground">{mockProfiles[0].name}, {mockProfiles[0].age}</h3>
-                      <p className="text-sm text-muted-foreground flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5" />
-                        {mockProfiles[0].location}
-                      </p>
-                    </div>
-                    <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                      {mockProfiles[0].bio}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {mockProfiles[0].tags.slice(0, 3).map((tag) => (
-                        <span key={tag.id} className="px-3 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full font-medium">
-                          {tag.name}
-                        </span>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Tarjeta Carlos - Móvil */}
-                <Card className="overflow-hidden border-0 shadow-2xl rounded-3xl bg-card">
-                  <div className="relative h-64">
-                    <img 
-                      src={mockProfiles[1].imgUrl} 
-                      alt={mockProfiles[1].name}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute top-4 left-4 flex gap-2">
-                      <span className="px-3 py-1.5 bg-green-500 text-white text-xs font-semibold rounded-full shadow-lg">
-                        Activo ahora
-                      </span>
-                      <span className="px-3 py-1.5 bg-homi-purple text-white text-xs font-semibold rounded-full flex items-center gap-1 shadow-lg">
-                        <Star className="w-3.5 h-3.5" fill="white" />
-                        {mockProfiles[1].compatibility}%
-                      </span>
-                    </div>
-                  </div>
-                  <CardContent className="p-5">
-                    <div className="mb-2">
-                      <h3 className="font-bold text-xl text-foreground">{mockProfiles[1].name}, {mockProfiles[1].age}</h3>
-                      <p className="text-sm text-muted-foreground flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5" />
-                        {mockProfiles[1].location}
-                      </p>
-                    </div>
-                    <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                      {mockProfiles[1].bio}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {mockProfiles[1].tags.slice(0, 3).map((tag) => (
-                        <span key={tag.id} className="px-3 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full font-medium">
-                          {tag.name}
-                        </span>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
                 <Link to="/register" className="inline-block">
                   <Button size="lg" className="w-full sm:w-auto rounded-full bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-lightPurple hover:to-homi-purple text-white font-bold shadow-lg shadow-purple-500/30 transform hover:scale-105 transition-all duration-300">
@@ -156,6 +75,45 @@ const SeoCitiesIndexPage = () => {
                 </div>
                 <span className="text-sm text-muted-foreground font-medium">+500 usuarios activos</span>
               </div>
+
+              {/* Tarjeta Elena - Solo móvil */}
+              <Card className="overflow-hidden border-0 shadow-2xl rounded-3xl bg-card lg:hidden mt-6">
+                <div className="relative h-64">
+                  <img 
+                    src={mockProfiles[0].imgUrl} 
+                    alt={mockProfiles[0].name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute top-4 left-4 flex gap-2">
+                    <span className="px-3 py-1.5 bg-green-500 text-white text-xs font-semibold rounded-full shadow-lg">
+                      Activo ahora
+                    </span>
+                    <span className="px-3 py-1.5 bg-homi-purple text-white text-xs font-semibold rounded-full flex items-center gap-1 shadow-lg">
+                      <Star className="w-3.5 h-3.5" fill="white" />
+                      {mockProfiles[0].compatibility}%
+                    </span>
+                  </div>
+                </div>
+                <CardContent className="p-5">
+                  <div className="mb-2">
+                    <h3 className="font-bold text-xl text-foreground">{mockProfiles[0].name}, {mockProfiles[0].age}</h3>
+                    <p className="text-sm text-muted-foreground flex items-center gap-1">
+                      <MapPin className="w-3.5 h-3.5" />
+                      {mockProfiles[0].location}
+                    </p>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                    {mockProfiles[0].bio}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {mockProfiles[0].tags.slice(0, 3).map((tag) => (
+                      <span key={tag.id} className="px-3 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full font-medium">
+                        {tag.name}
+                      </span>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
             
             {/* Right Content - Profile Cards */}
