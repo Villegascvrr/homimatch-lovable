@@ -72,7 +72,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
               <div className="grid grid-cols-2 gap-4 max-w-2xl">
                 {/* Tarjeta 1 - Elena */}
                 <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-300 rounded-3xl">
-                  <div className="relative h-72">
+                  <div className="relative h-56">
                     <img 
                       src={heroProfiles[0].imgUrl} 
                       alt={heroProfiles[0].name}
@@ -88,7 +88,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                       </span>
                     </div>
                   </div>
-                  <CardContent className="p-4">
+                  <CardContent className="p-3">
                     <div className="mb-2">
                       <h3 className="font-bold text-xl">{heroProfiles[0].name}, {heroProfiles[0].age}</h3>
                       <p className="text-sm text-muted-foreground flex items-center gap-1">
@@ -111,7 +111,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
 
                 {/* Tarjeta 2 - Carlos */}
                 <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-300 rounded-3xl">
-                  <div className="relative h-72">
+                  <div className="relative h-56">
                     <img 
                       src={heroProfiles[1].imgUrl} 
                       alt={heroProfiles[1].name}
@@ -127,7 +127,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                       </span>
                     </div>
                   </div>
-                  <CardContent className="p-4">
+                  <CardContent className="p-3">
                     <div className="mb-2">
                       <h3 className="font-bold text-xl">{heroProfiles[1].name}, {heroProfiles[1].age}</h3>
                       <p className="text-sm text-muted-foreground flex items-center gap-1">
