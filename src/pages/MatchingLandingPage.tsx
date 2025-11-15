@@ -58,9 +58,7 @@ const MatchingLandingPage = () => {
               <h3 className="text-2xl font-bold mb-4">
                 ¿Listo para encontrar tu compañero ideal?
               </h3>
-              <p className="text-muted-foreground mb-6">
-                Regístrate ahora y sé de los primeros en acceder cuando lancemos
-              </p>
+              
               <Button size="lg" className="rounded-full bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-lightPurple hover:to-homi-purple" onClick={() => navigate('/register')}>
                 Crear cuenta gratis
                 <ArrowRight className="ml-2 h-4 w-4" />
