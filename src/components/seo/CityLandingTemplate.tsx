@@ -68,7 +68,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
             </div>
 
             {/* Collage de perfiles reales - 2 tarjetas horizontales */}
-            <div className="relative hidden lg:block">
+            <div className="relative hidden lg:block -mt-8">
               <div className="grid grid-cols-2 gap-4 max-w-2xl">
                 {/* Tarjeta 1 - Elena */}
                 <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-300 rounded-3xl">
