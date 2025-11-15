@@ -82,10 +82,10 @@ const MaintenancePage = () => {
                   </p>
                 </div>
 
-                <Button asChild className="w-full bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-purple/90 hover:to-homi-lightPurple/90 text-white font-semibold shadow-lg rounded-lg h-11 transition-all hover:scale-[1.02]">
+                <Button asChild className="w-full bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-purple/90 hover:to-homi-lightPurple/90 text-white font-semibold shadow-lg rounded-lg h-11 transition-all hover:scale-[1.02] text-sm md:text-base px-4">
                   <a href="https://www.instagram.com/homimatch_es/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                    <Instagram className="w-5 h-5" />
-                    <span>Seguir en Instagram (@homimatch)</span>
+                    <Instagram className="w-5 h-5 flex-shrink-0" />
+                    <span className="truncate">Seguir en Instagram (@homimatch)</span>
                   </a>
                 </Button>
               </div>
