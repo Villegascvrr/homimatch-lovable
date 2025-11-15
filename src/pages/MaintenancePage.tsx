@@ -50,7 +50,7 @@ const MaintenancePage = () => {
                   <div className="space-y-4 pt-2">
                     
                     <p className="text-lg text-white/85 font-light max-w-2xl mx-auto">
-                      Te avisaremos por email en cuanto esté lista.
+                      Te avisaremos por email cuando esté lista.
                     </p>
                   </div>
                 </div>
