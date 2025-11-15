@@ -69,12 +69,12 @@ const MaintenancePage = () => {
               <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-8"></div>
 
               {/* Instagram CTA */}
-              <div className="text-center space-y-4">
+              <div className="text-center space-y-4 pt-6 pb-4">
                 <div className="space-y-2">
                   <div className="flex items-center justify-center gap-2">
                     
                     <h3 className="text-lg font-bold text-foreground">
-                      Mantente al día para no perderte na                                                                                                                                                                                                                                                             
+                      Mantente al día para no perderte nada
                     </h3>
                   </div>
                   <p className="text-sm text-muted-foreground">
@@ -93,7 +93,7 @@ const MaintenancePage = () => {
           </Card>
 
           {/* Back Button */}
-          <div className="text-center mt-6">
+          <div className="text-center mt-10">
             <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground" size="sm">
               <Link to="/" className="flex items-center gap-2">
                 <Home className="w-4 h-4" />
