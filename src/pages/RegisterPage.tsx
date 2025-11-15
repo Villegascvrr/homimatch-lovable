@@ -5,9 +5,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { 
-  Eye, 
-  EyeOff, 
-  Lock, 
   Mail, 
   User,
   ArrowRight,
@@ -34,19 +31,12 @@ const formSchema = z.object({
   firstName: z.string().min(2, { message: 'El nombre debe tener al menos 2 caracteres' }),
   lastName: z.string().min(2, { message: 'Los apellidos deben tener al menos 2 caracteres' }),
   email: z.string().email({ message: 'Email inválido' }),
-  password: z.string().min(6, { message: 'La contraseña debe tener al menos 6 caracteres' }),
-  confirmPassword: z.string(),
   terms: z.boolean().refine(val => val === true, {
     message: 'Debes aceptar los términos y condiciones',
   }),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Las contraseñas no coinciden",
-  path: ["confirmPassword"],
 });
 
 const RegisterPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSigningWithGoogle, setIsSigningWithGoogle] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isCheckingEmail, setIsCheckingEmail] = useState(false);
@@ -66,8 +56,6 @@ const RegisterPage = () => {
       firstName: '',
       lastName: '',
       email: '',
-      password: '',
-      confirmPassword: '',
       terms: false,
     },
     mode: "onBlur"
@@ -133,7 +121,6 @@ const RegisterPage = () => {
     try {
       const result = await signUp({
         email: values.email,
-        password: values.password,
         firstName: values.firstName,
         lastName: values.lastName,
       });
@@ -282,72 +269,6 @@ const RegisterPage = () => {
                                   <div className="h-4 w-4 animate-spin rounded-full border-2 border-homi-purple border-b-transparent"></div>
                                 </div>
                               )}
-                            </div>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="password"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Contraseña</FormLabel>
-                          <FormControl>
-                            <div className="relative">
-                              <Input 
-                                placeholder="••••••••" 
-                                type={showPassword ? "text" : "password"} 
-                                className="pl-10 rounded-full" 
-                                {...field} 
-                              />
-                              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                              <button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-                              >
-                                {showPassword ? (
-                                  <EyeOff className="h-5 w-5" />
-                                ) : (
-                                  <Eye className="h-5 w-5" />
-                                )}
-                              </button>
-                            </div>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="confirmPassword"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Confirmar contraseña</FormLabel>
-                          <FormControl>
-                            <div className="relative">
-                              <Input 
-                                placeholder="••••••••" 
-                                type={showConfirmPassword ? "text" : "password"} 
-                                className="pl-10 rounded-full" 
-                                {...field} 
-                              />
-                              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                              <button
-                                type="button"
-                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-                              >
-                                {showConfirmPassword ? (
-                                  <EyeOff className="h-5 w-5" />
-                                ) : (
-                                  <Eye className="h-5 w-5" />
-                                )}
-                              </button>
                             </div>
                           </FormControl>
                           <FormMessage />
