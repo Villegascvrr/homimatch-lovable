@@ -249,7 +249,7 @@ const RegisterPage = () => {
                         </>
                       ) : (
                         <>
-                          Unirme a la lista de espera
+                          Unirme a HomiMatch
                           <ArrowRight className="ml-1 h-4 w-4" />
                         </>
                       )}
