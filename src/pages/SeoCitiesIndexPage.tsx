@@ -5,11 +5,18 @@ import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { seoCities } from "@/data/seoCities";
 import { mockProfiles } from "@/data/mockProfiles";
 import { MapPin, Star, Shield, UserCheck, Search, MessageCircle, Users } from "lucide-react";
+import { useState } from "react";
 
 const SeoCitiesIndexPage = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredCities = seoCities.filter(city =>
+    city.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   return (
     <>
       <Helmet>
@@ -159,32 +166,55 @@ const SeoCitiesIndexPage = () => {
             <Badge className="mb-4 px-4 py-2 bg-homi-purple/10 text-homi-purple border-0 text-sm font-semibold">
               Elige tu ubicación
             </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold homi-gradient-text">
+            <h2 className="text-3xl md:text-4xl font-bold homi-gradient-text mb-6">
               Selecciona tu ciudad
             </h2>
+            
+            {/* Search Bar */}
+            <div className="max-w-md mx-auto mb-8">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Input
+                  type="text"
+                  placeholder="Buscar ciudad..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-12 pr-4 py-6 rounded-full border-2 border-border focus:border-homi-purple focus:ring-homi-purple text-base"
+                />
+              </div>
+            </div>
           </div>
+          
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {seoCities.map((city) => (
-              <Link key={city.slug} to={`/companero-de-piso/${city.slug}`}>
-                <Card className="hover:shadow-xl transition-all duration-300 cursor-pointer h-full border-0 bg-card rounded-3xl shadow-lg transform hover:scale-105">
-                  <CardContent className="p-5">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-homi-purple to-homi-lightPurple flex items-center justify-center flex-shrink-0 shadow-md">
-                        <MapPin className="w-5 h-5 text-white" />
+            {filteredCities.length > 0 ? (
+              filteredCities.map((city) => (
+                <Link key={city.slug} to={`/companero-de-piso/${city.slug}`}>
+                  <Card className="hover:shadow-xl transition-all duration-300 cursor-pointer h-full border-0 bg-card rounded-3xl shadow-lg transform hover:scale-105">
+                    <CardContent className="p-5">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-homi-purple to-homi-lightPurple flex items-center justify-center flex-shrink-0 shadow-md">
+                          <MapPin className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-base font-bold text-foreground mb-0.5">
+                            {city.name}
+                          </h3>
+                          <p className="text-xs text-muted-foreground">
+                            Ver compañeros →
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="text-base font-bold text-foreground mb-0.5">
-                          {city.name}
-                        </h3>
-                        <p className="text-xs text-muted-foreground">
-                          Ver compañeros →
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <p className="text-muted-foreground text-lg">
+                  No se encontraron ciudades que coincidan con "{searchQuery}"
+                </p>
+              </div>
+            )}
           </div>
         </section>
 
