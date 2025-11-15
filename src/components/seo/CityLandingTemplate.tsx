@@ -444,7 +444,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                   </Button>
                 </Link>
                 <Link to="/matching">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full border-2 border-white text-white hover:bg-white/10">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full border-2 border-white text-white bg-white/10 hover:bg-white/20">
                     Ver perfiles en {city.name}
                   </Button>
                 </Link>
