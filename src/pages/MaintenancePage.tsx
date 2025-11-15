@@ -40,14 +40,14 @@ const MaintenancePage = () => {
 
               {/* App Section - Destacado */}
               <div className="bg-gradient-to-br from-homi-purple to-homi-lightPurple rounded-xl p-6 md:p-8 text-center mb-8">
-                <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
-                  La app oficial de HomiMatch llegará muy pronto
-                </h2>
-                
-                <p className="text-sm text-white/85 flex items-center justify-center gap-2">
-                  <Mail className="w-4 h-4" />
-                  Te avisaremos por email cuando esté lista.
-                </p>
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-4">
+                La app oficial de HomiMatch llegará muy pronto
+              </h2>
+              
+              <p className="text-base md:text-lg text-white flex items-center justify-center gap-2">
+                <Mail className="w-5 h-5" />
+                Te avisaremos por email cuando esté lista.
+              </p>
               </div>
 
               {/* Maintenance Notice */}
