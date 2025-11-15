@@ -71,7 +71,7 @@ const MaintenancePage = () => {
                   <div className="flex items-center justify-center gap-2">
                     
                     <h3 className="text-lg font-bold text-foreground">
-                      Mantente al día para no è           
+                      Mantente al día para no perderte na                                                                                                                                                                                                                                                             
                     </h3>
                   </div>
                   <p className="text-sm text-muted-foreground">
