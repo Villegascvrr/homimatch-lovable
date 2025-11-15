@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, Home, Shield, MapPin, Heart, Star, CheckCircle } from "lucide-react";
+import { Users, Home, Shield, MapPin, Heart, CheckCircle } from "lucide-react";
 import { SeoCityData, seoCities } from "@/data/seoCities";
-import { mockProfiles } from "@/data/mockProfiles";
 
 interface CityLandingTemplateProps {
   city: SeoCityData;
@@ -11,7 +10,6 @@ interface CityLandingTemplateProps {
 
 export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
   const otherCities = seoCities.filter(c => c.slug !== city.slug);
-  const featuredProfiles = mockProfiles.slice(0, 6);
 
   return (
     <div className="min-h-screen bg-background">
@@ -70,33 +68,21 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-4">
                   <div className="bg-white rounded-2xl shadow-xl p-4 transform hover:scale-105 transition-transform duration-300">
-                    <img src={mockProfiles[0].imgUrl} alt={mockProfiles[0].name} className="w-full h-32 object-cover rounded-xl mb-3" />
-                    <h4 className="font-semibold">{mockProfiles[0].name}, {mockProfiles[0].age}</h4>
-                    <p className="text-xs text-muted-foreground line-clamp-2">{mockProfiles[0].bio}</p>
-                    <div className="flex items-center gap-1 mt-2">
-                      <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                      <span className="text-xs font-medium">{mockProfiles[0].compatibility}% compatible</span>
-                    </div>
+                    <div className="w-full h-32 bg-gradient-to-br from-homi-ultraLightPurple to-homi-lightPurple rounded-xl mb-3"></div>
+                    <div className="h-4 bg-gray-200 rounded mb-2 w-2/3"></div>
+                    <div className="h-3 bg-gray-100 rounded w-full"></div>
                   </div>
                   <div className="bg-white rounded-2xl shadow-xl p-4 transform hover:scale-105 transition-transform duration-300">
-                    <img src={mockProfiles[1].imgUrl} alt={mockProfiles[1].name} className="w-full h-32 object-cover rounded-xl mb-3" />
-                    <h4 className="font-semibold">{mockProfiles[1].name}, {mockProfiles[1].age}</h4>
-                    <p className="text-xs text-muted-foreground line-clamp-2">{mockProfiles[1].bio}</p>
-                    <div className="flex items-center gap-1 mt-2">
-                      <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                      <span className="text-xs font-medium">{mockProfiles[1].compatibility}% compatible</span>
-                    </div>
+                    <div className="w-full h-32 bg-gradient-to-br from-homi-lightPurple to-homi-purple rounded-xl mb-3"></div>
+                    <div className="h-4 bg-gray-200 rounded mb-2 w-2/3"></div>
+                    <div className="h-3 bg-gray-100 rounded w-full"></div>
                   </div>
                 </div>
                 <div className="space-y-4 pt-8">
                   <div className="bg-white rounded-2xl shadow-xl p-4 transform hover:scale-105 transition-transform duration-300">
-                    <img src={mockProfiles[2].imgUrl} alt={mockProfiles[2].name} className="w-full h-32 object-cover rounded-xl mb-3" />
-                    <h4 className="font-semibold">{mockProfiles[2].name}, {mockProfiles[2].age}</h4>
-                    <p className="text-xs text-muted-foreground line-clamp-2">{mockProfiles[2].bio}</p>
-                    <div className="flex items-center gap-1 mt-2">
-                      <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                      <span className="text-xs font-medium">{mockProfiles[2].compatibility}% compatible</span>
-                    </div>
+                    <div className="w-full h-32 bg-gradient-to-br from-homi-purple to-homi-ultraLightPurple rounded-xl mb-3"></div>
+                    <div className="h-4 bg-gray-200 rounded mb-2 w-2/3"></div>
+                    <div className="h-3 bg-gray-100 rounded w-full"></div>
                   </div>
                   <div className="bg-gradient-to-br from-homi-purple to-homi-lightPurple rounded-2xl shadow-xl p-6 text-white transform hover:scale-105 transition-transform duration-300">
                     <Heart className="w-8 h-8 mb-3" />
@@ -111,55 +97,6 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
       </section>
 
       <main className="container mx-auto px-4 py-12 max-w-6xl">
-        {/* Perfiles Destacados */}
-        <section className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Perfiles destacados en <span className="homi-gradient-text">{city.name}</span>
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Conecta con personas que buscan compañero de piso en tu zona
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredProfiles.map((profile) => (
-              <Card key={profile.id} className="overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
-                <div className="relative">
-                  <img 
-                    src={profile.imgUrl} 
-                    alt={profile.name} 
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute top-3 right-3 bg-white/95 backdrop-blur px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
-                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    {profile.compatibility}%
-                  </div>
-                </div>
-                <CardContent className="p-5">
-                  <h3 className="text-xl font-bold mb-2">{profile.name}, {profile.age}</h3>
-                  <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{profile.bio}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {profile.tags.slice(0, 3).map((tag) => (
-                      <span key={tag.id} className="px-3 py-1 bg-homi-ultraLightPurple text-homi-purple text-xs rounded-full font-medium">
-                        {tag.name}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center mt-10">
-            <Link to="/register">
-              <Button size="lg" variant="outline" className="rounded-full border-2">
-                Ver todos los perfiles en {city.name}
-              </Button>
-            </Link>
-          </div>
-        </section>
-
         {/* Ventajas */}
         <section className="mb-20">
           <div className="text-center mb-12">
