@@ -14,6 +14,9 @@ import ResetPasswordPage from './pages/ResetPasswordPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import CookiesPage from './pages/CookiesPage';
+import ChatPage from './pages/ChatPage';
+import ProfilePage from './pages/ProfilePage';
+import MatchesPage from './pages/MatchesPage';
 
 const queryClient = new QueryClient();
 
@@ -41,13 +44,16 @@ function App() {
               <Route path="/terms" element={<TermsPage />} />
               <Route path="/cookies" element={<CookiesPage />} />
               
+              {/* Rutas protegidas */}
+              <Route path="/chat" element={<ChatPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/matches" element={<MatchesPage />} />
+              
               {/* Redirigir rutas antiguas a registro o mantenimiento */}
               <Route path="/precios" element={<Navigate to="/register" replace />} />
               <Route path="/suscripcion" element={<Navigate to="/register" replace />} />
               <Route path="/success" element={<Navigate to="/maintenance" replace />} />
-              <Route path="/profile" element={<Navigate to="/maintenance" replace />} />
               <Route path="/profile/edit" element={<Navigate to="/maintenance" replace />} />
-              <Route path="/chat" element={<Navigate to="/maintenance" replace />} />
               <Route path="/coming-soon" element={<Navigate to="/maintenance" replace />} />
               
               {/* 404 - Redirigir al inicio */}
