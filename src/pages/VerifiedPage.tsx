@@ -25,19 +25,13 @@ const VerifiedPage = () => {
         setIsSuccess(isEmailVerified);
         
         if (isEmailVerified) {
-          toast({
-            title: "¡Email verificado!",
-            description: "Tu cuenta ha sido verificada con éxito.",
-            variant: "default",
-          });
+          // Verificar si el usuario es nuevo (creado recientemente)
+          const isNew = user?.created_at ? 
+            (new Date().getTime() - new Date(user.created_at).getTime()) < 60000 : // menos de 1 minuto
+            true;
           
-          // Añadimos un console log para depurar
-          
-          
-          setTimeout(() => {
-            // Aseguramos que se incluya el parámetro registered=true
-            navigate('/?registered=true');
-          }, 3000);
+          // Redirigir a maintenance con el parámetro apropiado
+          navigate(`/maintenance?isNew=${isNew}`);
         }
       } catch (error) {
         console.error("Error checking verification status:", error);
