@@ -14,9 +14,7 @@ const MaintenancePage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <main className="flex-grow flex items-center justify-center px-4 py-12 bg-gradient-to-b from-background to-muted/20">
@@ -34,7 +32,7 @@ const MaintenancePage = () => {
 
             {/* Título principal */}
             <CardTitle className="text-3xl md:text-4xl font-bold">
-              ¡Tu cuenta se ha creado con éxito! 🎉
+              ¡Tu cuenta se ha creado con éxito!  
             </CardTitle>
             
             <CardDescription className="text-lg font-medium homi-gradient-text">
@@ -59,17 +57,8 @@ const MaintenancePage = () => {
                 Para no perderte nada, síguenos en Instagram:
               </p>
               
-              <Button 
-                asChild 
-                className="w-full sm:w-auto bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-purple/90 hover:to-homi-lightPurple/90 text-white font-semibold"
-                size="lg"
-              >
-                <a 
-                  href="https://www.instagram.com/homimatch_es/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
+              <Button asChild className="w-full sm:w-auto bg-gradient-to-r from-homi-purple to-homi-lightPurple hover:from-homi-purple/90 hover:to-homi-lightPurple/90 text-white font-semibold" size="lg">
+                <a href="https://www.instagram.com/homimatch_es/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                   <Instagram className="w-5 h-5" />
                   @homimatch_es
                 </a>
@@ -84,12 +73,7 @@ const MaintenancePage = () => {
             </div>
 
             {/* Botón volver al inicio */}
-            <Button 
-              asChild 
-              variant="outline" 
-              className="w-full"
-              size="lg"
-            >
+            <Button asChild variant="outline" className="w-full" size="lg">
               <Link to="/" className="flex items-center gap-2">
                 <Home className="w-4 h-4" />
                 Volver al inicio
@@ -100,8 +84,6 @@ const MaintenancePage = () => {
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default MaintenancePage;
