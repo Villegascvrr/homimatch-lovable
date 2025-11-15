@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -37,522 +37,109 @@ const ProfileForm = ({ onSaved, cancelEdit }: ProfileFormProps) => {
       firstName: '',
       lastName: '',
       email: '',
-      companeros_count: "",
-      budget: "",
-      room_count: "",
-      room_price: "",
-      apartment_description: "",
-      completed: false,
-      lifestyle: {
-        schedule: undefined,
-        cleanliness: undefined,
-        smoking: undefined,
-        pets: undefined,
-        guests: undefined,
-      },
     },
   });
 
+  // Cargar datos del perfil
   useEffect(() => {
-    const handleScroll = () => {
-      if (!formEndRef.current) return;
+    const loadProfile = async () => {
+      if (!user) return;
       
-      const formEnd = formEndRef.current.getBoundingClientRect().top;
-      const viewportHeight = window.innerHeight;
-      
-      setShowFixedButtons(formEnd + (isMobile ? 150 : 30) > viewportHeight);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll);
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
-  }, []);
-
-  // Save function
-  const saveProfile = useCallback(async (values: FormValues) => {
-    if (!user || isLoading) return false;
-    
-    try {
-      // Handle city and zone logic
-      let finalCity = values.ciudad;
-      if (values.ciudad === 'Otro' && values.ciudad_otra) {
-        finalCity = values.ciudad_otra;
-      }
-      
-      // Para compatibilidad, guardar la info de ubicación en city_zone
-      let city_zone_value = "";
-      if (values.apartmentStatus === 'have') {
-        // Si tiene piso y ha seleccionado zona, guarda la zona
-        if (finalCity && values.city_zonas && values.city_zonas.length > 0) {
-          city_zone_value = values.city_zonas[0];
-        } else {
-          city_zone_value = ""; // No guardar 'tengo_piso'
-        }
-      } else if (finalCity && values.city_zonas && values.city_zonas.length > 0) {
-        city_zone_value = values.city_zonas[0];
-      } else if (finalCity) {
-        city_zone_value = finalCity;
-      }
-      
-      let occupation = values.occupation;
-      if (values.occupationType === "student") {
-        occupation = "Estudiante";
-      } else if (values.occupationType === "professional") {
-        occupation = "Profesional";
-      } else if (values.occupationType === "entrepreneur") {
-        occupation = "Emprendedor";
-      } else if (values.occupationType === "other" && !values.occupation) {
-        occupation = "Otro";
-      }
-      
-      const lifestyle = {
-        ...(values.lifestyle || {}),
-        budget: values.budget,
-        ciudad: finalCity,
-        city_zone: values.ciudad && values.city_zonas && values.city_zonas.length > 0 ? values.city_zonas[0] : undefined,
-        city_zonas: values.city_zonas,
-        room_count: values.room_count,
-        room_price: values.room_price,
-        apartment_description: values.apartment_description,
-        field_of_study: values.fieldOfStudy,
-      };
-      
-      const completed = (values.profileImage && values.firstName && values.age && values.interests.length > 0 && values.lifestyle) ? true : false;
-      const newProfileImageId = values.profileImage?.split('_')[2].split('.')[0] || '';
-      if(user.profile_image_id !== newProfileImageId) {
-        await supabase.storage.from('profile-images').remove([`user_${user.id}/profile_${user.profile_image_id}.jpeg`]);
-      }
-      
-      const updateData = {
-        first_name: values.firstName,
-        last_name: values.lastName,
-        username: values.username,
-        bio: values.bio || '',
-        edad: values.age || '',
-        ocupacion: occupation || '',
-        universidad: values.university || '',
-        profile_image_id: newProfileImageId,
-        interests: values.interests,
-        is_profile_active: values.isProfileActive,
-        city: values.ciudad,
-        city_zone: values.ciudad && values.city_zonas && values.city_zonas.length > 0 ? values.city_zonas[0] : null,
-        completed: completed,
-        companeros_count: values.companeros_count || '',
-        lifestyle: lifestyle,
-        has_apartment: values.apartmentStatus === 'have',
-        updated_at: new Date().toISOString()
-      };
-      
-      const { error } = await supabase
-        .from('profiles')
-        .update(updateData)
-        .eq('id', user.id);
-        
-      if (error) {
-        throw error;
-      }
-      
-      setHasUnsavedChanges(false);
-      
-      // Refresh user data
       try {
-        await refreshUser();
-      } catch (refreshError) {
-        console.error("Error refreshing user after save:", refreshError);
-      }
-      
-      return true;
-      
-    } catch (error: any) {
-      console.error("Error saving profile:", error);
-      toast({
-        title: "Error al guardar",
-        description: "Recuerda completar todos los campos requeridos.",
-        variant: "destructive",
-        duration: 1500
-      });
-      return false;
-    }
-  }, [user, refreshUser, toast, isLoading]);
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('auth_user_id', user.id)
+          .single();
 
-  // Save when leaving the page or component
-  useEffect(() => {
-    const handleBeforeUnload = async (e: BeforeUnloadEvent) => {
-      if (hasUnsavedChanges) {
-        e.preventDefault();
-        e.returnValue = '';
-        
-        // Try to save the data
-        const values = form.getValues();
-        //await saveProfile(values);
-      }
-    };
+        if (error) throw error;
 
-    const handleVisibilityChange = async () => {
-      if (document.visibilityState === 'hidden' && hasUnsavedChanges) {
-        const values = form.getValues();
-        //await saveProfile(values);
-      }
-    };
-
-    //window.addEventListener('beforeunload', handleBeforeUnload);
-    //document.addEventListener('visibilitychange', handleVisibilityChange);
-
-    return () => {
-      //window.removeEventListener('beforeunload', handleBeforeUnload);
-      //document.removeEventListener('visibilitychange', handleVisibilityChange);
-      
-      // Save on unmount if there are unsaved changes
-      if (hasUnsavedChanges) {
-        const values = form.getValues();
-        //saveProfile(values);
-      }
-    };
-  }, [hasUnsavedChanges, form, saveProfile]);
-
-  // Watch for form changes to detect unsaved changes
-  useEffect(() => {
-    const subscription = form.watch((values) => {
-      if (!isLoading && initialFormData) {
-        // Compare current values with initial data to detect changes
-        const hasChanges = JSON.stringify(values) !== JSON.stringify(initialFormData);
-        setHasUnsavedChanges(hasChanges);
-      }
-    });
-    return () => subscription.unsubscribe();
-  }, [form, isLoading, initialFormData]);
-
-  useEffect(() => {
-    const occupationType = form.watch("occupationType");
-    setShowUniversityField(occupationType === "student");
-  }, [form.watch("occupationType")]);
-
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      if (user) {
-        setIsLoading(true);
-        
-        try {
-          const { data: profileData, error } = await supabase
-            .from('profiles')
-            .select('first_name, last_name, username, email, bio, edad, ocupacion, universidad, interests, is_profile_active, city, city_zone, completed, companeros_count, lifestyle, profile_image_id, has_apartment')
-            .eq('id', user.id)
-            .single();
-          
-          if (error) {
-            console.error("Error fetching profile:", error);
-            throw error;
-          }
-          
-          let currentApartmentStatus: 'looking' | 'have' = 'looking';
-          
-          // Extract city and zone information
-          let ciudad = "";
-          let ciudad_otra = "";
-          let city_zonas: string[] = [];
-          
-          if (profileData.city_zone) {
-            // Check if it's the old format (just a zone) or new format
-            const sevillaZones = [
-              "Casco Antiguo", "Triana", "Los Remedios", "Nervión", 
-              "San Pablo - Santa Justa", "Este - Alcosa - Torreblanca", 
-              "Cerro - Amate", "Sur", "Bellavista - La Palmera", 
-              "Macarena", "Norte", "Viapol", "El Plantinar", "El Juncal", 
-              "Gran Plaza", "Otro/Alrededores"
-            ];
-
-            if(profileData.has_apartment) {
-              currentApartmentStatus = 'have';
-            } else {
-              currentApartmentStatus = 'looking';
-            }
-            
-            if (sevillaZones.includes(profileData.city_zone)) {
-              // Old format: it's a Sevilla zone
-              ciudad = "Sevilla";
-              city_zonas = [profileData.city_zone];
-            } else if (profileData.city_zone === 'tengo_piso') {
-              
-              ciudad = "Sevilla"; // Default to Sevilla for backwards compatibility
-            } else {
-              // It might be a city name
-              ciudad = profileData.city_zone;
-            }
-          }
-
-          // Handle new format where city_zonas might be stored in lifestyle
-          const lifestyleData = typeof profileData.lifestyle === 'object' && profileData.lifestyle !== null
-            ? profileData.lifestyle as Record<string, unknown>
-            : {};
-          
-          // Check if city_zonas is stored in lifestyle object
-          if (lifestyleData.city_zonas && Array.isArray(lifestyleData.city_zonas)) {
-            city_zonas = lifestyleData.city_zonas as string[];
-            if (city_zonas.length > 0) {
-              ciudad = "Sevilla";
-            }
-          }
-          
-          setApartmentStatus(currentApartmentStatus);
-          
-          let occupationType: 'student' | 'professional' | 'entrepreneur' | 'other' = "other";
-          if (profileData.ocupacion === "Estudiante") {
-            occupationType = "student";
-          } else if (profileData.ocupacion === "Profesional") {
-            occupationType = "professional";
-          } else if (profileData.ocupacion === "Emprendedor") {
-            occupationType = "entrepreneur";
-          } else if (profileData.ocupacion === "Otro") {
-            occupationType = "other";
-          }
-          
-          setShowUniversityField(occupationType === "student");
-          const profileImage = await useProfileImage(user.id, profileData.profile_image_id);
-          const formData: FormValues = {
-            firstName: profileData.first_name || '',
-            lastName: profileData.last_name || '',
-            username: profileData.username || '',
-            email: user.email || "",
-            bio: profileData.bio || "",
-            age: profileData.edad || "",
-            occupation: profileData.ocupacion || "",
-            occupationType: occupationType,
-            university: profileData.universidad || "",
-            fieldOfStudy: lifestyleData.field_of_study as string || "",
-            profileImage: profileImage || "",
-            interests: profileData.interests || [],
-            isProfileActive: profileData.is_profile_active !== false,
-            apartmentStatus: currentApartmentStatus,
-            ciudad: ciudad,
-            ciudad_otra: ciudad_otra,
-            city_zonas: city_zonas,
-            companeros_count: profileData.companeros_count || "",
-            budget: lifestyleData.budget as string || "",
-            room_count: lifestyleData.room_count as string || "",
-            room_price: lifestyleData.room_price as string || "",
-            apartment_description: lifestyleData.apartment_description as string || "",
-            completed: profileData.completed || false,
-            lifestyle: {
-              schedule: lifestyleData.schedule as any,
-              cleanliness: lifestyleData.cleanliness as any,
-              smoking: lifestyleData.smoking as any,
-              pets: lifestyleData.pets as any,
-              guests: lifestyleData.guests as any,
-            },
-          };
-          
-          form.reset(formData);
-          setInitialFormData(formData);
-          
-        } catch (err) {
-          console.error("Error loading profile data:", err);
-          const defaultData: FormValues = {
-            firstName: user.user_metadata?.firstName || "",
-            lastName: user.user_metadata?.lastName || "",
-            username: user.user_metadata?.username || "",
-            email: user.email || "",
-            bio: "",
-            age: "",
-            occupation: "",
-            occupationType: "other",
-            university: "",
-            fieldOfStudy: "",
-            profileImage: "",
-            interests: [],
-            isProfileActive: true,
-            apartmentStatus: 'looking',
-            ciudad: "",
-            ciudad_otra: "",
-            city_zonas: [],
-            companeros_count: "",
-            budget: "",
-            room_count: "",
-            room_price: "",
-            apartment_description: "",
-            completed: false,
-            lifestyle: {
-              schedule: undefined,
-              cleanliness: undefined,
-              smoking: undefined,
-              pets: undefined,
-              guests: undefined,
-            },
-          };
-          form.reset(defaultData);
-          setInitialFormData(defaultData);
-        } finally {
-          setIsLoading(false);
+        if (data) {
+          form.reset({
+            firstName: data.first_name || '',
+            lastName: data.last_name || '',
+            email: data.email || '',
+          });
         }
+      } catch (error) {
+        console.error('Error loading profile:', error);
+      } finally {
+        setLoading(false);
       }
     };
-    
-    fetchUserProfile();
-    //cada vez que se cambia de pestaña en otro lado se actualiza el user lo que hace que se recargue el form y es incomodo. Revisar
+
+    loadProfile();
   }, [user, form]);
 
-  async function onSubmit(values: FormValues) {
-    setIsSubmitting(true);
+  const onSubmit = async (values: FormValues) => {
+    if (!user) return;
     
-    const success = await saveProfile(values);
-    
-    if (success) {
+    setSubmitting(true);
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({
+          first_name: values.firstName,
+          last_name: values.lastName,
+          email: values.email,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('auth_user_id', user.id);
+
+      if (error) throw error;
+
       toast({
         title: "Perfil actualizado",
-        description: "Tu información de perfil ha sido guardada.",
-        duration: 1500
+        description: "Los cambios se han guardado correctamente.",
       });
-      
+
       if (onSaved) {
-        setTimeout(() => {
-          window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'instant'
-          });
-          
-          onSaved();
-        }, 100);
+        onSaved();
       }
-    }
-    
-    setIsSubmitting(false);
-  }
-
-  const handleCancelEdit = async () => {
-    if (hasUnsavedChanges) {
-      // Save before canceling
-      const values = form.getValues();
-      //await saveProfile(values);
-    }
-    
-    if (cancelEdit) {
-      cancelEdit();
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      toast({
+        title: "Error",
+        description: "No se pudo actualizar el perfil.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitting(false);
     }
   };
 
-  const handleProfileStatusToggle = (active: boolean) => {
-    form.setValue('isProfileActive', active);
-  };
-  
-  const handleApartmentStatusChange = (status: 'looking' | 'have') => {
-    setApartmentStatus(status);
-    form.setValue('apartmentStatus', status);
-  };
-
-  const handleOccupationTypeChange = (type: string) => {
-    form.setValue('occupationType', type as any);
-    setShowUniversityField(type === "student");
-  };
-
-  const renderButtons = () => (
-    <div className="flex flex-col sm:flex-row gap-4 justify-end">
-      <Button 
-        type="submit" 
-        className={`w-full sm:w-auto bg-homi-purple hover:bg-homi-purple/90 transition-all duration-200 shadow-lg hover:shadow-xl`}
-        size="auto" 
-        wrap="normal" 
-        disabled={isSubmitting}
-      >
-        <span className="button-text-container">
-          {isSubmitting ? "Guardando..." : "Guardar cambios"}
-        </span>
-      </Button>     
-      {cancelEdit && (
-        <Button 
-          type="button" 
-          variant="outline" 
-          onClick={cancelEdit}
-          className={`w-full sm:w-auto transition-all duration-200 shadow-lg hover:shadow-xl`}
-        >
-          Cancelar
-        </Button>
-      )}
-    </div>
-  );
-
-  if (isLoading) {
+  if (loading) {
     return (
-      <div className="min-h-[400px] flex items-center justify-center">
-        <div className="animate-pulse space-y-4">
-          <div className="h-8 w-64 bg-gray-200 rounded mb-4"></div>
-          <div className="h-4 w-44 bg-gray-200 rounded"></div>
-        </div>
-      </div>
+      <Card className="p-6">
+        <p className="text-center text-muted-foreground">Cargando...</p>
+      </Card>
     );
   }
 
   return (
-    <Form {...form}>
-      <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="space-y-4">
-          {/* Unsaved changes indicator */}
-          {/*hasUnsavedChanges && (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground bg-amber-50 p-3 rounded-lg border border-amber-200">
-              <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
-              Tienes cambios sin guardar. Se guardarán automáticamente al salir de esta página.
-            </div>
-          )*/}
+    <Card className="p-6">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <ProfileBasicInfo form={form} />
           
-          <div className="mb-4">
-            <ProfileStatusToggle 
-              isActive={form.watch('isProfileActive')} 
-              onToggle={handleProfileStatusToggle}
-            />
+          <div className="flex gap-4 justify-end">
+            {cancelEdit && (
+              <Button
+                type="button"
+                variant="outline"
+                onClick={cancelEdit}
+                disabled={submitting}
+              >
+                Cancelar
+              </Button>
+            )}
+            <Button type="submit" disabled={submitting}>
+              {submitting ? 'Guardando...' : 'Guardar cambios'}
+            </Button>
           </div>
-          
-          <Separator className="my-4" />
-          
-          <div className="w-full mb-6">
-            <FormImageUpload
-              name="profileImage"
-              label="Foto de perfil"
-              description="Esta será tu imagen principal en tu perfil"
-              required={true}
-            />
-          </div>
-          
-          <ProfileBasicInfo 
-            form={form} 
-            showUniversityField={showUniversityField}
-            onOccupationTypeChange={handleOccupationTypeChange}
-          />
-          
-          <ProfileInterests form={form} />
-          
-          <ProfileLifestyle form={form} />
-          
-          <ProfileApartmentPreferences 
-            form={form} 
-            apartmentStatus={apartmentStatus}
-            onApartmentStatusChange={handleApartmentStatusChange}
-          />
-        </div>
-
-        {/* Botones flotantes */}
-        {showFixedButtons && (
-          <div className="fixed bottom-0 left-0 right-0 z-50 sm:bottom-4">
-            <div className="max-w-4xl mx-auto px-0 sm:px-6">
-              <div className={`bg-white p-4 ${isMobile ? '' : 'rounded-lg'} sm:w-fit sm:ml-auto border border-homi-purple/30`}>
-                {renderButtons()}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Elemento para detectar el final del formulario */}
-        <div ref={formEndRef} className="h-1" />
-        
-        {/* Botones fijos al final */}
-        <div className="bg-white p-4 rounded-lg sm:w-fit sm:ml-auto border border-homi-purple/30">
-          {renderButtons()}
-        </div>
-      </form>
-    </Form>
+        </form>
+      </Form>
+    </Card>
   );
 };
 
