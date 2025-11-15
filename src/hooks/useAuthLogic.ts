@@ -232,8 +232,8 @@ export const useAuthLogic = () => {
         password: userData.password,
         options: {
           data: {
-            firstName: userData.firstName,
-            lastName: userData.lastName,
+            first_name: userData.firstName,
+            last_name: userData.lastName,
             username: username
           },
           emailRedirectTo: window.location.origin + '/verified',
