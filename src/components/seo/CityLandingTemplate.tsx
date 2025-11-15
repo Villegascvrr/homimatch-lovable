@@ -66,7 +66,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
               <div className="flex gap-6">
                 {/* Tarjeta 1 - Elena */}
                 <Card className="overflow-hidden border-0 shadow-2xl rounded-3xl bg-card w-[340px]">
-                  <div className="relative h-[400px]">
+                  <div className="relative h-[340px]">
                     <img 
                       src={heroProfiles[0].imgUrl} 
                       alt={heroProfiles[0].name}
@@ -105,7 +105,7 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
 
                 {/* Tarjeta 2 - Carlos */}
                 <Card className="overflow-hidden border-0 shadow-2xl rounded-3xl bg-card w-[340px]">
-                  <div className="relative h-[400px]">
+                  <div className="relative h-[340px]">
                     <img 
                       src={heroProfiles[1].imgUrl} 
                       alt={heroProfiles[1].name}
