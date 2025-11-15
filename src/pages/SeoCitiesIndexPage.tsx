@@ -103,45 +103,6 @@ const SeoCitiesIndexPage = () => {
           </div>
         </section>
 
-        {/* Featured Profiles Section */}
-        <section className="mb-20">
-          <div className="text-center mb-10">
-            <Badge className="mb-4 px-4 py-2 bg-gradient-to-r from-homi-purple/20 to-homi-lightPurple/20 text-homi-purple border-0 text-sm font-semibold">
-              Perfiles destacados
-            </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold homi-gradient-text">
-              Conoce a algunos de nuestros usuarios
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {mockProfiles.slice(0, 3).map((profile) => (
-              <Card key={profile.id} className="overflow-hidden border-0 bg-gradient-to-br from-background to-homi-ultraLightPurple/10 rounded-3xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-                <img 
-                  src={profile.imgUrl} 
-                  alt={profile.name}
-                  className="w-full h-64 object-cover"
-                />
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-lg font-bold text-foreground">{profile.name}, {profile.age}</h3>
-                    <Badge className="bg-gradient-to-r from-homi-purple to-homi-lightPurple text-white border-0 text-sm">
-                      {profile.compatibility}%
-                    </Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-3">{profile.location}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {profile.tags.slice(0, 3).map((tag) => (
-                      <Badge key={tag.id} variant="secondary" className="text-xs bg-homi-purple/10 text-homi-purple border-0">
-                        {tag.name}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
         {/* Cities Grid */}
         <section className="mb-20">
           <div className="text-center mb-10">
