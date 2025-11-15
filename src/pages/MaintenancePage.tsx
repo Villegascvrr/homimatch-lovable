@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Home, CheckCircle } from 'lucide-react';
+import { Instagram, Home, CheckCircle, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Navbar from '@/components/layout/Navbar';
@@ -49,7 +49,8 @@ const MaintenancePage = () => {
                   
                   <div className="space-y-4 pt-2">
                     
-                    <p className="text-lg text-white/85 font-light max-w-2xl mx-auto">
+                    <p className="text-lg text-white/85 font-light max-w-2xl mx-auto flex items-center justify-center gap-2">
+                      <Mail className="w-5 h-5" />
                       Te avisaremos por email cuando esté lista.
                     </p>
                   </div>
