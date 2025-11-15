@@ -67,12 +67,13 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
               </div>
             </div>
 
-            {/* Collage de perfiles reales - Grid que imita bloques morados */}
+            {/* Collage de perfiles reales - 2 arriba + 1 abajo */}
             <div className="relative hidden lg:block">
-              <div className="grid grid-cols-2 gap-4 auto-rows-fr">
-                {/* Tarjeta 1 - Top Left */}
-                <div className="row-span-1">
-                  <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-300 h-full">
+              <div className="flex flex-col gap-4 max-w-2xl">
+                {/* Fila superior: 2 tarjetas */}
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Tarjeta 1 - Elena (izquierda) */}
+                  <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-300">
                     <div className="relative h-48">
                       <img 
                         src={heroProfiles[0].imgUrl} 
@@ -85,24 +86,22 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                         </span>
                         <span className="px-2 py-1 bg-homi-purple text-white text-xs font-medium rounded-full flex items-center gap-1">
                           <Star className="w-3 h-3" fill="white" />
-                          {heroProfiles[0].compatibility}% compatibilidad
+                          {heroProfiles[0].compatibility}%
                         </span>
                       </div>
                     </div>
                     <CardContent className="p-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <div>
-                          <h3 className="font-bold text-xl">{heroProfiles[0].name}, {heroProfiles[0].age}</h3>
-                          <p className="text-sm text-muted-foreground flex items-center gap-1">
-                            <MapPin className="w-3 h-3" />
-                            {city.name}
-                          </p>
-                        </div>
+                      <div className="mb-2">
+                        <h3 className="font-bold text-xl">{heroProfiles[0].name}, {heroProfiles[0].age}</h3>
+                        <p className="text-sm text-muted-foreground flex items-center gap-1">
+                          <MapPin className="w-3 h-3" />
+                          {city.name}
+                        </p>
                       </div>
                       <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
                         {heroProfiles[0].bio}
                       </p>
-                      <div className="flex flex-wrap gap-1.5 mb-3">
+                      <div className="flex flex-wrap gap-1.5">
                         {heroProfiles[0].tags.slice(0, 3).map((tag) => (
                           <span key={tag.id} className="px-2 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full">
                             {tag.name}
@@ -111,12 +110,10 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                       </div>
                     </CardContent>
                   </Card>
-                </div>
 
-                {/* Tarjeta 2 - Top Right (más grande) */}
-                <div className="row-span-2">
-                  <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-300 h-full">
-                    <div className="relative h-64">
+                  {/* Tarjeta 2 - Carlos (derecha) */}
+                  <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-300">
+                    <div className="relative h-48">
                       <img 
                         src={heroProfiles[1].imgUrl} 
                         alt={heroProfiles[1].name}
@@ -128,25 +125,23 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                         </span>
                         <span className="px-2 py-1 bg-homi-purple text-white text-xs font-medium rounded-full flex items-center gap-1">
                           <Star className="w-3 h-3" fill="white" />
-                          {heroProfiles[1].compatibility}% compatibilidad
+                          {heroProfiles[1].compatibility}%
                         </span>
                       </div>
                     </div>
                     <CardContent className="p-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <div>
-                          <h3 className="font-bold text-xl">{heroProfiles[1].name}, {heroProfiles[1].age}</h3>
-                          <p className="text-sm text-muted-foreground flex items-center gap-1">
-                            <MapPin className="w-3 h-3" />
-                            {city.name}
-                          </p>
-                        </div>
+                      <div className="mb-2">
+                        <h3 className="font-bold text-xl">{heroProfiles[1].name}, {heroProfiles[1].age}</h3>
+                        <p className="text-sm text-muted-foreground flex items-center gap-1">
+                          <MapPin className="w-3 h-3" />
+                          {city.name}
+                        </p>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-3 line-clamp-3">
+                      <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
                         {heroProfiles[1].bio}
                       </p>
-                      <div className="flex flex-wrap gap-1.5 mb-3">
-                        {heroProfiles[1].tags.slice(0, 4).map((tag) => (
+                      <div className="flex flex-wrap gap-1.5">
+                        {heroProfiles[1].tags.slice(0, 3).map((tag) => (
                           <span key={tag.id} className="px-2 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full">
                             {tag.name}
                           </span>
@@ -156,9 +151,10 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                   </Card>
                 </div>
 
-                {/* Tarjeta 3 - Bottom Left */}
-                <div className="row-span-1">
-                  <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-300 h-full">
+                {/* Fila inferior: 1 tarjeta alineada a la izquierda */}
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Tarjeta 3 - Laura (izquierda, columna vacía a la derecha) */}
+                  <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-300">
                     <div className="relative h-48">
                       <img 
                         src={heroProfiles[2].imgUrl} 
@@ -171,24 +167,22 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                         </span>
                         <span className="px-2 py-1 bg-homi-purple text-white text-xs font-medium rounded-full flex items-center gap-1">
                           <Star className="w-3 h-3" fill="white" />
-                          {heroProfiles[2].compatibility}% compatibilidad
+                          {heroProfiles[2].compatibility}%
                         </span>
                       </div>
                     </div>
                     <CardContent className="p-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <div>
-                          <h3 className="font-bold text-xl">{heroProfiles[2].name}, {heroProfiles[2].age}</h3>
-                          <p className="text-sm text-muted-foreground flex items-center gap-1">
-                            <MapPin className="w-3 h-3" />
-                            {city.name}
-                          </p>
-                        </div>
+                      <div className="mb-2">
+                        <h3 className="font-bold text-xl">{heroProfiles[2].name}, {heroProfiles[2].age}</h3>
+                        <p className="text-sm text-muted-foreground flex items-center gap-1">
+                          <MapPin className="w-3 h-3" />
+                          {city.name}
+                        </p>
                       </div>
                       <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
                         {heroProfiles[2].bio}
                       </p>
-                      <div className="flex flex-wrap gap-1.5 mb-3">
+                      <div className="flex flex-wrap gap-1.5">
                         {heroProfiles[2].tags.slice(0, 3).map((tag) => (
                           <span key={tag.id} className="px-2 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full">
                             {tag.name}
@@ -197,6 +191,8 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
                       </div>
                     </CardContent>
                   </Card>
+                  {/* Espacio vacío */}
+                  <div></div>
                 </div>
               </div>
             </div>
