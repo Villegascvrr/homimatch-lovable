@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, Home, Shield, MapPin, Heart, CheckCircle } from "lucide-react";
+import { Users, Home, Shield, MapPin, Heart, CheckCircle, X, Plus, Star, Search } from "lucide-react";
 import { SeoCityData, seoCities } from "@/data/seoCities";
+import { mockProfiles } from "@/data/mockProfiles";
 
 interface CityLandingTemplateProps {
   city: SeoCityData;
@@ -10,6 +11,9 @@ interface CityLandingTemplateProps {
 
 export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
   const otherCities = seoCities.filter(c => c.slug !== city.slug);
+  
+  // Usar los primeros 3 perfiles para el hero (Elena, Carlos, Laura)
+  const heroProfiles = mockProfiles.slice(0, 3);
 
   return (
     <div className="min-h-screen bg-background">
@@ -63,33 +67,102 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
               </div>
             </div>
 
-            {/* Collage de perfiles */}
+            {/* Collage de perfiles reales */}
             <div className="relative hidden lg:block">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="bg-white rounded-2xl shadow-xl p-4 transform hover:scale-105 transition-transform duration-300">
-                    <div className="w-full h-32 bg-gradient-to-br from-homi-ultraLightPurple to-homi-lightPurple rounded-xl mb-3"></div>
-                    <div className="h-4 bg-gray-200 rounded mb-2 w-2/3"></div>
-                    <div className="h-3 bg-gray-100 rounded w-full"></div>
+              <div className="grid grid-cols-1 gap-6">
+                {heroProfiles.map((profile) => (
+                  <div key={profile.id} className="w-full max-w-sm mx-auto">
+                    <div className="relative glass-card overflow-hidden rounded-xl shadow-lg border-2 border-transparent hover:border-homi-purple transition-all duration-300">
+                      {/* Profile Image Section */}
+                      <div className="relative aspect-[3/2] overflow-hidden bg-gray-100">
+                        <img
+                          src={profile.imgUrl}
+                          alt={profile.name}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3 text-white">
+                          <h3 className="text-xl font-bold">{profile.name}, {profile.age}</h3>
+                          <p className="text-sm opacity-90 flex items-center gap-1">
+                            <Home size={14} className="shrink-0" />
+                            {city.name}
+                          </p>
+                        </div>
+                        
+                        {/* Housing Status Badge */}
+                        <div className="absolute top-2 left-2">
+                          <span className={`flex items-center gap-1 text-xs px-2 py-1 rounded-full ${
+                            profile.has_apartment 
+                              ? 'bg-green-500/90 text-white' 
+                              : 'bg-blue-500/90 text-white'
+                          }`}>
+                            {profile.has_apartment ? <Home size={12} /> : <Search size={12} />}
+                            {profile.has_apartment ? 'Tengo piso' : 'Busco piso'}
+                          </span>
+                        </div>
+
+                        {/* Compatibility Badge */}
+                        <div className="absolute top-2 right-2">
+                          <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-white/95 backdrop-blur">
+                            <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                            <span className="text-xs font-bold text-homi-purple">{profile.compatibility}%</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Profile Details Section */}
+                      <div className="p-3">
+                        <p className="text-sm mb-2 line-clamp-2">{profile.bio}</p>
+                        
+                        <div className="flex flex-wrap gap-1 mb-3">
+                          {profile.tags.slice(0, 3).map((tag) => (
+                            <span 
+                              key={tag.id} 
+                              className="px-2 py-0.5 text-xs rounded-full bg-homi-ultraLightPurple text-homi-purple"
+                            >
+                              {tag.name}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Control buttons below the card */}
+                    <div className="flex justify-center items-center gap-3 mt-3">
+                      <Button 
+                        variant="outline"
+                        size="icon"
+                        className="w-10 h-10 rounded-full border-2 border-red-500 text-red-500 flex items-center justify-center shadow-md transition-all hover:bg-red-500 hover:text-white transform hover:scale-110 active:scale-95"
+                        asChild
+                      >
+                        <Link to="/register">
+                          <X size={20} />
+                        </Link>
+                      </Button>
+                      
+                      <Button 
+                        variant="outline"
+                        size="icon"
+                        className="w-10 h-10 rounded-full border-2 border-homi-purple text-homi-purple flex items-center justify-center shadow-md transition-all hover:bg-homi-purple hover:text-white transform hover:scale-110 active:scale-95"
+                        asChild
+                      >
+                        <Link to="/register">
+                          <Heart size={20} />
+                        </Link>
+                      </Button>
+
+                      <Button 
+                        variant="outline"
+                        size="icon"
+                        className="w-10 h-10 rounded-full border-2 border-gray-400 text-gray-600 flex items-center justify-center shadow-md transition-all hover:bg-gray-100 transform hover:scale-110 active:scale-95"
+                        asChild
+                      >
+                        <Link to="/register">
+                          <Plus size={20} />
+                        </Link>
+                      </Button>
+                    </div>
                   </div>
-                  <div className="bg-white rounded-2xl shadow-xl p-4 transform hover:scale-105 transition-transform duration-300">
-                    <div className="w-full h-32 bg-gradient-to-br from-homi-lightPurple to-homi-purple rounded-xl mb-3"></div>
-                    <div className="h-4 bg-gray-200 rounded mb-2 w-2/3"></div>
-                    <div className="h-3 bg-gray-100 rounded w-full"></div>
-                  </div>
-                </div>
-                <div className="space-y-4 pt-8">
-                  <div className="bg-white rounded-2xl shadow-xl p-4 transform hover:scale-105 transition-transform duration-300">
-                    <div className="w-full h-32 bg-gradient-to-br from-homi-purple to-homi-ultraLightPurple rounded-xl mb-3"></div>
-                    <div className="h-4 bg-gray-200 rounded mb-2 w-2/3"></div>
-                    <div className="h-3 bg-gray-100 rounded w-full"></div>
-                  </div>
-                  <div className="bg-gradient-to-br from-homi-purple to-homi-lightPurple rounded-2xl shadow-xl p-6 text-white transform hover:scale-105 transition-transform duration-300">
-                    <Heart className="w-8 h-8 mb-3" />
-                    <h4 className="font-bold text-xl mb-2">+1000</h4>
-                    <p className="text-sm opacity-90">Compañeros encontrados en {city.name}</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
