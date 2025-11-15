@@ -14,7 +14,7 @@ const AuthRequiredNotice = ({ message = "Para acceder a esta función, necesitas
   return (
     <>
       <Navbar />
-      <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-b from-background to-muted/20">
+      <div className="min-h-screen flex items-start justify-center pt-20 p-4 bg-gradient-to-b from-background to-muted/20">
         <Card className="max-w-md mx-auto p-8 shadow-md">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold mb-2">Acceso requerido</h2>

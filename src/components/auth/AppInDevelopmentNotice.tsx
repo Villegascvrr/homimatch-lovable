@@ -9,7 +9,7 @@ const AppInDevelopmentNotice = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-b from-background to-muted/20">
+      <div className="min-h-screen flex items-start justify-center pt-20 p-4 bg-gradient-to-b from-background to-muted/20">
         <Card className="w-full max-w-md">
           <CardHeader className="text-center">
             <div className="mx-auto mb-4 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
