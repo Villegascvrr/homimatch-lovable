@@ -67,102 +67,137 @@ export const CityLandingTemplate = ({ city }: CityLandingTemplateProps) => {
               </div>
             </div>
 
-            {/* Collage de perfiles reales */}
+            {/* Collage de perfiles reales - Grid que imita bloques morados */}
             <div className="relative hidden lg:block">
-              <div className="grid grid-cols-1 gap-6">
-                {heroProfiles.map((profile) => (
-                  <div key={profile.id} className="w-full max-w-sm mx-auto">
-                    <div className="relative glass-card overflow-hidden rounded-xl shadow-lg border-2 border-transparent hover:border-homi-purple transition-all duration-300">
-                      {/* Profile Image Section */}
-                      <div className="relative aspect-[3/2] overflow-hidden bg-gray-100">
-                        <img
-                          src={profile.imgUrl}
-                          alt={profile.name}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3 text-white">
-                          <h3 className="text-xl font-bold">{profile.name}, {profile.age}</h3>
-                          <p className="text-sm opacity-90 flex items-center gap-1">
-                            <Home size={14} className="shrink-0" />
+              <div className="grid grid-cols-2 gap-4 auto-rows-fr">
+                {/* Tarjeta 1 - Top Left */}
+                <div className="row-span-1">
+                  <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-300 h-full">
+                    <div className="relative h-48">
+                      <img 
+                        src={heroProfiles[0].imgUrl} 
+                        alt={heroProfiles[0].name}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute top-3 left-3 flex gap-2">
+                        <span className="px-2 py-1 bg-green-500 text-white text-xs font-medium rounded-full">
+                          Activo ahora
+                        </span>
+                        <span className="px-2 py-1 bg-homi-purple text-white text-xs font-medium rounded-full flex items-center gap-1">
+                          <Star className="w-3 h-3" fill="white" />
+                          {heroProfiles[0].compatibility}% compatibilidad
+                        </span>
+                      </div>
+                    </div>
+                    <CardContent className="p-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <div>
+                          <h3 className="font-bold text-xl">{heroProfiles[0].name}, {heroProfiles[0].age}</h3>
+                          <p className="text-sm text-muted-foreground flex items-center gap-1">
+                            <MapPin className="w-3 h-3" />
                             {city.name}
                           </p>
                         </div>
-                        
-                        {/* Housing Status Badge */}
-                        <div className="absolute top-2 left-2">
-                          <span className={`flex items-center gap-1 text-xs px-2 py-1 rounded-full ${
-                            profile.has_apartment 
-                              ? 'bg-green-500/90 text-white' 
-                              : 'bg-blue-500/90 text-white'
-                          }`}>
-                            {profile.has_apartment ? <Home size={12} /> : <Search size={12} />}
-                            {profile.has_apartment ? 'Tengo piso' : 'Busco piso'}
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                        {heroProfiles[0].bio}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        {heroProfiles[0].tags.slice(0, 3).map((tag) => (
+                          <span key={tag.id} className="px-2 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full">
+                            {tag.name}
                           </span>
-                        </div>
-
-                        {/* Compatibility Badge */}
-                        <div className="absolute top-2 right-2">
-                          <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-white/95 backdrop-blur">
-                            <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                            <span className="text-xs font-bold text-homi-purple">{profile.compatibility}%</span>
-                          </div>
-                        </div>
+                        ))}
                       </div>
-                      
-                      {/* Profile Details Section */}
-                      <div className="p-3">
-                        <p className="text-sm mb-2 line-clamp-2">{profile.bio}</p>
-                        
-                        <div className="flex flex-wrap gap-1 mb-3">
-                          {profile.tags.slice(0, 3).map((tag) => (
-                            <span 
-                              key={tag.id} 
-                              className="px-2 py-0.5 text-xs rounded-full bg-homi-ultraLightPurple text-homi-purple"
-                            >
-                              {tag.name}
-                            </span>
-                          ))}
-                        </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Tarjeta 2 - Top Right (más grande) */}
+                <div className="row-span-2">
+                  <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-300 h-full">
+                    <div className="relative h-64">
+                      <img 
+                        src={heroProfiles[1].imgUrl} 
+                        alt={heroProfiles[1].name}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute top-3 left-3 flex gap-2">
+                        <span className="px-2 py-1 bg-green-500 text-white text-xs font-medium rounded-full">
+                          Activo ahora
+                        </span>
+                        <span className="px-2 py-1 bg-homi-purple text-white text-xs font-medium rounded-full flex items-center gap-1">
+                          <Star className="w-3 h-3" fill="white" />
+                          {heroProfiles[1].compatibility}% compatibilidad
+                        </span>
                       </div>
                     </div>
-                    
-                    {/* Control buttons below the card */}
-                    <div className="flex justify-center items-center gap-3 mt-3">
-                      <Button 
-                        variant="outline"
-                        size="icon"
-                        className="w-10 h-10 rounded-full border-2 border-red-500 text-red-500 flex items-center justify-center shadow-md transition-all hover:bg-red-500 hover:text-white transform hover:scale-110 active:scale-95"
-                        asChild
-                      >
-                        <Link to="/register">
-                          <X size={20} />
-                        </Link>
-                      </Button>
-                      
-                      <Button 
-                        variant="outline"
-                        size="icon"
-                        className="w-10 h-10 rounded-full border-2 border-homi-purple text-homi-purple flex items-center justify-center shadow-md transition-all hover:bg-homi-purple hover:text-white transform hover:scale-110 active:scale-95"
-                        asChild
-                      >
-                        <Link to="/register">
-                          <Heart size={20} />
-                        </Link>
-                      </Button>
+                    <CardContent className="p-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <div>
+                          <h3 className="font-bold text-xl">{heroProfiles[1].name}, {heroProfiles[1].age}</h3>
+                          <p className="text-sm text-muted-foreground flex items-center gap-1">
+                            <MapPin className="w-3 h-3" />
+                            {city.name}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-3 line-clamp-3">
+                        {heroProfiles[1].bio}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        {heroProfiles[1].tags.slice(0, 4).map((tag) => (
+                          <span key={tag.id} className="px-2 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full">
+                            {tag.name}
+                          </span>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
 
-                      <Button 
-                        variant="outline"
-                        size="icon"
-                        className="w-10 h-10 rounded-full border-2 border-gray-400 text-gray-600 flex items-center justify-center shadow-md transition-all hover:bg-gray-100 transform hover:scale-110 active:scale-95"
-                        asChild
-                      >
-                        <Link to="/register">
-                          <Plus size={20} />
-                        </Link>
-                      </Button>
+                {/* Tarjeta 3 - Bottom Left */}
+                <div className="row-span-1">
+                  <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-300 h-full">
+                    <div className="relative h-48">
+                      <img 
+                        src={heroProfiles[2].imgUrl} 
+                        alt={heroProfiles[2].name}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute top-3 left-3 flex gap-2">
+                        <span className="px-2 py-1 bg-green-500 text-white text-xs font-medium rounded-full">
+                          Activo ahora
+                        </span>
+                        <span className="px-2 py-1 bg-homi-purple text-white text-xs font-medium rounded-full flex items-center gap-1">
+                          <Star className="w-3 h-3" fill="white" />
+                          {heroProfiles[2].compatibility}% compatibilidad
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                    <CardContent className="p-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <div>
+                          <h3 className="font-bold text-xl">{heroProfiles[2].name}, {heroProfiles[2].age}</h3>
+                          <p className="text-sm text-muted-foreground flex items-center gap-1">
+                            <MapPin className="w-3 h-3" />
+                            {city.name}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                        {heroProfiles[2].bio}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        {heroProfiles[2].tags.slice(0, 3).map((tag) => (
+                          <span key={tag.id} className="px-2 py-1 bg-homi-purple/10 text-homi-purple text-xs rounded-full">
+                            {tag.name}
+                          </span>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </div>
           </div>
