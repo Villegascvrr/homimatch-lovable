@@ -10,7 +10,6 @@ import {
   Lock, 
   Mail, 
   User,
-  AtSign,
   ArrowRight,
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';

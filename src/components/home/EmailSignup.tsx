@@ -7,7 +7,7 @@ import * as z from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { CheckCircle2, ArrowRight, User, Mail, AtSign, Lock } from 'lucide-react';
+import { CheckCircle2, ArrowRight, User, Mail, Lock } from 'lucide-react';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
@@ -18,13 +18,6 @@ const formSchema = z.object({
   }),
   lastName: z.string().min(2, {
     message: 'Los apellidos deben tener al menos 2 caracteres'
-  }),
-  username: z.string().min(3, {
-    message: 'El nombre de usuario debe tener al menos 3 caracteres'
-  }).max(20, {
-    message: 'El nombre de usuario no puede tener más de 20 caracteres'
-  }).regex(/^[a-z0-9_]+$/, {
-    message: 'El nombre de usuario solo puede contener letras minúsculas, números y guiones bajos'
   }),
   email: z.string().email({
     message: 'Email inválido'
@@ -51,7 +44,6 @@ const EmailSignup = () => {
     defaultValues: {
       firstName: '',
       lastName: '',
-      username: '',
       email: '',
       password: '',
     },
@@ -149,7 +141,6 @@ const EmailSignup = () => {
         password: values.password,
         firstName: values.firstName,
         lastName: values.lastName,
-        username: values.username
       });
       
       if (result.success) {        
@@ -302,25 +293,6 @@ const EmailSignup = () => {
                     <FormMessage />
                   </FormItem>} />
             </div>
-            
-            <FormField control={form.control} name="username" render={({
-              field
-            }) => <FormItem>
-                  <FormLabel>Nombre de usuario *</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input 
-                        id="username" 
-                        placeholder="tu_usuario" 
-                        className="pl-10 rounded-full" 
-                        disabled={isLoading || isSigningWithGoogle}
-                        {...field} 
-                      />
-                      <AtSign className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>} />
             
             <FormField control={form.control} name="email" render={({
               field

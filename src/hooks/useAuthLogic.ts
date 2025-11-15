@@ -197,10 +197,10 @@ export const useAuthLogic = () => {
       
       // Validate required fields
       if (!userData.email || !userData.password || !userData.firstName || 
-          !userData.lastName || !userData.username) {
+          !userData.lastName) {
         toast({
           title: "Datos incompletos",
-          description: "Todos los campos son obligatorios para crear una cuenta.",
+          description: "Por favor completa nombre, apellidos, email y contraseña.",
           variant: "destructive",
           duration: 1500
         });
@@ -224,6 +224,9 @@ export const useAuthLogic = () => {
         return { success: false, error: { message: "Email already registered" } };
       }
       
+      // Generate username from email if not provided
+      const username = userData.username || extractUsernameFromEmail(userData.email);
+      
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: userData.email,
         password: userData.password,
@@ -231,7 +234,7 @@ export const useAuthLogic = () => {
           data: {
             firstName: userData.firstName,
             lastName: userData.lastName,
-            username: userData.username
+            username: username
           },
           emailRedirectTo: window.location.origin + '/verified',
         },
