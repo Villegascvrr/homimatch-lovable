@@ -28,7 +28,7 @@ const MatchingLandingPage = () => {
   return <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow container mx-auto px-4 py-8 mt-20">
+      <main className="flex-grow container mx-auto px-4 py-8 mt-8">
         {/* Header */}
         <div className="text-center mb-12">
           
