@@ -59,17 +59,17 @@ const EmailSignup = () => {
     }
   }, []);
 
-  // Validación de email debounced
-  useEffect(() => {
-    const email = form.watch("email");
-    if (!email || !email.includes('@')) return;
-    
-    const timer = setTimeout(() => {
-      validateEmailNotInUse(email);
-    }, 800);
-    
-    return () => clearTimeout(timer);
-  }, [form.watch("email")]);
+  // Remove email validation check - allow duplicates silently
+  // useEffect(() => {
+  //   const email = form.watch("email");
+  //   if (!email || !email.includes('@')) return;
+  //   
+  //   const timer = setTimeout(() => {
+  //     validateEmailNotInUse(email);
+  //   }, 800);
+  //   
+  //   return () => clearTimeout(timer);
+  // }, [form.watch("email")]);
   
   const validateEmailNotInUse = async (email: string) => {
     if (!email || !email.includes('@')) return;
@@ -93,8 +93,8 @@ const EmailSignup = () => {
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // Prevent multiple submissions or submission while checking email
-    if (isLoading || isCheckingEmail) return;
+    // Prevent multiple submissions
+    if (isLoading) return;
     
     try {
       const result = await registerToWaitingList({
@@ -104,20 +104,9 @@ const EmailSignup = () => {
       });
       
       if (result.success) {
-        setIsSubmitted(true);
-        
-        toast({
-          title: "¡Registro exitoso!",
-          description: result.alreadyExists 
-            ? "Ya estabas en nuestra lista de espera. Te notificaremos cuando la app esté lista."
-            : "Te hemos añadido a la lista de espera. Te notificaremos por email.",
-          variant: "default",
-        });
-        
-        // Redirigir a página de mantenimiento
-        setTimeout(() => {
-          navigate('/maintenance');
-        }, 1500);
+        // Navegar directamente sin mostrar toast
+        const isNew = !result.alreadyExists;
+        navigate(`/maintenance?isNew=${isNew}`);
       } else {
         toast({
           title: "Error",

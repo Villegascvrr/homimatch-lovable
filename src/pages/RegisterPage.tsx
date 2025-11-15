@@ -59,41 +59,42 @@ const RegisterPage = () => {
     mode: "onBlur"
   });
   
-  // Add debounce to avoid too many API calls
-  useEffect(() => {
-    const email = form.watch("email");
-    if (!email || !email.includes('@')) {
-      setIsCheckingEmail(false);
-      return;
-    }
-    
-    setIsCheckingEmail(true);
-    const timer = setTimeout(async () => {
-      try {
-        const exists = await checkEmailExists(email);
-        if (exists) {
-          form.setError("email", {
-            type: "manual",
-            message: "Este correo electrónico ya está en nuestra lista de espera."
-          });
-        } else {
-          form.clearErrors("email");
-        }
-      } catch (error) {
-        console.error("Error checking email:", error);
-      } finally {
-        setIsCheckingEmail(false);
-      }
-    }, 800);
-    
-    return () => {
-      clearTimeout(timer);
-      setIsCheckingEmail(false);
-    };
-  }, [form.watch("email")]);
+  // Remove email validation check - allow duplicates silently
+  // useEffect(() => {
+  //   const email = form.watch("email");
+  //   if (!email || !email.includes('@')) {
+  //     setIsCheckingEmail(false);
+  //     return;
+  //   }
+  //   
+  //   setIsCheckingEmail(true);
+  //   const timer = setTimeout(async () => {
+  //     try {
+  //       const exists = await checkEmailExists(email);
+  //       if (exists) {
+  //         form.setError("email", {
+  //           type: "manual",
+  //           message: "Este correo electrónico ya está en nuestra lista de espera."
+  //         });
+  //       } else {
+  //         form.clearErrors("email");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error checking email:", error);
+  //     } finally {
+  //       setIsCheckingEmail(false);
+  //     }
+  //   }, 800);
+  //   
+  //   return () => {
+  //     clearTimeout(timer);
+  //     setIsCheckingEmail(false);
+  //   };
+  // }, [form.watch("email")]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (isLoading || isCheckingEmail) return;
+    // Prevent multiple submissions
+    if (isLoading) return;
     
     try {
       const result = await registerToWaitingList({
@@ -103,17 +104,9 @@ const RegisterPage = () => {
       });
 
       if (result.success) {
-        toast({
-          title: "¡Registro exitoso!",
-          description: result.alreadyExists 
-            ? "Ya estabas en nuestra lista de espera. Te notificaremos cuando la app esté lista."
-            : "Te hemos añadido a la lista de espera. Te notificaremos por email.",
-        });
-        
-        // Redirigir a página de mantenimiento
-        setTimeout(() => {
-          navigate('/maintenance');
-        }, 1500);
+        // Navegar directamente sin mostrar toast
+        const isNew = !result.alreadyExists;
+        navigate(`/maintenance?isNew=${isNew}`);
       } else {
         toast({
           title: "Error en el registro",

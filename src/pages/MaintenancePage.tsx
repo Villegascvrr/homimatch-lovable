@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Instagram, Home, CheckCircle, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,6 +11,9 @@ import Footer from '@/components/layout/Footer';
  * Informa a los usuarios que la web está en mantenimiento temporal
  */
 const MaintenancePage = () => {
+  const [searchParams] = useSearchParams();
+  const isNew = searchParams.get('isNew') === 'true';
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -29,7 +32,7 @@ const MaintenancePage = () => {
                 </div>
                 
                 <h1 className="text-2xl md:text-3xl font-bold text-foreground">
-                  Tu cuenta se ha creado con éxito
+                  {isNew ? 'Tu cuenta se ha creado con éxito' : 'Ya has completado el registro anteriormente'}
                 </h1>
                 <p className="text-base text-muted-foreground">
                   Gracias por registrarte en HomiMatch.
