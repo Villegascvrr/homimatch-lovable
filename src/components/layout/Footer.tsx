@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 import { Instagram, Mail } from "lucide-react";
-const Footer = () => {
+
+interface FooterProps {
+  cityName?: string;
+}
+
+const Footer = ({ cityName }: FooterProps = {}) => {
+  const location = cityName || "España";
   const popularCities = [{
     name: "Madrid",
     slug: "madrid"
@@ -30,7 +36,7 @@ const Footer = () => {
               <span className="font-bold text-2xl homi-gradient-text">HomiMatch</span>
             </Link>
             <p className="text-sm text-muted-foreground mb-4 max-w-xs">
-              Encuentra tu compañero de piso ideal en toda España. Conecta con personas afines y comparte experiencias.
+              Encuentra tu compañero de piso ideal en {location}. Descubre personas afines, conecta con ellas y comparte piso con total confianza y comodidad.
             </p>
             <div className="flex flex-col gap-2">
               <a href="mailto:hola@homimatch.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-homi-purple transition-colors">

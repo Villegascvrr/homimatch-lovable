@@ -27,7 +27,7 @@ const SeoCityLandingPage = () => {
       
       <Navbar />
       <CityLandingTemplate city={cityData} />
-      <Footer />
+      <Footer cityName={cityData.name} />
     </>
   );
 };
