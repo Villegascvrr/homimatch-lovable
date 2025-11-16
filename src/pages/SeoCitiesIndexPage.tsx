@@ -90,28 +90,24 @@ const SeoCitiesIndexPage = () => {
           content="Encuentra compañeros de piso en toda España. Conecta con personas afines en Madrid, Barcelona, Valencia y más de 30 ciudades españolas." 
         />
         <meta name="keywords" content="homi, homi app, homi compañeros de piso, homi alquiler, homi piso, compañero de piso España, compartir piso" />
-        
-        {/* Open Graph */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Encontrar compañero de piso en España | HomiMatch" />
-        <meta property="og:description" content="Encuentra compañeros de piso en toda España. Conecta con personas afines en Madrid, Barcelona, Valencia y más de 30 ciudades españolas." />
-        <meta property="og:url" content="https://homimatch.com/companero-de-piso" />
-        <meta property="og:image" content="https://homimatch.com/og-image.png" />
-        <meta property="og:image:alt" content="Encuentra compañeros de piso en España con HomiMatch" />
-        
-        {/* Twitter Cards */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Encontrar compañero de piso en España | HomiMatch" />
-        <meta name="twitter:description" content="Encuentra compañeros de piso en toda España. Conecta con personas afines en Madrid, Barcelona, Valencia y más de 30 ciudades españolas." />
-        <meta name="twitter:image" content="https://homimatch.com/og-image.png" />
-        <meta name="twitter:url" content="https://homimatch.com/companero-de-piso" />
-        
         <link rel="canonical" href="https://homimatch.com/companero-de-piso" />
-        
-        {/* Hreflang tags */}
         <link rel="alternate" hrefLang="es-es" href="https://homimatch.com/companero-de-piso" />
         <link rel="alternate" hrefLang="es" href="https://homimatch.com/companero-de-piso" />
         <link rel="alternate" hrefLang="x-default" href="https://homimatch.com" />
+        
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Encuentra Compañero de Piso en España | HomiMatch - Todas las Ciudades" />
+        <meta property="og:description" content="Busca compañero de piso compatible en las principales ciudades de España. HomiMatch te ayuda a encontrar roommates ideales en Madrid, Barcelona, Valencia, Sevilla y más." />
+        <meta property="og:url" content="https://homimatch.com/companero-de-piso" />
+        <meta property="og:image" content="https://homimatch.com/lovable-uploads/e5ed243f-ce37-4556-9a8d-2c8ca65a01a5.png" />
+        <meta property="og:site_name" content="HomiMatch" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Encuentra Compañero de Piso en España | HomiMatch - Todas las Ciudades" />
+        <meta name="twitter:description" content="Busca compañero de piso compatible en las principales ciudades de España. HomiMatch te ayuda a encontrar roommates ideales en Madrid, Barcelona, Valencia, Sevilla y más." />
+        <meta name="twitter:image" content="https://homimatch.com/lovable-uploads/e5ed243f-ce37-4556-9a8d-2c8ca65a01a5.png" />
         
         <script type="application/ld+json">
           {JSON.stringify(organizationSchema)}
@@ -124,7 +120,8 @@ const SeoCitiesIndexPage = () => {
         </script>
       </Helmet>
       
-      <Navbar />
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
       
       <main className="container mx-auto px-4 py-10 md:py-16 max-w-7xl">
         {/* Hero Section */}
@@ -452,6 +449,7 @@ const SeoCitiesIndexPage = () => {
       </main>
       
       <Footer />
+      </div>
     </>
   );
 };

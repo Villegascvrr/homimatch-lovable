@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import MatchCard from '@/components/matching/MatchCard';
@@ -25,8 +26,30 @@ const MatchingLandingPage = () => {
       navigate('/register');
     }
   };
-  return <div className="min-h-screen flex flex-col">
-      <Navbar />
+  return (
+    <>
+      <Helmet>
+        <title>Descubre Compañeros de Piso Compatibles | HomiMatch</title>
+        <meta name="description" content="Explora perfiles de personas que comparten tus intereses y estilo de vida. Encuentra tu compañero de piso ideal con nuestro algoritmo de compatibilidad." />
+        <link rel="canonical" href="https://homimatch.com/matching" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Descubre Compañeros de Piso Compatibles | HomiMatch" />
+        <meta property="og:description" content="Explora perfiles de personas que comparten tus intereses y estilo de vida. Encuentra tu compañero de piso ideal con nuestro algoritmo de compatibilidad." />
+        <meta property="og:image" content="https://homimatch.com/lovable-uploads/e5ed243f-ce37-4556-9a8d-2c8ca65a01a5.png" />
+        <meta property="og:url" content="https://homimatch.com/matching" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="HomiMatch" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Descubre Compañeros de Piso Compatibles | HomiMatch" />
+        <meta name="twitter:description" content="Explora perfiles de personas que comparten tus intereses y estilo de vida. Encuentra tu compañero de piso ideal con nuestro algoritmo de compatibilidad." />
+        <meta name="twitter:image" content="https://homimatch.com/lovable-uploads/e5ed243f-ce37-4556-9a8d-2c8ca65a01a5.png" />
+      </Helmet>
+      
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
       
       <main className="flex-grow container mx-auto px-4 py-8 mt-8">
         {/* Header */}
@@ -66,8 +89,10 @@ const MatchingLandingPage = () => {
             </div>
           </div>}
       </main>
-      
-      <Footer />
-    </div>;
+        
+        <Footer />
+      </div>
+    </>
+  );
 };
 export default MatchingLandingPage;
