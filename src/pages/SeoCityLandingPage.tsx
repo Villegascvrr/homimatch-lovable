@@ -19,6 +19,7 @@ const SeoCityLandingPage = () => {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": `HomiMatch ${cityData.name}`,
+    "alternateName": "Homi",
     "description": `Encuentra compañeros de piso en ${cityData.name}. Conecta con personas afines y comparte piso con total confianza.`,
     "url": `https://homimatch.com/companero-de-piso/${cityData.slug}`,
     "telephone": "+34-XXX-XXX-XXX",
@@ -71,6 +72,7 @@ const SeoCityLandingPage = () => {
       <Helmet>
         <title>{cityData.metaTitle}</title>
         <meta name="description" content={cityData.metaDescription} />
+        <meta name="keywords" content={`homi, homi app, homi compañeros de piso, homi alquiler, homi piso, compañero de piso ${cityData.name}, compartir piso ${cityData.name}`} />
         
         {/* Open Graph */}
         <meta property="og:type" content="website" />

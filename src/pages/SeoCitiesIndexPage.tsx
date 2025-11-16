@@ -23,6 +23,7 @@ const SeoCitiesIndexPage = () => {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "HomiMatch España",
+    "alternateName": "Homi",
     "description": "Encuentra compañeros de piso en toda España. Conecta con personas afines en más de 30 ciudades españolas.",
     "url": "https://homimatch.com/companero-de-piso",
     "telephone": "+34-XXX-XXX-XXX",
@@ -66,6 +67,7 @@ const SeoCitiesIndexPage = () => {
           name="description" 
           content="Encuentra compañeros de piso en toda España. Conecta con personas afines en Madrid, Barcelona, Valencia y más de 30 ciudades españolas." 
         />
+        <meta name="keywords" content="homi, homi app, homi compañeros de piso, homi alquiler, homi piso, compañero de piso España, compartir piso" />
         
         {/* Open Graph */}
         <meta property="og:type" content="website" />
