@@ -1,6 +1,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -126,8 +127,29 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
+    <>
+      <Helmet>
+        <title>Regístrate Gratis | HomiMatch - Encuentra tu Compañero de Piso</title>
+        <meta name="description" content="Únete a HomiMatch y encuentra tu compañero de piso ideal. Regístrate gratis y accede a nuestro algoritmo inteligente de compatibilidad. ¡Empieza hoy!" />
+        <link rel="canonical" href="https://homimatch.com/register" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Regístrate Gratis | HomiMatch - Encuentra tu Compañero de Piso" />
+        <meta property="og:description" content="Únete a HomiMatch y encuentra tu compañero de piso ideal. Regístrate gratis y accede a nuestro algoritmo inteligente de compatibilidad. ¡Empieza hoy!" />
+        <meta property="og:image" content="https://homimatch.com/lovable-uploads/e5ed243f-ce37-4556-9a8d-2c8ca65a01a5.png" />
+        <meta property="og:url" content="https://homimatch.com/register" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="HomiMatch" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Regístrate Gratis | HomiMatch - Encuentra tu Compañero de Piso" />
+        <meta name="twitter:description" content="Únete a HomiMatch y encuentra tu compañero de piso ideal. Regístrate gratis y accede a nuestro algoritmo inteligente de compatibilidad. ¡Empieza hoy!" />
+        <meta name="twitter:image" content="https://homimatch.com/lovable-uploads/e5ed243f-ce37-4556-9a8d-2c8ca65a01a5.png" />
+      </Helmet>
+      
+      <div className="min-h-screen flex flex-col bg-background">
+        <Navbar />
       
       <main className="flex-grow pt-20 pb-12">
         <div className="container mx-auto px-4 py-8">
@@ -303,9 +325,10 @@ const RegisterPage = () => {
           </div>
         </div>
       </main>
-      
-      <Footer />
-    </div>
+        
+        <Footer />
+      </div>
+    </>
   );
 };
 

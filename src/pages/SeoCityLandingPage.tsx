@@ -95,43 +95,40 @@ const SeoCityLandingPage = () => {
         <title>{cityData.metaTitle}</title>
         <meta name="description" content={cityData.metaDescription} />
         <meta name="keywords" content={`homi, homi app, homi compañeros de piso, homi alquiler, homi piso, compañero de piso ${cityData.name}, compartir piso ${cityData.name}`} />
+        <link rel="canonical" href={`https://homimatch.com/companero-de-piso/${cityData.slug}`} />
+        <link rel="alternate" hrefLang="es-es" href={`https://homimatch.com/companero-de-piso/${cityData.slug}`} />
+        <link rel="alternate" hrefLang="es" href={`https://homimatch.com/companero-de-piso/${cityData.slug}`} />
+        <link rel="alternate" hrefLang="x-default" href="https://homimatch.com" />
         
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={cityData.metaTitle} />
         <meta property="og:description" content={cityData.metaDescription} />
         <meta property="og:url" content={`https://homimatch.com/companero-de-piso/${cityData.slug}`} />
-        <meta property="og:image" content="https://homimatch.com/og-image.png" />
+        <meta property="og:image" content="https://homimatch.com/lovable-uploads/e5ed243f-ce37-4556-9a8d-2c8ca65a01a5.png" />
         <meta property="og:image:alt" content={`Perfiles para compartir piso en ${cityData.name} con HomiMatch`} />
+        <meta property="og:site_name" content="HomiMatch" />
         
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={cityData.metaTitle} />
         <meta name="twitter:description" content={cityData.metaDescription} />
-        <meta name="twitter:image" content="https://homimatch.com/og-image.png" />
-        <meta name="twitter:url" content={`https://homimatch.com/companero-de-piso/${cityData.slug}`} />
-        
-        <link rel="canonical" href={`https://homimatch.com/companero-de-piso/${cityData.slug}`} />
-        
-        {/* Hreflang tags */}
-        <link rel="alternate" hrefLang="es-es" href={`https://homimatch.com/companero-de-piso/${cityData.slug}`} />
-        <link rel="alternate" hrefLang="es" href={`https://homimatch.com/companero-de-piso/${cityData.slug}`} />
-        <link rel="alternate" hrefLang="x-default" href="https://homimatch.com" />
+        <meta name="twitter:image" content="https://homimatch.com/lovable-uploads/e5ed243f-ce37-4556-9a8d-2c8ca65a01a5.png" />
+        <meta name="twitter:image:alt" content={`Perfiles para compartir piso en ${cityData.name} con HomiMatch`} />
         
         <script type="application/ld+json">
           {JSON.stringify(organizationSchema)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(localBusinessSchema)}
         </script>
         <script type="application/ld+json">
           {JSON.stringify(breadcrumbSchema)}
         </script>
       </Helmet>
       
-      <Navbar />
-      <CityLandingTemplate city={cityData} />
-      <Footer cityName={cityData.name} />
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <CityLandingTemplate city={cityData} />
+        <Footer cityName={cityData.name} />
+      </div>
     </>
   );
 };

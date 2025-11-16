@@ -346,6 +346,20 @@ import { mockProfiles } from '@/data/mockProfiles';
         <link rel="alternate" hrefLang="es" href="https://homimatch.com" />
         <link rel="alternate" hrefLang="x-default" href="https://homimatch.com" />
         
+        {/* Open Graph */}
+        <meta property="og:title" content="HomiMatch - Encuentra tu compañero de piso ideal en España" />
+        <meta property="og:description" content="Descubre personas afines para compartir piso. Conecta con compañeros ideales y vive con total confianza. Algoritmo inteligente de compatibilidad." />
+        <meta property="og:image" content="https://homimatch.com/lovable-uploads/e5ed243f-ce37-4556-9a8d-2c8ca65a01a5.png" />
+        <meta property="og:url" content="https://homimatch.com" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="HomiMatch" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="HomiMatch - Encuentra tu compañero de piso ideal en España" />
+        <meta name="twitter:description" content="Descubre personas afines para compartir piso. Conecta con compañeros ideales y vive con total confianza. Algoritmo inteligente de compatibilidad." />
+        <meta name="twitter:image" content="https://homimatch.com/lovable-uploads/e5ed243f-ce37-4556-9a8d-2c8ca65a01a5.png" />
+        
         <script type="application/ld+json">
           {JSON.stringify(organizationSchema)}
         </script>
