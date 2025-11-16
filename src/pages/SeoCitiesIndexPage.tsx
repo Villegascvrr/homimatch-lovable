@@ -39,6 +39,28 @@ const SeoCitiesIndexPage = () => {
     "priceRange": "Gratis"
   };
 
+  // JSON-LD para Organization (SEO)
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "HomiMatch",
+    "alternateName": "Homi",
+    "url": "https://homimatch.com",
+    "logo": "https://homimatch.com/lovable-uploads/e5ed243f-ce37-4556-9a8d-2c8ca65a01a5.png",
+    "sameAs": [
+      "https://www.instagram.com/homimatch"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "hi@homimatch.com",
+        "areaServed": "ES",
+        "availableLanguage": "es"
+      }
+    ]
+  };
+
   // JSON-LD para Breadcrumbs
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -85,6 +107,15 @@ const SeoCitiesIndexPage = () => {
         <meta name="twitter:url" content="https://homimatch.com/companero-de-piso" />
         
         <link rel="canonical" href="https://homimatch.com/companero-de-piso" />
+        
+        {/* Hreflang tags */}
+        <link rel="alternate" hrefLang="es-es" href="https://homimatch.com/companero-de-piso" />
+        <link rel="alternate" hrefLang="es" href="https://homimatch.com/companero-de-piso" />
+        <link rel="alternate" hrefLang="x-default" href="https://homimatch.com" />
+        
+        <script type="application/ld+json">
+          {JSON.stringify(organizationSchema)}
+        </script>
         <script type="application/ld+json">
           {JSON.stringify(localBusinessSchema)}
         </script>

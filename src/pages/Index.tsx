@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Hero from '@/components/home/Hero';
@@ -14,7 +15,7 @@ import MatchCard from '@/components/matching/MatchCard';
 import { Check, Crown, Star, Zap, Sparkles, Users, Home, Quote, Heart } from 'lucide-react';
 import { useSubscription } from '@/hooks/useSubscription';
 import { mockProfiles } from '@/data/mockProfiles';
-const Index = () => {
+  const Index = () => {
   const {
     user
   } = useAuth();
@@ -22,6 +23,28 @@ const Index = () => {
   const {
     createCheckout
   } = useSubscription();
+
+  // JSON-LD para Organization (SEO)
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "HomiMatch",
+    "alternateName": "Homi",
+    "url": "https://homimatch.com",
+    "logo": "https://homimatch.com/lovable-uploads/e5ed243f-ce37-4556-9a8d-2c8ca65a01a5.png",
+    "sameAs": [
+      "https://www.instagram.com/homimatch"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "hi@homimatch.com",
+        "areaServed": "ES",
+        "availableLanguage": "es"
+      }
+    ]
+  };
   const featuredProfiles = mockProfiles.slice(0, 3);
   const successStories = [{
     id: 1,
@@ -313,6 +336,20 @@ const Index = () => {
     borderColor: 'border-yellow-400 hover:border-yellow-500'
   }];
   return <div className="min-h-screen flex flex-col overflow-x-hidden w-full">
+      <Helmet>
+        <title>HomiMatch - Encuentra tu compañero de piso ideal</title>
+        <meta name="description" content="Descubre personas afines para compartir piso. Conecta con compañeros ideales y vive con total confianza." />
+        <link rel="canonical" href="https://homimatch.com" />
+        
+        {/* Hreflang tags */}
+        <link rel="alternate" hrefLang="es-es" href="https://homimatch.com" />
+        <link rel="alternate" hrefLang="es" href="https://homimatch.com" />
+        <link rel="alternate" hrefLang="x-default" href="https://homimatch.com" />
+        
+        <script type="application/ld+json">
+          {JSON.stringify(organizationSchema)}
+        </script>
+      </Helmet>
       
     <Navbar />
 
