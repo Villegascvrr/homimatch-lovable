@@ -387,8 +387,8 @@ import { mockProfiles } from '@/data/mockProfiles';
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mb-16 mr-5 ml-5">
-              {featuredProfiles.map(profile => <div key={profile.id} className="animate-on-scroll">
-                  <MatchCard {...profile} compact={true} onLike={id => console.log('Liked:', id)} onPass={id => console.log('Passed:', id)} onView={id => navigate('/profile')} />
+              {featuredProfiles.map(profile => <div key={profile.id} className="animate-on-scroll cursor-pointer" onClick={() => navigate('/register')}>
+                  <MatchCard {...profile} compact={true} onLike={() => navigate('/register')} onPass={() => navigate('/register')} onView={() => navigate('/register')} />
                 </div>)}
             </div>
 
