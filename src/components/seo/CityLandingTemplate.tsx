@@ -516,11 +516,11 @@ export const CityLandingTemplate = ({
         </section>
 
         {/* Options Section - SEO Content */}
-        <section className="mb-12 bg-gradient-to-br from-homi-ultraLightPurple/30 via-homi-lightPurple/5 to-transparent rounded-3xl p-10 md:p-16 shadow-lg">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
+        <section className="mb-8 bg-gradient-to-br from-homi-ultraLightPurple/30 via-homi-lightPurple/5 to-transparent rounded-2xl p-6 md:p-8 shadow-md">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">
             Opciones para encontrar compañero de piso en {city.name}
           </h2>
-          <div className="space-y-4 text-lg text-muted-foreground">
+          <div className="space-y-3 text-base text-muted-foreground">
             <p>
               Da igual si <strong className="text-foreground">busco compañero de piso {city.name}</strong>, <strong className="text-foreground">se busca compañero de piso {city.name}</strong> o necesitas encontrar <strong className="text-foreground">compañeros de piso {city.name}</strong>. HomiMatch te ayuda a conectar con personas que buscan <strong className="text-foreground">compañera de piso {city.name}</strong> o <strong className="text-foreground">buscamos compañera de piso en {city.name}</strong>.
             </p>
