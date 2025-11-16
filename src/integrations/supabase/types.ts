@@ -44,6 +44,30 @@ export type Database = {
         }
         Relationships: []
       }
+      signup_rate_limit: {
+        Row: {
+          attempt_count: number | null
+          blocked_until: string | null
+          first_attempt_at: string | null
+          ip_address: string
+          last_attempt_at: string | null
+        }
+        Insert: {
+          attempt_count?: number | null
+          blocked_until?: string | null
+          first_attempt_at?: string | null
+          ip_address: string
+          last_attempt_at?: string | null
+        }
+        Update: {
+          attempt_count?: number | null
+          blocked_until?: string | null
+          first_attempt_at?: string | null
+          ip_address?: string
+          last_attempt_at?: string | null
+        }
+        Relationships: []
+      }
       waiting_list: {
         Row: {
           auth_user_id: string | null
@@ -82,7 +106,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      check_email_exists: { Args: { email_to_check: string }; Returns: boolean }
+      check_signup_rate_limit: { Args: { client_ip: string }; Returns: Json }
+      email_exists_in_waiting_list: {
+        Args: { email_to_check: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
