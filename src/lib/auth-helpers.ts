@@ -2,24 +2,20 @@ import { supabase } from '@/integrations/supabase/client';
 
 /**
  * Helper para verificar si un email ya existe en la base de datos
- * Nota: En la versión simplificada, no hay tabla de profiles, 
- * así que verificamos directamente en auth.users
+ * Usa función segura de base de datos para prevenir exposición de datos
  */
 export const checkEmailExists = async (email: string): Promise<boolean> => {
   try {
-    // Intentar buscar en waiting_list primero
-    const { data, error } = await supabase
-      .from('waiting_list')
-      .select('email')
-      .eq('email', email)
-      .maybeSingle();
+    const { data, error } = await supabase.rpc('email_exists_in_waiting_list', {
+      email_to_check: email.toLowerCase()
+    });
     
     if (error) {
       console.error('Error checking email exists:', error);
       return false;
     }
     
-    return data !== null;
+    return data === true;
   } catch (error) {
     console.error('Error in checkEmailExists:', error);
     return false;
