@@ -17,6 +17,47 @@ const SeoCitiesIndexPage = () => {
   const filteredCities = seoCities.filter(city =>
     city.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  // JSON-LD para LocalBusiness España
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "HomiMatch España",
+    "description": "Encuentra compañeros de piso en toda España. Conecta con personas afines en más de 30 ciudades españolas.",
+    "url": "https://homimatch.com/companero-de-piso",
+    "telephone": "+34-XXX-XXX-XXX",
+    "email": "hi@homimatch.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "ES"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "España"
+    },
+    "priceRange": "Gratis"
+  };
+
+  // JSON-LD para Breadcrumbs
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Inicio",
+        "item": "https://homimatch.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "España",
+        "item": "https://homimatch.com/companero-de-piso"
+      }
+    ]
+  };
+
   return (
     <>
       <Helmet>
@@ -29,6 +70,12 @@ const SeoCitiesIndexPage = () => {
         <meta property="og:description" content="Encuentra compañeros de piso en toda España. Conecta con personas afines en Madrid, Barcelona, Valencia y más de 30 ciudades españolas." />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://homimatch.com/companero-de-piso" />
+        <script type="application/ld+json">
+          {JSON.stringify(localBusinessSchema)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbSchema)}
+        </script>
       </Helmet>
       
       <Navbar />
