@@ -71,9 +71,22 @@ const SeoCityLandingPage = () => {
       <Helmet>
         <title>{cityData.metaTitle}</title>
         <meta name="description" content={cityData.metaDescription} />
+        
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
         <meta property="og:title" content={cityData.metaTitle} />
         <meta property="og:description" content={cityData.metaDescription} />
-        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://homimatch.com/companero-de-piso/${cityData.slug}`} />
+        <meta property="og:image" content="https://homimatch.com/og-image.png" />
+        <meta property="og:image:alt" content={`Perfiles para compartir piso en ${cityData.name} con HomiMatch`} />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={cityData.metaTitle} />
+        <meta name="twitter:description" content={cityData.metaDescription} />
+        <meta name="twitter:image" content="https://homimatch.com/og-image.png" />
+        <meta name="twitter:url" content={`https://homimatch.com/companero-de-piso/${cityData.slug}`} />
+        
         <link rel="canonical" href={`https://homimatch.com/companero-de-piso/${cityData.slug}`} />
         <script type="application/ld+json">
           {JSON.stringify(localBusinessSchema)}
