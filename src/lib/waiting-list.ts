@@ -96,23 +96,21 @@ export async function addToWaitingList(data: {
     }
 
     // Insertar nuevo registro
-    const { data: result, error } = await supabase
+    const { error } = await supabase
       .from('waiting_list')
       .insert({
         email: data.email.toLowerCase(),
         first_name: data.firstName,
         last_name: data.lastName,
         auth_user_id: null,
-      })
-      .select()
-      .single();
+      });
 
     if (error) {
       console.error('Error adding to waiting list:', error);
       return { success: false, error };
     }
 
-    return { success: true, data: result, alreadyExists: false };
+    return { success: true, alreadyExists: false };
   } catch (error) {
     console.error('Exception adding to waiting list:', error);
     return { success: false, error };
