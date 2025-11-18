@@ -483,8 +483,6 @@ export const useAuthLogic = () => {
 
                   if (!insertError) {
                     // Profile created successfully
-                  } else {
-                    console.error("Error creating profile for Google user:", insertError);
                   }
                 }
               }
@@ -543,10 +541,8 @@ export const useAuthLogic = () => {
             if (!isMounted) return;
 
             if (!error && profileData) {
-              console.log("Existing session profile data:", profileData);
               setUser(authUser);
             } else {
-              console.log("No profile data in existing session, setting basic user:", authUser);
               setUser(authUser);
             }
           } catch (error) {
