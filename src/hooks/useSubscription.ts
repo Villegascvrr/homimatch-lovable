@@ -37,22 +37,29 @@ export const useSubscription = () => {
       
       if (error) {
         console.error('Error checking subscription:', error);
-        throw error;
+        // No mostrar error al usuario, solo registrar en consola
+        setSubscriptionInfo({
+          subscribed: false,
+          subscription_tier: null,
+          subscription_end: null,
+        });
+        return;
       }
 
       console.log('Subscription check result:', data);
       setSubscriptionInfo(data);
     } catch (error) {
       console.error('Failed to check subscription:', error);
-      toast({
-        title: "Error",
-        description: "No se pudo verificar el estado de la suscripción",
-        variant: "destructive",
+      // No mostrar error al usuario, permitir continuar sin suscripción
+      setSubscriptionInfo({
+        subscribed: false,
+        subscription_tier: null,
+        subscription_end: null,
       });
     } finally {
       setLoading(false);
     }
-  }, [user, toast]);
+  }, [user]);
 
   const createCheckout = async (planId: string) => {
     if (!user) {
@@ -126,9 +133,8 @@ export const useSubscription = () => {
     }
   };
 
-  useEffect(() => {
-    checkSubscription();
-  }, [checkSubscription]);
+  // No verificar suscripción automáticamente
+  // Solo se verificará si se llama manualmente a checkSubscription
 
   return {
     subscriptionInfo,
