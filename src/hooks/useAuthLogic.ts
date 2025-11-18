@@ -128,16 +128,10 @@ export const useAuthLogic = () => {
     setLoading(true);
     setIsInternalAction(true);
     try {
-      // Using the exported function from supabase client
       await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/verified`,
-          queryParams: {
-            access_type: "offline",
-            prompt: "consent",
-          },
-          scopes: "email profile",
+          redirectTo: `${window.location.origin}/?loggedIn=true`,
         },
       });
     } catch (error: any) {
