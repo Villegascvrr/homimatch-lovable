@@ -1,8 +1,8 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { Session, User } from '@supabase/supabase-js';
-import { supabase } from '@/integrations/supabase/client';
-import { checkEmailExists } from '@/lib/auth-helpers';
-import { useToast } from '@/hooks/use-toast';
+import React, { useState, useCallback, useEffect } from "react";
+import { Session, User } from "@supabase/supabase-js";
+import { supabase } from "@/integrations/supabase/client";
+import { checkEmailExists } from "@/lib/auth-helpers";
+import { useToast } from "@/hooks/use-toast";
 
 export interface UserSignUpData {
   email: string;
@@ -23,19 +23,19 @@ const saveSessionToLocalStorage = (session: Session | null): void => {
   if (session) {
     try {
       const sessionJson = JSON.stringify(session);
-      localStorage.setItem('homi-auth-session', sessionJson);
-      
-      const stored = localStorage.getItem('homi-auth-session');
+      localStorage.setItem("homi-auth-session", sessionJson);
+
+      const stored = localStorage.getItem("homi-auth-session");
       if (!stored) {
         console.warn("Failed to verify session storage, retrying...");
-        localStorage.setItem('homi-auth-session', sessionJson);
+        localStorage.setItem("homi-auth-session", sessionJson);
       } else {
       }
     } catch (error) {
       console.error("Error saving session to localStorage:", error);
     }
   } else {
-    localStorage.removeItem('homi-auth-session');
+    localStorage.removeItem("homi-auth-session");
   }
 };
 
@@ -43,10 +43,10 @@ const saveSessionToLocalStorage = (session: Session | null): void => {
  * Helper function to extract username from email
  */
 const extractUsernameFromEmail = (email: string): string => {
-  if (!email) return '';
-  
-  const username = email.split('@')[0];
-  return username.replace(/[^a-zA-Z0-9_]/g, '').toLowerCase();
+  if (!email) return "";
+
+  const username = email.split("@")[0];
+  return username.replace(/[^a-zA-Z0-9_]/g, "").toLowerCase();
 };
 
 /**
@@ -54,20 +54,20 @@ const extractUsernameFromEmail = (email: string): string => {
  */
 const cleanupAuthStorage = (): void => {
   // Clear all possible auth-related storage
-  localStorage.removeItem('homi-auth-session');
-  localStorage.removeItem('supabase.auth.token');
-  localStorage.removeItem('auth.token');
-  
+  localStorage.removeItem("homi-auth-session");
+  localStorage.removeItem("supabase.auth.token");
+  localStorage.removeItem("auth.token");
+
   // Clear cookies
-  document.cookie.split(";").forEach(function(c) {
+  document.cookie.split(";").forEach(function (c) {
     document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
   });
 
   // Clear any other potential auth storage
   try {
     const localStorageKeys = Object.keys(localStorage);
-    localStorageKeys.forEach(key => {
-      if (key.includes('supabase') || key.includes('auth') || key.includes('session')) {
+    localStorageKeys.forEach((key) => {
+      if (key.includes("supabase") || key.includes("auth") || key.includes("session")) {
         localStorage.removeItem(key);
       }
     });
@@ -84,7 +84,7 @@ export const useAuthLogic = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [isEmailVerified, setIsEmailVerified] = useState(true);
-  const [authKey, setAuthKey] = useState<string>('initial');
+  const [authKey, setAuthKey] = useState<string>("initial");
   const { toast } = useToast();
   const [isInternalAction, setIsInternalAction] = useState(false);
 
@@ -94,7 +94,7 @@ export const useAuthLogic = () => {
   const refreshUser = useCallback(async () => {
     try {
       setIsInternalAction(true);
-      
+
       const { data: sessionData, error: sessionError } = await supabase.auth.refreshSession();
       if (sessionError) {
         console.error("Error refreshing session:", sessionError);
@@ -102,10 +102,13 @@ export const useAuthLogic = () => {
         setSession(sessionData.session);
         saveSessionToLocalStorage(sessionData.session);
       }
-      
-      const { data: { user: refreshedUser }, error } = await supabase.auth.getUser();
+
+      const {
+        data: { user: refreshedUser },
+        error,
+      } = await supabase.auth.getUser();
       if (error) throw error;
-      
+
       if (refreshedUser) {
         // Solo establecer el usuario con datos básicos
         setUser(refreshedUser);
@@ -125,27 +128,25 @@ export const useAuthLogic = () => {
     setLoading(true);
     setIsInternalAction(true);
     try {
-      
       // Using the exported function from supabase client
       await supabase.auth.signInWithOAuth({
-        provider: 'google',
+        provider: "google",
         options: {
           redirectTo: `${window.location.origin}/verified`,
           queryParams: {
-            access_type: 'offline',
-            prompt: 'consent',
+            access_type: "offline",
+            prompt: "consent",
           },
-          scopes: 'email profile',
+          scopes: "email profile",
         },
       });
-      
     } catch (error: any) {
       console.error("Error en autenticación con Google:", error);
       toast({
         title: "Error al autenticar con Google",
         description: error.message || "Ha ocurrido un error durante la autenticación con Google.",
         variant: "destructive",
-        duration: 1500
+        duration: 1500,
       });
       setLoading(false);
       setIsInternalAction(false);
@@ -157,28 +158,21 @@ export const useAuthLogic = () => {
    */
   const validateEmailNotInUse = useCallback(async (email: string): Promise<boolean> => {
     try {
-      
       setIsInternalAction(true);
-      
+
       // First check in profiles table
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('email')
-        .eq('email', email)
-        .maybeSingle();
-      
+      const { data, error } = await supabase.from("profiles").select("email").eq("email", email).maybeSingle();
+
       if (data) {
-        
         setIsInternalAction(false);
         return false;
       }
-      
+
       // Then check in auth.users using our secure method
       const emailExists = await checkEmailExists(email);
-      
+
       setIsInternalAction(false);
       return !emailExists;
-      
     } catch (error) {
       console.error("Error checking if email exists:", error);
       setIsInternalAction(false);
@@ -189,222 +183,223 @@ export const useAuthLogic = () => {
   /**
    * Signs up a new user
    */
-  const signUp = useCallback(async (userData: UserSignUpData) => {
-    setLoading(true);
-    setIsInternalAction(true);
-    try {
-      
-      
-      // Validate required fields (solo nombre, apellidos y email)
-      if (!userData.email || !userData.firstName || !userData.lastName) {
-        toast({
-          title: "Datos incompletos",
-          description: "Por favor completa nombre, apellidos y correo electrónico.",
-          variant: "destructive",
-          duration: 1500
-        });
-        setLoading(false);
-        setIsInternalAction(false);
-        return { success: false, error: { message: "Missing required fields" } };
-      }
-      
-      // Check if email already exists
-      const isEmailAvailable = await validateEmailNotInUse(userData.email);
-      if (!isEmailAvailable) {
-        
-        toast({
-          title: "Correo ya registrado",
-          description: "Este correo electrónico ya está registrado. Por favor, inicia sesión o usa otro correo.",
-          variant: "destructive",
-          duration: 1500
-        });
-        setLoading(false);
-        setIsInternalAction(false);
-        return { success: false, error: { message: "Email already registered" } };
-      }
-      
-      // Generate username from email if not provided
-      const username = userData.username || extractUsernameFromEmail(userData.email);
-      
-      // Generate a random password if not provided (required by Supabase)
-      const password = userData.password || Math.random().toString(36).slice(-12) + Math.random().toString(36).slice(-12);
-      
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        email: userData.email,
-        password: password,
-        options: {
-          data: {
-            first_name: userData.firstName,
-            last_name: userData.lastName,
-            username: username
-          },
-          emailRedirectTo: window.location.origin + '/verified',
-        },
-      });
-
-      if (authError) {
-        console.error("Auth error during signup:", authError);
-        setIsInternalAction(false);
-        throw authError;
-      }
-      
-      // Establecer usuario con datos básicos
-      if (authData.user) {
-        setUser(authData.user);
-        
-        if (authData.session) {
-          setSession(authData.session);
-          saveSessionToLocalStorage(authData.session);
+  const signUp = useCallback(
+    async (userData: UserSignUpData) => {
+      setLoading(true);
+      setIsInternalAction(true);
+      try {
+        // Validate required fields (solo nombre, apellidos y email)
+        if (!userData.email || !userData.firstName || !userData.lastName) {
+          toast({
+            title: "Datos incompletos",
+            description: "Por favor completa nombre, apellidos y correo electrónico.",
+            variant: "destructive",
+            duration: 1500,
+          });
+          setLoading(false);
+          setIsInternalAction(false);
+          return { success: false, error: { message: "Missing required fields" } };
         }
-      }
-      
-      toast({
-        title: "Cuenta creada con éxito",
-        description: "Ya puedes comenzar a usar tu cuenta.",
-        duration: 1500
-      });
-      
-      // Allow the UI to update before redirecting
-      setTimeout(() => {
-        window.location.href = '/?registered=true';
-      }, 500);
-      
-      setIsInternalAction(false);
-      return { success: true };
-    } catch (error: any) {
-      console.error("SignUp error:", error);
-      if (error.message?.includes('email') || error.message?.includes('already')) {
-        toast({
-          title: "Correo ya registrado",
-          description: "Este correo electrónico ya está registrado. Por favor, inicia sesión o usa otro correo.",
-          variant: "destructive",
-          duration: 1500
+
+        // Check if email already exists
+        const isEmailAvailable = await validateEmailNotInUse(userData.email);
+        if (!isEmailAvailable) {
+          toast({
+            title: "Correo ya registrado",
+            description: "Este correo electrónico ya está registrado. Por favor, inicia sesión o usa otro correo.",
+            variant: "destructive",
+            duration: 1500,
+          });
+          setLoading(false);
+          setIsInternalAction(false);
+          return { success: false, error: { message: "Email already registered" } };
+        }
+
+        // Generate username from email if not provided
+        const username = userData.username || extractUsernameFromEmail(userData.email);
+
+        // Generate a random password if not provided (required by Supabase)
+        const password =
+          userData.password || Math.random().toString(36).slice(-12) + Math.random().toString(36).slice(-12);
+
+        const { data: authData, error: authError } = await supabase.auth.signUp({
+          email: userData.email,
+          password: password,
+          options: {
+            data: {
+              first_name: userData.firstName,
+              last_name: userData.lastName,
+              username: username,
+            },
+            emailRedirectTo: window.location.origin + "/verified",
+          },
         });
-      } else {
+
+        if (authError) {
+          console.error("Auth error during signup:", authError);
+          setIsInternalAction(false);
+          throw authError;
+        }
+
+        // Establecer usuario con datos básicos
+        if (authData.user) {
+          setUser(authData.user);
+
+          if (authData.session) {
+            setSession(authData.session);
+            saveSessionToLocalStorage(authData.session);
+          }
+        }
+
         toast({
-          title: "Error al crear la cuenta",
-          description: error.message || "Ha ocurrido un error durante el registro.",
-          variant: "destructive",
-          duration: 1500
+          title: "Cuenta creada con éxito",
+          description: "Ya puedes comenzar a usar tu cuenta.",
+          duration: 1500,
         });
+
+        // Allow the UI to update before redirecting
+        setTimeout(() => {
+          window.location.href = "/?registered=true";
+        }, 500);
+
+        setIsInternalAction(false);
+        return { success: true };
+      } catch (error: any) {
+        console.error("SignUp error:", error);
+        if (error.message?.includes("email") || error.message?.includes("already")) {
+          toast({
+            title: "Correo ya registrado",
+            description: "Este correo electrónico ya está registrado. Por favor, inicia sesión o usa otro correo.",
+            variant: "destructive",
+            duration: 1500,
+          });
+        } else {
+          toast({
+            title: "Error al crear la cuenta",
+            description: error.message || "Ha ocurrido un error durante el registro.",
+            variant: "destructive",
+            duration: 1500,
+          });
+        }
+        setIsInternalAction(false);
+        return { success: false, error };
+      } finally {
+        setLoading(false);
       }
-      setIsInternalAction(false);
-      return { success: false, error };
-    } finally {
-      setLoading(false);
-    }
-  }, [toast, validateEmailNotInUse]);
+    },
+    [toast, validateEmailNotInUse],
+  );
 
   /**
    * Signs in an existing user
    */
-  const signIn = useCallback(async (email: string, password: string) => {
-    setLoading(true);
-    setIsInternalAction(true);
-    try {
-      
-      
-      if (!email || !password) {
-        toast({
-          title: "Datos incompletos",
-          description: "El email y la contraseña son obligatorios.",
-          variant: "destructive",
-          duration: 1500
-        });
-        setLoading(false);
-        setIsInternalAction(false);
-        return;
-      }
-      
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+  const signIn = useCallback(
+    async (email: string, password: string) => {
+      setLoading(true);
+      setIsInternalAction(true);
+      try {
+        if (!email || !password) {
+          toast({
+            title: "Datos incompletos",
+            description: "El email y la contraseña son obligatorios.",
+            variant: "destructive",
+            duration: 1500,
+          });
+          setLoading(false);
+          setIsInternalAction(false);
+          return;
+        }
 
-      if (error) {
-        console.error("Login error:", error);
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (error) {
+          console.error("Login error:", error);
+          setIsInternalAction(false);
+          throw error;
+        }
+
+        if (data.session) {
+          setSession(data.session);
+          setUser(data.user);
+          saveSessionToLocalStorage(data.session);
+
+          toast({
+            title: "Inicio de sesión exitoso",
+            description: "Has iniciado sesión en tu cuenta.",
+            duration: 1500,
+          });
+
+          // Allow the UI to update before redirecting
+          setTimeout(() => {
+            window.location.href = "/?loggedIn=true";
+          }, 300);
+        } else {
+          throw new Error("No session returned after login");
+        }
+      } catch (error: any) {
+        console.error("Sign in error:", error);
+        toast({
+          title: "Error al iniciar sesión",
+          description:
+            error.message === "Invalid login credentials"
+              ? "Credenciales inválidas. Verifica tu email y contraseña."
+              : error.message || "Ha ocurrido un error durante el inicio de sesión.",
+          variant: "destructive",
+          duration: 1500,
+        });
         setIsInternalAction(false);
         throw error;
+      } finally {
+        setLoading(false);
       }
-      
-      if (data.session) {
-        setSession(data.session);
-        setUser(data.user);
-        saveSessionToLocalStorage(data.session);
-        
-        toast({
-          title: "Inicio de sesión exitoso",
-          description: "Has iniciado sesión en tu cuenta.",
-          duration: 1500
-        });
-        
-        // Allow the UI to update before redirecting
-        setTimeout(() => {
-          window.location.href = '/?loggedIn=true';
-        }, 300);
-      } else {
-        throw new Error("No session returned after login");
-      }
-      
-    } catch (error: any) {
-      console.error("Sign in error:", error);
-      toast({
-        title: "Error al iniciar sesión",
-        description: error.message === "Invalid login credentials" 
-          ? "Credenciales inválidas. Verifica tu email y contraseña."
-          : (error.message || "Ha ocurrido un error durante el inicio de sesión."),
-        variant: "destructive",
-        duration: 1500
-      });
-      setIsInternalAction(false);
-      throw error;
-    } finally {
-      setLoading(false);
-    }
-  }, [toast]);
+    },
+    [toast],
+  );
 
   /**
    * Signs out the current user
    */
   const signOut = useCallback(async () => {
     try {
-      
       setLoading(true);
       setIsInternalAction(true);
-      
+
       const wasAuthenticated = !!user;
-      
+
       // First, clear our local state
       setUser(null);
       setSession(null);
-      
+
       // Then clean up all storage
       cleanupAuthStorage();
-      
+
       // Finally, call the API to sign out
-      const { error } = await supabase.auth.signOut({ scope: 'global' });
-      
+      const { error } = await supabase.auth.signOut({ scope: "global" });
+
       if (error) {
         console.error("Error during API signout:", error);
         toast({
           title: "Error al cerrar sesión",
           description: error.message,
           variant: "destructive",
-          duration: 1500
+          duration: 1500,
         });
       } else {
         toast({
           title: "Sesión cerrada",
           description: "Has cerrado sesión correctamente.",
-          duration: 1500
+          duration: 1500,
         });
-        
-        setAuthKey('signed-out-' + Date.now());
-        
+
+        setAuthKey("signed-out-" + Date.now());
+
         if (wasAuthenticated) {
           // Allow the UI to update before redirecting
           setTimeout(() => {
-            window.location.href = '/';
+            window.location.href = "/";
           }, 300);
         }
       }
@@ -415,7 +410,7 @@ export const useAuthLogic = () => {
         title: "Error al cerrar sesión",
         description: error.message || "Ha ocurrido un error al cerrar sesión.",
         variant: "destructive",
-        duration: 1500
+        duration: 1500,
       });
       setIsInternalAction(false);
     } finally {
@@ -425,197 +420,178 @@ export const useAuthLogic = () => {
 
   // Set up auth state listener and check for existing session
   useEffect(() => {
-    
     let isMounted = true;
     setLoading(true);
-    
+
     // 1. Set up auth state change listener FIRST
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, currentSession) => {
-        // Skip internal auth actions to prevent re-rendering loops
-        if (isInternalAction) {
-          
-          return;
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, currentSession) => {
+      // Skip internal auth actions to prevent re-rendering loops
+      if (isInternalAction) {
+        return;
+      }
+
+      if (!isMounted) {
+        return;
+      }
+
+      if (currentSession) {
+        if (isMounted) {
+          setSession(currentSession);
+          saveSessionToLocalStorage(currentSession);
         }
-        
-        
-        
-        if (!isMounted) {
-          
-          return;
-        }
-        
-        if (currentSession) {
-          
-          
-          if (isMounted) {
-            setSession(currentSession);
-            saveSessionToLocalStorage(currentSession);
-          }
-          
-          if (currentSession.user && isMounted) {
-            const authUser = currentSession.user;
-            
-            
-            setIsEmailVerified(true);
-            
-            // Using setTimeout to avoid potential deadlock with Supabase auth state
-            setTimeout(async () => {
+
+        if (currentSession.user && isMounted) {
+          const authUser = currentSession.user;
+
+          setIsEmailVerified(true);
+
+          // Using setTimeout to avoid potential deadlock with Supabase auth state
+          setTimeout(async () => {
+            if (!isMounted) return;
+
+            try {
+              let { data: profileData, error } = await supabase
+                .from("profiles")
+                .select("first_name, last_name, email")
+                .eq("auth_user_id", authUser.id)
+                .maybeSingle();
+
               if (!isMounted) return;
-              
-              try {
-                let { data: profileData, error } = await supabase
-                  .from('profiles')
-                  .select('first_name, last_name, email')
-                  .eq('auth_user_id', authUser.id)
-                  .maybeSingle();
-                
-                if (!isMounted) return;
-                
-                if (error || !profileData) {
-                  
-                  
-                  // Create profile for Google users if needed
-                  if (event === 'SIGNED_IN' && authUser.app_metadata?.provider === 'google') {
-                    const name = authUser.user_metadata?.full_name || authUser.user_metadata?.name || '';
-                    const nameParts = name.split(' ');
-                    const firstName = nameParts[0] || '';
-                    const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
-                    
-                    const newProfile = {
-                      auth_user_id: authUser.id,
-                      first_name: firstName,
-                      last_name: lastName,
-                      email: authUser.email,
-                    };
-                    
-                    console.log("Creating profile for Google user:", newProfile);
-                    
-                    const { error: insertError } = await supabase
-                      .from('profiles')
-                      .insert(newProfile);
-                    
-                    if (!isMounted) return;
-                    
-                    if (!insertError) {
-                      // Profile created successfully
-                      
-                    } else {
-                      console.error("Error creating profile for Google user:", insertError);
-                    }
+
+              if (error || !profileData) {
+                // Create profile for Google users if needed
+                if (event === "SIGNED_IN" && authUser.app_metadata?.provider === "google") {
+                  const name = authUser.user_metadata?.full_name || authUser.user_metadata?.name || "";
+                  const nameParts = name.split(" ");
+                  const firstName = nameParts[0] || "";
+                  const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "";
+
+                  const newProfile = {
+                    auth_user_id: authUser.id,
+                    first_name: firstName,
+                    last_name: lastName,
+                    email: authUser.email,
+                  };
+
+                  console.log("Creating profile for Google user:", newProfile);
+
+                  const { error: insertError } = await supabase.from("profiles").insert(newProfile);
+
+                  if (!isMounted) return;
+
+                  if (!insertError) {
+                    // Profile created successfully
+                  } else {
+                    console.error("Error creating profile for Google user:", insertError);
                   }
                 }
-                
-                if (isMounted) {
-                  console.log('Setting user:', authUser);
-                  setUser(authUser);
-                }
-              } catch (error) {
-                console.error("Error fetching profile data:", error);
-                if (isMounted) {
-                  setUser(authUser);
-                }
-              } finally {
-                if (isMounted) {
-                  setLoading(false);
-                }
               }
-            }, 0);
-          }
-        } else {
-          
-          if (event === 'SIGNED_OUT' && isMounted) {
-            cleanupAuthStorage();
-            setSession(null);
-            setUser(null);
-            setIsEmailVerified(false);
-          }
-          if (isMounted) {
-            setLoading(false);
-          }
+
+              if (isMounted) {
+                setUser(authUser);
+              }
+            } catch (error) {
+              if (isMounted) {
+                setUser(authUser);
+              }
+            } finally {
+              if (isMounted) {
+                setLoading(false);
+              }
+            }
+          }, 0);
+        }
+      } else {
+        if (event === "SIGNED_OUT" && isMounted) {
+          cleanupAuthStorage();
+          setSession(null);
+          setUser(null);
+          setIsEmailVerified(false);
+        }
+        if (isMounted) {
+          setLoading(false);
         }
       }
-    );
+    });
 
     // 2. THEN check for existing session
     const checkExistingSession = async () => {
       try {
-        const { data: { session: currentSession } } = await supabase.auth.getSession();
-        
-        
+        const {
+          data: { session: currentSession },
+        } = await supabase.auth.getSession();
+
         if (!isMounted) return;
-        
+
         if (currentSession?.user) {
-          
           setSession(currentSession);
-          
+
           saveSessionToLocalStorage(currentSession);
-          
+
           const authUser = currentSession.user;
           setIsEmailVerified(authUser.email_confirmed_at !== null);
-          
+
           try {
             const { data: profileData, error } = await supabase
-              .from('profiles')
-              .select('first_name, last_name, email')
-              .eq('auth_user_id', authUser.id)
+              .from("profiles")
+              .select("first_name, last_name, email")
+              .eq("auth_user_id", authUser.id)
               .maybeSingle();
-            
+
             if (!isMounted) return;
-            
+
             if (!error && profileData) {
-              console.log('Existing session profile data:', profileData);
+              console.log("Existing session profile data:", profileData);
               setUser(authUser);
             } else {
-              console.log('No profile data in existing session, setting basic user:', authUser);
+              console.log("No profile data in existing session, setting basic user:", authUser);
               setUser(authUser);
             }
           } catch (error) {
-            
             if (isMounted) {
               setUser(authUser);
             }
           }
         } else {
-          const sessionStr = localStorage.getItem('homi-auth-session');
-          
-          
+          const sessionStr = localStorage.getItem("homi-auth-session");
+
           if (sessionStr && isMounted) {
             try {
               const sessionData = JSON.parse(sessionStr);
               const isExpired = sessionData.expires_at && new Date(sessionData.expires_at * 1000) < new Date();
-              
+
               if (!isExpired) {
-                
                 setSession(sessionData);
-                
+
                 if (sessionData.user) {
                   setUser(sessionData.user);
-                  
+
                   // Try to refresh the session
-                  supabase.auth.refreshSession().then(({ data }) => {
-                    if (!isMounted) return;
-                    if (data.session) {
-                      
-                      setSession(data.session);
-                      saveSessionToLocalStorage(data.session);
-                    }
-                  }).catch(err => {
-                    console.error("Error refreshing session:", err);
-                  });
+                  supabase.auth
+                    .refreshSession()
+                    .then(({ data }) => {
+                      if (!isMounted) return;
+                      if (data.session) {
+                        setSession(data.session);
+                        saveSessionToLocalStorage(data.session);
+                      }
+                    })
+                    .catch((err) => {
+                      console.error("Error refreshing session:", err);
+                    });
                 }
               } else {
-                
-                localStorage.removeItem('homi-auth-session');
+                localStorage.removeItem("homi-auth-session");
               }
             } catch (error) {
               console.error("Error parsing session from localStorage:", error);
             }
           } else {
-            
           }
         }
-        
+
         if (isMounted) {
           setLoading(false);
         }
@@ -626,13 +602,12 @@ export const useAuthLogic = () => {
         }
       }
     };
-    
+
     checkExistingSession();
 
     // Set timeout to prevent infinite loading state
     const loadingTimeout = setTimeout(() => {
       if (isMounted && loading) {
-        
         setLoading(false);
       }
     }, 3000);
@@ -654,6 +629,6 @@ export const useAuthLogic = () => {
     signOut,
     signInWithGoogle,
     refreshUser,
-    validateEmailNotInUse
+    validateEmailNotInUse,
   };
 };
