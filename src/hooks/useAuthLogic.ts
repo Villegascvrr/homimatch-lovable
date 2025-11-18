@@ -253,7 +253,7 @@ export const useAuthLogic = () => {
 
         // Allow the UI to update before redirecting
         setTimeout(() => {
-          window.location.href = "/?registered=true";
+          window.location.href = "/maintenance";
         }, 500);
 
         setIsInternalAction(false);
