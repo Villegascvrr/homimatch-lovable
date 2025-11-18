@@ -131,7 +131,7 @@ export const useAuthLogic = () => {
       await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/?loggedIn=true`,
+          redirectTo: `${window.location.origin}/maintenance`,
         },
       });
     } catch (error: any) {
@@ -328,7 +328,7 @@ export const useAuthLogic = () => {
 
           // Allow the UI to update before redirecting
           setTimeout(() => {
-            window.location.href = "/?loggedIn=true";
+            window.location.href = "/maintenance";
           }, 300);
         } else {
           throw new Error("No session returned after login");
