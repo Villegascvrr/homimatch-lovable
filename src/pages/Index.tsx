@@ -12,7 +12,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import ProfileCard from '@/components/profiles/ProfileCard';
 import { useAuth } from '@/context/AuthContext';
 import MatchCard from '@/components/matching/MatchCard';
-import { Check, Crown, Star, Zap, Sparkles, Users, Home, Quote, Heart } from 'lucide-react';
+import { Check, Crown, Star, Zap, Sparkles, Users, Home, Quote, Heart, Shield } from 'lucide-react';
 import { useSubscription } from '@/hooks/useSubscription';
 import { mockProfiles } from '@/data/mockProfiles';
   const Index = () => {
@@ -39,7 +39,7 @@ import { mockProfiles } from '@/data/mockProfiles';
       {
         "@type": "ContactPoint",
         "contactType": "customer support",
-        "email": "hi@homimatch.com",
+        "email": "contact@homimatch.com",
         "areaServed": "ES",
         "availableLanguage": "es"
       }
@@ -511,6 +511,35 @@ import { mockProfiles } from '@/data/mockProfiles';
         {/* Pricing section */}
         
         
+        {/* Privacy Transparency Section */}
+        <section className="py-12 md:py-16 bg-muted/30 overflow-x-hidden w-full">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="max-w-2xl mx-auto">
+              <Card className="bg-background/80 backdrop-blur border-border/50 shadow-sm">
+                <CardContent className="p-6 md:p-8 text-center">
+                  <div className="flex justify-center mb-4">
+                    <div className="p-3 bg-green-100 rounded-full">
+                      <Shield className="w-6 h-6 text-green-600" />
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">Tu privacidad es nuestra prioridad</h3>
+                  <p className="text-muted-foreground mb-4">
+                    HomiMatch utiliza únicamente los datos necesarios para crear perfiles y facilitar 
+                    el matching entre compañeros de piso. <strong>No vendemos datos personales ni los 
+                    usamos para publicidad.</strong>
+                  </p>
+                  <Link 
+                    to="/privacy" 
+                    className="text-homi-purple font-medium hover:underline inline-flex items-center gap-1"
+                  >
+                    Más información en nuestra Política de Privacidad →
+                  </Link>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
         <section className="py-16 md:py-20 bg-homi-purple text-white overflow-x-hidden w-full">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center animate-on-scroll">

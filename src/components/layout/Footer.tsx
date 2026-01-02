@@ -39,9 +39,9 @@ const Footer = ({ cityName }: FooterProps = {}) => {
               Encuentra tu compañero de piso ideal en {location}. Descubre personas afines, conecta con ellas y comparte piso con total confianza y comodidad.
             </p>
             <div className="flex flex-col gap-2">
-              <a href="mailto:hi@homimatch.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-homi-purple transition-colors">
+              <a href="mailto:contact@homimatch.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-homi-purple transition-colors">
                 <Mail className="w-4 h-4" />
-                hi@homimatch.com
+                contact@homimatch.com
               </a>
               <a href="https://instagram.com/homimatch" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-homi-purple transition-colors">
                 <Instagram className="w-4 h-4" />
